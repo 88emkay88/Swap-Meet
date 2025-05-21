@@ -22,7 +22,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="grid items-center py-4 px-10 bg-white h-25">
+    <header className="items-center z-10 xl:py-4 xl:px-10 bg-white h-25">
       <div className="flex justify-evenly">
         {/* Logo */}
         <div>
