@@ -1,11 +1,10 @@
 import React from "react";
+import CarouselHero from "./CarouselHero";
 
 const Hero = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold">
-        Welcome to Swap<span className="text-sky-400">Meet</span>
-      </h1>
+      <CarouselHero />
     </div>
   );
 };
