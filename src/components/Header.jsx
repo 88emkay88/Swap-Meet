@@ -6,6 +6,7 @@ import {
   ShoppingBagIcon,
   ShoppingCart,
 } from "lucide-react";
+import LowNav from "./LowNav";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="items-center z-10 xl:py-4 xl:px-10 bg-white h-25">
+    <header className="grid items-center z-10 xl:py-4 xl:px-10 bg-white  space-y-2 shadow-md">
       <div className="flex justify-evenly">
         {/* Logo */}
         <div>
@@ -107,6 +108,8 @@ const Header = () => {
           </a>
         </div>
       </div>
+
+      <LowNav />
     </header>
   );
 };
