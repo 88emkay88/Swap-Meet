@@ -1,11 +1,12 @@
 @import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
 :root{
     background-color: #D8EFFD;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     text-decoration: none;
-    max-width: 2000px;
 }
 
 html{
