@@ -1,14 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=El+Messiri:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito&family=Outfit:wght@100..900&family=Passion+One:wght@400;700;900&family=Roboto+Slab:wght@100..900&display=swap');
 @import "tailwindcss";
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
-:root{
-    background-color: #D8EFFD;
+
+
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+
+
+  --animate-fillProgress: fillProgress 10s linear forwards;
+
+  @keyframes fillProgress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+}
+
+@tailwind utilities;
+
+@layer base{
+  :root {
+    background-color: #d8effd;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     text-decoration: none;
-}
-
-html{
+    overflow-x: hidden;
+  }
+  
+  html, body{
+      overflow-x:hidden;
+      font-family: 'Montserrat', sans-serif;
+  }
+  
+  html {
     width: 100%;
+  }  
 }
