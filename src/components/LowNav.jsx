@@ -10,7 +10,7 @@ const LowNav = () => {
     "Limited Additon",
   ];
   return (
-    <div className="flex justify-center translate-x-15 space-x-3.5">
+    <div className="hidden md:flex justify-center translate-x-15 space-x-3.5">
       <ul className="flex">
         {lowNav.map((opt, index) => (
           <button>

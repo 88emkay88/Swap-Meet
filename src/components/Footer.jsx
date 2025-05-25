@@ -7,15 +7,14 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer className="grid mx-10 mt-19 p-10 border-t-1 border-gray-300">
-
       {/* Upper Nav */}
-      <div className="grid grid-cols-5">
+      <div className="grid md:grid-cols-5 md:space-y-0 space-y-3">
         {/* Logo */}
         <div>
           <div>
             <a href="#" className="flex items-center space-x-2">
-              <ShoppingCart size={35} />
-              <p className="text-2xl font-bold">
+              <ShoppingCart size={25} />
+              <p className="md:text-2xl font-bold">
                 Swap<span className="text-sky-400">Meet</span>
               </p>
             </a>
@@ -24,7 +23,7 @@ const Footer = () => {
 
         {/* Buyer */}
         <div>
-          <h3 className="text-xl mb-5 font-semibold">Buy</h3>
+          <h3 className="text-xl md:mb-5 font-semibold">Buy</h3>
           <ul>
             <li className="hover:underline text-md cursor-pointer">
               Registration
@@ -39,7 +38,7 @@ const Footer = () => {
 
         {/* Seller */}
         <div>
-          <h3 className="text-xl mb-5 font-semibold">Sell</h3>
+          <h3 className="text-xl md:mb-5 font-semibold">Sell</h3>
           <ul>
             <li className="hover:underline text-md cursor-pointer">
               Start selling
@@ -58,7 +57,7 @@ const Footer = () => {
 
         {/* Help */}
         <div>
-          <h3 className="text-xl mb-5 font-semibold">Help</h3>
+          <h3 className="text-xl md:mb-5 font-semibold">Help</h3>
           <ul>
             <li className="hover:underline text-md cursor-pointer">
               Seller Center
@@ -73,7 +72,7 @@ const Footer = () => {
 
         {/* Socials */}
         <div>
-          <h3 className="text-xl mb-5 font-semibold">Stay Connected</h3>
+          <h3 className="text-xl md:mb-5 font-semibold">Stay Connected</h3>
           <ul>
             <li className="flex gap-1 items-center">
               <a className="hover:underline text-md" href="#">
@@ -99,7 +98,7 @@ const Footer = () => {
 
       {/* Lower Nav */}
       <div className="text-center mt-8 cursor-default">
-        SwapMeet &copy; 2025 | All Rights Reserved. 
+        SwapMeet &copy; 2025 | All Rights Reserved.
       </div>
     </footer>
   );

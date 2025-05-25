@@ -3,7 +3,7 @@ import CarouselHero from "./CarouselHero";
 
 const Hero = () => {
   return (
-    <div className="flex h-225 bg-gray-100">
+    <div className="flex h-105 md:h-225 bg-gray-100">
       <CarouselHero />
     </div>
   );

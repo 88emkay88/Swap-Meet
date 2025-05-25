@@ -25,11 +25,11 @@ const PopularCategories = () => {
   ];
   return (
     <div className="text-blue-950 p-10">
-      <h1 className="text-3xl font-semibold font-montserrat">
+      <h1 className="text-xl md:text-3xl font-semibold font-montserrat">
         Explore Popular Categories
           </h1>
         
-          <div className="grid grid-cols-5 mt-8 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-5 mt-8 w-full">
               {categories.map((cat, index) => (
                   <div
                       key={index}
