@@ -11,12 +11,12 @@ const LowNav = () => {
   ];
   return (
     <div className="flex justify-center translate-x-15 space-x-3.5">
-      <ul className="flex ">
+      <ul className="flex">
         {lowNav.map((opt, index) => (
           <button>
             <li
               key={index}
-              className="hover:bg-gray-100 py-1 px-4 rounded-full"
+              className="hover:bg-gray-200 cursor-pointer py-1 px-4 rounded-full"
             >
               {opt}
             </li>

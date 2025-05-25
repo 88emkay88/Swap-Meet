@@ -43,7 +43,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       ),
       heading_class: "text-6xl font-semibold shadow-xl",
       details:
-        "With built-in escrow, verified users, and easy payments, SwapMeet brings you a smarter way to trade peer-to-peer — securely and hassle-free.",
+        "With a built-in escrow, verified users, and easy payments, SwapMeet brings you a smarter way to trade peer-to-peer — securely and hassle-free.",
       button: "Explore",
       button_class:
         "bg-sky-200 w-2/6 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl",
@@ -95,7 +95,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
                   {image.heading}
                 </h1>
                 <p className="text-xl text-sky-950 w-2/4 mb-5">{image.details}</p>
-                <button className={`${image.button_class} translate-x-[20%]`}>
+                <button className={`${image.button_class} cursor-pointer translate-x-[20%]`}>
                   {image.button}
                 </button>
               </div>
@@ -106,13 +106,13 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
 
       {/* Buttons */}
       <button
-        className="top-1/2 absolute left-0 transform -translate-y-1/2 ml-3 bg-sky-400 text-sky-100 rounded-full p-2"
+        className="top-1/2 absolute cursor-pointer left-0 transform -translate-y-1/2 ml-3 bg-sky-400 text-sky-100 rounded-full p-2"
         onClick={prevSlide}
       >
         <ChevronLeft />
       </button>
       <button
-        className="top-1/2 absolute right-0 transform -translate-y-1/2 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
+        className="top-1/2 absolute cursor-pointer right-0 transform -translate-y-1/2 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
         onClick={nextSlide}
       >
         <ChevronRight />
@@ -124,7 +124,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className="relative w-12 h-2 mx-1 bg-blue-200 rounded-full overflow-hidden"
+            className="relative cursor-pointer w-12 h-2 mx-1 bg-blue-200 rounded-full overflow-hidden"
           >
             <div
               className={`absolute left-0 top-0 h-full bg-sky-600 transition-all  ${
