@@ -7,6 +7,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import LowNav from "./LowNav";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -87,12 +88,12 @@ const Header = () => {
           </div>
 
           <div className="flex space-x-4 items-center">
-            <a
-              href="#"
+            <Link
+              to="/sign-up"
               className="hover:bg-gray-200 px-2 py-1 rounded-full font-semibold"
             >
               Sign in
-            </a>
+            </Link>
 
             <a href="#">
               <Heart
@@ -132,12 +133,12 @@ const Header = () => {
 
           {/* button group */}
           <div className="flex items-center">
-            <a
-              href="#"
+            <Link
+              to="/sign-up"
               className="hover:bg-gray-200 px-2 py-1 rounded-full font-semibold"
             >
               Sign in
-            </a>
+            </Link>
 
             <a href="#">
               <Heart

@@ -119,7 +119,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
           <ChevronLeft />
         </button>
         <button
-          className="top-1/2 absolute cursor-pointer right-0 transform -translate-y-1/2 translate-y-0 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
+          className="top-1/2 absolute cursor-pointer right-0 transform -translate-y-1/2 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
           onClick={nextSlide}
         >
           <ChevronRight />
