@@ -94,8 +94,12 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
                 <h1 className="text-xl md:text-4xl font-semibold text-sky-50 md:mb-4 mb-2">
                   {image.heading}
                 </h1>
-                <p className="md:text-xl text-sky-950 w-2/3 md:w-2/4 mb-5">{image.details}</p>
-                <button className={`${image.button_class} cursor-pointer translate-x-[20%]`}>
+                <p className="md:text-xl text-sky-950 w-2/3 md:w-2/4 mb-5">
+                  {image.details}
+                </p>
+                <button
+                  className={`${image.button_class} cursor-pointer translate-x-[20%]`}
+                >
                   {image.button}
                 </button>
               </div>
@@ -105,18 +109,38 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       </div>
 
       {/* Buttons */}
-      <button
-        className="bottom-0 md:top-1/2 absolute cursor-pointer left-0 md:transform -translate-y-1/2 ml-3 bg-sky-400 text-sky-100 rounded-full p-2"
-        onClick={prevSlide}
-      >
-        <ChevronLeft />
-      </button>
-      <button
-        className="bottom-0 md:top-1/2 absolute cursor-pointer right-0 md:transform -translate-y-1/2 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
-        onClick={nextSlide}
-      >
-        <ChevronRight />
-      </button>
+
+      {/* Desktop */}
+      <div className="hidden md:block">
+        <button
+          className="top-1/2 absolute cursor-pointer left-0 transform -translate-y-1/2 ml-3 bg-sky-400 text-sky-100 rounded-full p-2"
+          onClick={prevSlide}
+        >
+          <ChevronLeft />
+        </button>
+        <button
+          className="top-1/2 absolute cursor-pointer right-0 transform -translate-y-1/2 translate-y-0 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
+          onClick={nextSlide}
+        >
+          <ChevronRight />
+        </button>
+      </div>
+
+      {/* Mobile */}
+      <div className="md:hidden block">
+        <button
+          className="bottom-0 md:top-1/2 absolute cursor-pointer left-0 md:transform md:-translate-y-1/2 ml-3 bg-sky-400 text-sky-100 rounded-full p-2"
+          onClick={prevSlide}
+        >
+          <ChevronLeft />
+        </button>
+        <button
+          className="bottom-0 md:top-1/2 absolute cursor-pointer right-0 md:transform md:-translate-y-1/2 translate-y-0 mr-3 bg-sky-400 text-sky-100 rounded-full p-2"
+          onClick={nextSlide}
+        >
+          <ChevronRight />
+        </button>
+      </div>
 
       {/* Pagination */}
       <div className="absolute bottom-0 left-0 right-0 flex justify-center mb-4">
