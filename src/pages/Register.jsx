@@ -6,9 +6,9 @@ import { IoArrowBack } from "react-icons/io5";
 const Register = () => {
   return (
     <div className="w-screen  flex flex-col items-center justify-center p-20">
-      <div className="relative p-10 w-150 bg-gray-200 rounded-4xl shadow-2xl">
+      <div className="relative flex-grow flex-cols p-10 w-90 md:w-150 bg-gray-200 rounded-4xl shadow-2xl">
         {/* Back Button  */}
-        <Link className="absolute top-8" to="/sign-up">
+        <Link className="absolute md:top-8" to="/sign-up">
           <IoArrowBack size={20} />
         </Link>
 
