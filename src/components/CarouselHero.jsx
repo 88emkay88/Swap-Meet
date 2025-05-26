@@ -16,8 +16,6 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       details:
         "Your secure, local marketplace for buying and selling everything from fashion to gadgets. No middlemen. No nonsense.",
       button: "Explore",
-      button_class:
-        "bg-sky-200 w-2/6 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold",
     },
     {
       img: "/src/assets/images/shopping-cart-bluebg.jpg",
@@ -31,8 +29,6 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       details:
         "Where your closet turns into cash, or where you can find hidden gems from sellers near you. Whether you're a buyer or a seller — SwapMeet puts the power in your hands.",
       button: "Explore",
-      button_class:
-        "bg-sky-200 w-2/6 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl",
     },
     {
       img: "/src/assets/images/online-shopping-chart.jpg",
@@ -46,8 +42,6 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       details:
         "With a built-in escrow, verified users, and easy payments, SwapMeet brings you a smarter way to trade peer-to-peer — securely and hassle-free.",
       button: "Explore",
-      button_class:
-        "bg-sky-200 w-2/6 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl",
     },
   ];
 
