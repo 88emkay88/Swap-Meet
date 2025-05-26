@@ -1,31 +1,28 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
-import {IoArrowBack } from "react-icons/io5"
+import { IoArrowBack } from "react-icons/io5";
 
 const SignUp = () => {
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
       <div className="relative bg-gray-200 p-8 md:p-10 space-y-4 rounded-4xl md:w-110 shadow-2xl">
         {/* Back Button  */}
-        <Link
-          className="absolute top-8"
-          to='/'
-        >
+        <Link className="absolute top-8" to="/">
           <IoArrowBack size={20} />
         </Link>
 
         {/* Logo */}
-        <div className="flex justify-center">
-          <a href="#" className="flex items-center space-x-2">
+        <div className="flex justify-center cursor-default">
+          <div className="flex items-center space-x-2">
             <ShoppingCart size={35} />
             <p className="text-2xl font-bold">
               Swap<span className="text-sky-400">Meet</span>
             </p>
-          </a>
+          </div>
         </div>
 
-        <h2 className="text-2xl">Sign in to your account</h2>
+        <h2 className="text-2xl cursor-default">Sign in to your account</h2>
 
         <form className="grid gap-3" method="POST">
           <label className="font-bold">Email</label>
@@ -60,9 +57,7 @@ const SignUp = () => {
 
         <p className="text-sm cursor-default">
           Don't have an account?{" "}
-          <Link
-            to="/register"
-            className="font-semibold underline">
+          <Link to="/register" className="font-semibold underline">
             Register
           </Link>
         </p>
