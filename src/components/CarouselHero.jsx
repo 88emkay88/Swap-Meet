@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
   const heroContent = [
@@ -97,11 +98,12 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
                 <p className="md:text-xl text-sky-950 w-2/3 md:w-2/4 mb-5">
                   {image.details}
                 </p>
-                <button
-                  className={`${image.button_class} cursor-pointer translate-x-[20%]`}
+                <Link
+                  to="/products"
+                  className={`text-center w-1/6 bg-sky-200 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl cursor-pointer translate-x-[60%]`}
                 >
                   {image.button}
-                </button>
+                </Link>
               </div>
             </div>
           </div>
