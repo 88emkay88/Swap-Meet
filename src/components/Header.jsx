@@ -26,16 +26,16 @@ const Header = () => {
   return (
     <>
       {/*Desktop header */}
-      <header className="hidden lg:grid items-center text-blue-950 z-10 py-2 px-5 xl:py-4 xl:px-10 bg-white  space-y-2 shadow-md">
+      <header className="hidden lg:grid items-center text-blue-950 z-10 py-2 px-5 xl:py-4 xl:px-10 bg-white space-y-2 shadow-md">
         <div className="flex justify-evenly">
           {/* Logo */}
           <div>
-            <a href="#" className="flex items-center space-x-2">
+            <Link to={"/"} className="flex items-center space-x-2">
               <ShoppingCart size={35} />
               <p className="text-2xl font-bold">
                 Swap<span className="text-sky-400">Meet</span>
               </p>
-            </a>
+            </Link>
           </div>
 
           <div className="hover:bg-sky-100 py-3 px-6 rounded-full">
@@ -50,7 +50,7 @@ const Header = () => {
             </button>
 
             {open && (
-              <div className="absolute top-17 left-75 z-10 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black/10">
+              <div className="absolute top-17 left-95 z-10 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black/10">
                 <ul className="py-1">
                   {categories.map((cat, i) => (
                     <li key={i}>
@@ -75,7 +75,7 @@ const Header = () => {
               </label>
               <div className="flex items-center group">
                 <input
-                  className="border-2 border-r-0 w-190 h-10 rounded-l-full p-5 focus:outline-0 group focus:border-blue-400"
+                  className="border-2 border-r-0 lg:w-120 xl:w-190 h-10 rounded-l-full p-5 focus:outline-0 group focus:border-blue-400"
                   type="search"
                   name="search"
                   placeholder="Search for items"

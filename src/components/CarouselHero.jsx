@@ -68,7 +68,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
   }, [autoSlide, autoSlideInterval, heroContent.length]);
 
   return (
-    <div className="relative w-full lg:h-200 mx-auto">
+    <div className="relative w-full md:h-200 lg:h-200 mx-auto">
       {/* Slider */}
       <div className="relative mx-5 md:mx-20 my-10 overflow-x-clip rounded-4xl">
         {heroContent.map((image, index) => (
@@ -84,17 +84,17 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
               className="relative h-85 md:h-200 w-full rounded-4xl shadow-md hover:shadow-2xl hover:-translate-y-1 transform duration-500"
             />
 
-            <div className="absolute top-5 md:top-70 left-2 md:left-40 md:w-1/2">
+            <div className="absolute top-5 md:top-70 left-8 md:left-30 lg:left-40 md:w-1/2">
               <div className="grid">
-                <h1 className="text-xl md:text-4xl font-semibold text-sky-50 md:mb-4 mb-2">
+                <h1 className="text-2xl md:text-3xl font-semibold text-sky-50 md:mb-4 mb-2">
                   {image.heading}
                 </h1>
-                <p className="md:text-xl text-sky-950 w-2/3 md:w-2/4 mb-5">
+                <p className="md:text-xl text-sky-950 w-2/3 md:w-3/4 mb-5">
                   {image.details}
                 </p>
                 <Link
                   to="/products"
-                  className={`text-center w-1/6 bg-sky-200 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl cursor-pointer translate-x-[60%]`}
+                  className={`text-center w-2/6 md:w-2/4 lg:w-1/6 bg-sky-200 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl cursor-pointer lg:translate-x-[60%]`}
                 >
                   {image.button}
                 </Link>

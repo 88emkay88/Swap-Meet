@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="grid mx-10 mt-19 p-10 border-t-1 border-gray-300">
       {/* Upper Nav */}
-      <div className="grid md:grid-cols-5 md:space-y-0 space-y-3">
+      <div className="grid lg:grid-cols-5 lg:space-y-0 space-y-3">
         {/* Logo */}
         <div>
           <div>

@@ -9,8 +9,8 @@ const AuctionCard = () => {
         alt="Auction elements"
       />
 
-      <div className='text-center px-5 flex flex-col items-center space-y-3 md:space-y-10'>
-        <h1 className='md:text-5xl text-2xl font-bold mt-4'>Bid. Win. Save.</h1>
+      <div className='text-center px-5 flex flex-col items-center space-y-3 lg:space-y-10'>
+        <h1 className='md:text-4xl text-2xl font-bold mt-4'>Bid. Win. Save.</h1>
         <p className='tracking-wide md:text-xl md:w-1/2'>
           Get the best deals by bidding on high-demand items in real time. Our
           auction system lets you compete fairly, securely, and transparently —
