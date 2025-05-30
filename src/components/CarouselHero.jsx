@@ -94,7 +94,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
                 </p>
                 <Link
                   to="/products"
-                  className={`text-center w-2/6 md:w-2/4 lg:w-1/6 bg-sky-200 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl cursor-pointer lg:translate-x-[60%]`}
+                  className={`text-center w-2/4 md:w-2/4 lg:w-1/6 bg-sky-200 px-8 py-2 rounded-full hover:bg-sky-100 text-blue-900 font-semibold shadow-xl cursor-pointer lg:translate-x-[60%]`}
                 >
                   {image.button}
                 </Link>

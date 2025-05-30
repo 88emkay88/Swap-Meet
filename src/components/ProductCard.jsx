@@ -1,3 +1,4 @@
+import { Heart, Star } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -5,6 +6,8 @@ const ProductCard = ({
   id,
   title,
   image,
+  price,
+  rating, 
   category,
   condition,
   location,
@@ -22,6 +25,7 @@ const ProductCard = ({
     Excellent: "bg-teal-300",
     Good: "bg-amber-300",
     fair: "bg-yellow-400",
+    Used: "bg-orange-300",
     poor: "bg-red-300",
   }[condition] || "bg-gray-300"
 
@@ -36,11 +40,31 @@ const ProductCard = ({
           <div className={`text-blue-800 font-bold absolute top-2 right-2 ${conditionColor}  text-xs px-2 py-1 rounded-full`}>
             {condition}
           </div>
+
+          <div className="absolute top-2 left-2">
+            <Heart className="hover:text-red-600" />
+          </div>
         </div>
 
         {/* Title & Info */}
-        <div className="p-4">
+        <div className="p-4 relative">
           <h3 className="font-medium text-lg truncate">{title}</h3>
+          <p className="font-semibold text-lg">R{price}</p>
+          <div className="flex space-x-1 mt-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star
+                key={star}
+                className={`h-4 w-4 ${ 
+                  star <= rating ? "text-yellow-400 fill-yellow-400" : "text-sky-700"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="absolute right-5 bg-sky-500 md:bg-white text-sm -translate-y-6.5 md:translate-y-0 md:hover:bg-sky-200 px-3 py-1 rounded-full">
+            <button>Add To Cart</button>
+          </div>
+
           <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
             <span>{category}</span>
             <span>•</span>

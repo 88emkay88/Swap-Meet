@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import ProductsHeader from "../components/ProductsHeader";
 import Breadcrumbs from "../components/Breadcrumbs";
+import Footer from "../components/Footer";
 import { Range } from "react-range";
 import { Star } from "lucide-react";
 import ProductCard from "../components/ProductCard";
@@ -31,7 +32,7 @@ const products = [
     image:
       "https://levelshoes.co.za/cdn/shop/files/pixelcut-export-1713638368437.png?v=1713694758&width=1946",
     rating: 4,
-    color: "Red",
+    color: "Black",
     condition: "Like New",
     location: "Johannesburg",
     seller: {
@@ -107,7 +108,7 @@ export default function ProductPage() {
       product.name.toLowerCase().includes(search.toLowerCase()) &&
       product.price >= values[0] &&
       product.price <= values[1] &&
-      (!rating || product.rating >= rating) &&
+      (!rating || product.rating === rating) &&
       (selectedCategories.length === 0 ||
         selectedCategories.includes(product.category)) &&
       (selectedColors.length === 0 || selectedColors.includes(product.color))
@@ -115,7 +116,7 @@ export default function ProductPage() {
   });
 
   const resetFilters = () => {
-    setValues([minPrice, maxPrice]);
+    setValues([values[0], values[1]]);
     setRating(0);
     setSelectedColors([]);
     setSelectedCategories([]);
@@ -130,14 +131,14 @@ export default function ProductPage() {
       <ProductsHeader />
 
       {/* Background picture */}
-      <div className="h-150 relative">
+      <div className=" md:h-150 relative">
         <img
           src="/src/assets/images/blue-bg.jpg"
           alt="shopping cart with cereals"
           className="h-full w-full rounded-b-4xl"
         />
 
-        <h1 className="absolute top-[30%] left-[18%] cursor-default text-white font-bold text-12xl">
+        <h1 className="absolute top-[58%] left-[20%] text-5xl md:top-[30%] md:left-[18%] cursor-default text-white font-bold md:text-12xl">
           Products
         </h1>
       </div>
@@ -146,7 +147,7 @@ export default function ProductPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
         {/* Sidebar Filters */}
-        <aside className="md:col-span-1 space-y-6">
+        <aside className="hidden md:block md:col-span-1 space-y-6">
           {/* Popular Categories */}
           <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
             <h1 className="font-semibold text-lg mb-2">Popular Categories</h1>
@@ -268,10 +269,10 @@ export default function ProductPage() {
         </aside>
 
         {/* Product Grid */}
-        <section className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 -translate-x-20">
+        <section className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:-translate-x-20">
           {/* Search */}
           <form
-            className="col-span-3  bg-white p-4 ring-1 ring-black/10 shadow-lg"
+            className=" hidden md:col-span-3 md:max-h-25 bg-white p-4 ring-1 ring-black/10 shadow-lg"
             method="get"
           >
             <input
@@ -290,6 +291,8 @@ export default function ProductPage() {
                 key={product.id}
                 id={product.id}
                 title={product.name}
+                price={product.price}
+                rating={product.rating}
                 image={product.image}
                 category={product.category}
                 condition={product.condition}
@@ -305,6 +308,8 @@ export default function ProductPage() {
           )}
         </section>
       </div>
+
+      <Footer />
     </div>
   );
 }
