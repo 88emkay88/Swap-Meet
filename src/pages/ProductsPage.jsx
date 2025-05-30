@@ -6,73 +6,8 @@ import Footer from "../components/Footer";
 import { Range } from "react-range";
 import { Star } from "lucide-react";
 import ProductCard from "../components/ProductCard";
-
-const products = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    price: 899,
-    category: "Electronics",
-    image:
-      "https://www.99rands.co.za/wp-content/uploads/2023/07/M1-Wireless-Bluetooth-Headphones-BLACK-11.jpg",
-    rating: 2,
-    color: "Black",
-    condition: "Used",
-    location: "Cape Town",
-    seller: {
-      name: "Emkay Musia",
-      avatar: "",
-    },
-  },
-  {
-    id: 2,
-    name: "Stylish Jacket",
-    price: 499,
-    category: "Clothing",
-    image:
-      "https://levelshoes.co.za/cdn/shop/files/pixelcut-export-1713638368437.png?v=1713694758&width=1946",
-    rating: 4,
-    color: "Black",
-    condition: "Like New",
-    location: "Johannesburg",
-    seller: {
-      name: "Dracos Revenge",
-      avatar: "",
-    },
-  },
-  {
-    id: 3,
-    name: "Power Drill",
-    price: 1199,
-    category: "Tools",
-    image:
-      "data:image/jpeg;base64,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",
-    rating: 3,
-    color: "Green",
-    condition: "New",
-    location: "Bloemfontein",
-    seller: {
-      name: "Bob Viganna",
-      avatar: "https://randomuser.me/api/portraits/men/69.jpg",
-    },
-  },
-  {
-    id: 4,
-    name: "Cookware Set",
-    price: 799,
-    category: "Kitchen",
-    image:
-      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTvPfpSt24gOyJzUgCQbIFTiZe0rMRbKK1iU6i8WRi9gCnrSlaZn7oYx-FRQhU0RzKVgXAVIQ69MfMRurXUfGiqp6qKKYxgNxmA91yl5hTRMNfcEwNueoHRrJ6x6Lg6NAbFMQnZVg&usqp=CAc",
-    rating: 5,
-    color: "Black",
-    condition: "Good",
-    location: "Cape Town",
-    seller: {
-      name: "Casper Nyovest",
-      avatar: "https://randomuser.me/api/portraits/men/54.jpg",
-    },
-  },
-];
+import locationOptions from "../Data/locations";
+import products from "../Data/products";
 
 const checkbox = [
   "Electronics",
@@ -102,6 +37,7 @@ export default function ProductPage() {
   const [rating, setRating] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
 
   const filteredProducts = products.filter((product) => {
     return (
@@ -111,7 +47,9 @@ export default function ProductPage() {
       (!rating || product.rating === rating) &&
       (selectedCategories.length === 0 ||
         selectedCategories.includes(product.category)) &&
-      (selectedColors.length === 0 || selectedColors.includes(product.color))
+      (selectedColors.length === 0 || selectedColors.includes(product.color)) &&
+      (selectedLocations.length === 0 ||
+        selectedLocations.includes(product.location))
     );
   });
 
@@ -120,6 +58,7 @@ export default function ProductPage() {
     setRating(0);
     setSelectedColors([]);
     setSelectedCategories([]);
+    setSelectedLocations([]);
   };
 
   const handleChange = (newValues) => {
@@ -230,6 +169,36 @@ export default function ProductPage() {
                       : "text-sky-800 fill-none"
                   } hover:text-sky-500 transition-colors`}
                 ></Star>
+              ))}
+            </div>
+          </div>
+
+          {/* Locations */}
+          <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
+            <h1 className="font-semibold text-lg mb-2">Locations</h1>
+            <div>
+              {locationOptions.map((location, index) => (
+                <div
+                  key={index}
+                  className="flex items-center space-x-2 mb-1 text-sm"
+                >
+                  <input
+                    type="checkbox"
+                    name={location}
+                    id={location}
+                    checked={selectedLocations.includes(location)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setSelectedLocations((prev) =>
+                        prev.includes(value)
+                          ? prev.filter((loc) => loc !== value)
+                          : [...prev, value]
+                      );
+                    }}
+                    value={location}
+                  />
+                  <label htmlFor={location}>{location}</label>
+                </div>
               ))}
             </div>
           </div>

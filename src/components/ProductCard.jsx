@@ -7,7 +7,7 @@ const ProductCard = ({
   title,
   image,
   price,
-  rating, 
+  rating,
   category,
   condition,
   location,
@@ -19,31 +19,40 @@ const ProductCard = ({
     .split(" ")
     .map((n) => n[0])
     .join("");
-  
-  const conditionColor = {
-    New: "bg-green-300",
-    Excellent: "bg-teal-300",
-    Good: "bg-amber-300",
-    fair: "bg-yellow-400",
-    Used: "bg-orange-300",
-    poor: "bg-red-300",
-  }[condition] || "bg-gray-300"
+
+  const conditionColor =
+    {
+      New: "bg-green-300",
+      Excellent: "bg-teal-300",
+      Good: "bg-amber-300",
+      fair: "bg-yellow-400",
+      Used: "bg-orange-300",
+      poor: "bg-red-300",
+    }[condition] || "bg-gray-300";
 
   return (
-    <Link to={`/product/${id}`}>
+    <div>
       <div
         className={`bg-white rounded-lg shadow hover:shadow-xl overflow-hidden ${className}`}
       >
         {/* Image with condition badge */}
         <div className="relative aspect-square overflow-hidden">
-          <img src={image} alt={title} className="object-cover w-full h-full" />
-          <div className={`text-blue-800 font-bold absolute top-2 right-2 ${conditionColor}  text-xs px-2 py-1 rounded-full`}>
+          <Link to={`/product/${id}`}>
+            <img
+              src={image}
+              alt={title}
+              className="object-cover w-full h-full"
+            />
+          </Link>
+          <div
+            className={`text-blue-800 font-bold absolute top-2 right-2 ${conditionColor}  text-xs px-2 py-1 rounded-full`}
+          >
             {condition}
           </div>
 
-          <div className="absolute top-2 left-2">
+          <button className="absolute top-2 left-2 cursor-pointer">
             <Heart className="hover:text-red-600" />
-          </div>
+          </button>
         </div>
 
         {/* Title & Info */}
@@ -54,8 +63,10 @@ const ProductCard = ({
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
                 key={star}
-                className={`h-4 w-4 ${ 
-                  star <= rating ? "text-yellow-400 fill-yellow-400" : "text-sky-700"
+                className={`h-4 w-4 ${
+                  star <= rating
+                    ? "text-yellow-400 fill-yellow-400"
+                    : "text-sky-700"
                 }`}
               />
             ))}
@@ -88,7 +99,7 @@ const ProductCard = ({
           <span className="text-sm">{userName}</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
