@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Menu, ShoppingCart, UserCircle, X } from "lucide-react";
+import { Heart, Menu, ShoppingBagIcon, ShoppingCart, UserCircle, X } from "lucide-react";
 
 const ProductsHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="w-screen bg-white z-40 shadow-md py-5 md:px-20 px-2 flex justify-between items-center">
+    <header className="w-screen sticky top-0 bg-white/65 backdrop-blur-2xl z-40 shadow-md py-5 md:px-20 px-2 flex justify-between items-center">
       {/* Logo */}
       <div>
         <Link to={"/"} className="flex items-center space-x-2">
@@ -44,14 +44,28 @@ const ProductsHeader = () => {
         </div>
 
         <ul className="px-6 space-y-4">
-          <Link to="/" className="block text-lg">Home</Link>
+          <Link to="/" className="block text-lg">
+            Home
+          </Link>
           <Link className="block text-lg">Auction</Link>
           <Link className="block text-lg">Best Sellers</Link>
-          <Link to="/sign-up" className="block text-lg">Login</Link>
+          <Link to="/sign-up" className="block text-lg">
+            Login
+          </Link>
         </ul>
       </div>
 
       <div className="hidden md:flex items-center space-x-5">
+        <a href="#" className="relative">
+          <div className="group absolute left-6 -top-1 bg-blue-800 py-0.2 px-2 rounded-full text-blue-50">
+            0
+          </div>
+          <ShoppingBagIcon
+            size={40}
+            className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
+          />
+        </a>
+
         <Link>
           <Heart size={27} className="hover:text-sky-600" />
         </Link>

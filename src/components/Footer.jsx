@@ -3,6 +3,7 @@ import { ShoppingCart } from "lucide-react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,12 +13,12 @@ const Footer = () => {
         {/* Logo */}
         <div>
           <div>
-            <a href="#" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <ShoppingCart size={25} />
               <p className="md:text-2xl font-bold">
                 Swap<span className="text-sky-400">Meet</span>
               </p>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -25,9 +26,12 @@ const Footer = () => {
         <div>
           <h3 className="text-xl md:mb-5 font-semibold">Buy</h3>
           <ul>
-            <li className="hover:underline text-md cursor-pointer">
+            <Link
+              to="/register"
+              className="hover:underline text-md cursor-pointer"
+            >
               Registration
-            </li>
+            </Link>
             <li className="hover:underline text-md cursor-pointer">Auction</li>
             <li className="hover:underline text-md cursor-pointer">
               Gift Cards

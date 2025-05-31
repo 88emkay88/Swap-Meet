@@ -1,6 +1,6 @@
-import ProductDetails from "../components/ProductDetails";
+import ProductDetails from "../pages/Products/ProductDetails";
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import Electronics from "../pages/Categories/Electronics";
+import Electronics from "../pages/Products/Categories/Electronics";
 import Home from "../pages/Home";
 import ProductsPage from "../pages/ProductsPage";
 import Register from "../pages/Register";
@@ -31,7 +31,7 @@ const routes = [
     element: <Electronics />,
   },
   {
-    path: "/product/:id",
+    path: "/products/:id",
     element: <ProductDetails />,
   },
   {

@@ -13,20 +13,44 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   const categories = [
-    "Electronics",
-    "Clothing & Accessories",
-    "Home & Kitchen",
-    "Toys & Games",
-    "Books & Media",
-    "Antiques & Collectibles",
-    "Tools & DIY",
-    "Sports & Outdoors",
+    {
+      name: "Electronics",
+      link: "/electornics",
+    },
+    {
+      name: "Clothing & Accessories",
+      link: "",
+    },
+    {
+      name: "Home & Kitchen",
+      link: "",
+    },
+    {
+      name: "Toys & Games",
+      link: "",
+    },
+    {
+      name: "Books & Media",
+      link: "",
+    },
+    {
+      name: "Antiques & Collectibles",
+      link: "",
+    },
+    {
+      name: "Tools & DIY",
+      link: "",
+    },
+    {
+      name: "Sports & Outdoors",
+      link: "",
+    },
   ];
 
   return (
     <>
       {/*Desktop header */}
-      <header className="hidden lg:grid items-center text-blue-950 z-10 py-2 px-5 xl:py-4 xl:px-10 bg-white space-y-2 shadow-md">
+      <header className="hidden sticky top-0 lg:grid items-center bg-white/40 z-10 py-2 px-5 xl:py-4 xl:px-10 backdrop-blur-lg space-y-2 shadow-md">
         <div className="flex justify-evenly">
           {/* Logo */}
           <div>
@@ -38,7 +62,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="hover:bg-sky-100 py-3 px-6 rounded-full">
+          <div className="hover:bg-sky-400 py-3 px-6 rounded-full">
             {/* Category button */}
             <button
               onClick={() => setOpen(!open)}
@@ -50,16 +74,16 @@ const Header = () => {
             </button>
 
             {open && (
-              <div className="absolute top-17 left-95 z-10 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black/10">
+              <div className="absolute top-17 left-95 z-10 mt-2 w-60 rounded-md shadow-lg backdrop-blur-3xl bg-white/70 ring-1 ring-black/10">
                 <ul className="py-1">
                   {categories.map((cat, i) => (
                     <li key={i}>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm hover:bg-blue-100"
+                      <Link
+                        to={cat.link}
+                        className="block px-4 py-2 text-sm hover:bg-blue-300"
                       >
-                        {cat}
-                      </a>
+                        {cat.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -90,7 +114,7 @@ const Header = () => {
           <div className="flex space-x-4 items-center">
             <Link
               to="/sign-up"
-              className="hover:bg-gray-200 px-2 py-1 rounded-full font-semibold"
+              className="hover:bg-sky-400 px-2 py-1 rounded-full font-semibold"
             >
               Sign in
             </Link>
@@ -98,7 +122,7 @@ const Header = () => {
             <a href="#">
               <Heart
                 size={40}
-                className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
+                className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
               />
             </a>
 
@@ -108,7 +132,7 @@ const Header = () => {
               </div>
               <ShoppingBagIcon
                 size={40}
-                className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
+                className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
               />
             </a>
           </div>
@@ -181,7 +205,7 @@ const Header = () => {
                         href="#"
                         className="block px-4 py-2 text-sm hover:bg-blue-100"
                       >
-                        {cat}
+                        {cat.name}
                       </a>
                     </li>
                   ))}

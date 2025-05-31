@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ProductsHeader from "../../components/ProductsHeader";
-import Breadcrumbs from "../../components/Breadcrumbs";
+import ProductsHeader from "../ProductsHeader";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import { Star } from "lucide-react";
 import { Range } from "react-range";
 

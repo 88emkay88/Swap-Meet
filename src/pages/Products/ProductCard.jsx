@@ -37,7 +37,7 @@ const ProductCard = ({
       >
         {/* Image with condition badge */}
         <div className="relative aspect-square overflow-hidden">
-          <Link to={`/product/${id}`}>
+          <Link to={`/products/${id}`}>
             <img
               src={image}
               alt={title}

@@ -16,7 +16,7 @@ const LowNav = () => {
           <button>
             <li
               key={index}
-              className="hover:bg-gray-200 cursor-pointer py-1 px-4 rounded-full"
+              className="hover:bg-sky-400 cursor-pointer py-1 px-4 rounded-full"
             >
               {opt}
             </li>

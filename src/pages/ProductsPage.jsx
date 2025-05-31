@@ -1,11 +1,11 @@
 // src/pages/ProductPage.jsx
 import React, { useState } from "react";
-import ProductsHeader from "../components/ProductsHeader";
+import ProductsHeader from "./Products/ProductsHeader";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 import { Range } from "react-range";
 import { Star } from "lucide-react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "./Products/ProductCard";
 import locationOptions from "../Data/locations";
 import products from "../Data/products";
 
@@ -39,6 +39,7 @@ export default function ProductPage() {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
 
+ 
   const filteredProducts = products.filter((product) => {
     return (
       product.name.toLowerCase().includes(search.toLowerCase()) &&
@@ -262,7 +263,7 @@ export default function ProductPage() {
                 title={product.name}
                 price={product.price}
                 rating={product.rating}
-                image={product.image}
+                image={product.images[0]}
                 category={product.category}
                 condition={product.condition}
                 location={product.location}
