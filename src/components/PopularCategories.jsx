@@ -11,7 +11,7 @@ const PopularCategories = () => {
     {
       img: "/src/assets/images/accessories.png",
       heading: "Accessories",
-      link: "/electronics",
+      link: "/accessories",
     },
     {
       img: "/src/assets/images/blender.png",

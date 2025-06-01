@@ -8,6 +8,7 @@ import SignUp from "../pages/SignUp";
 import UserProfile from "../pages/UserProfile";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import Accessories from "../pages/Products/Categories/Accessories";
 
 const routes = [
   {
@@ -31,7 +32,11 @@ const routes = [
     element: <Electronics />,
   },
   {
-    path: "/products/:id",
+    path: "/accessories" ,
+    element: <Accessories />
+  },
+  {
+    path: "/:category/:id",
     element: <ProductDetails />,
   },
   {

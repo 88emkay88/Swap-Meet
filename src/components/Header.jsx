@@ -142,7 +142,7 @@ const Header = () => {
       </header>
 
       {/* Mobile */}
-      <header className="lg:hidden grid items-center z-10 py-2 px-5 space-y-3 bg-white  shadow-md">
+      <header className="lg:hidden sticky -top-14 grid items-center z-10 py-2 px-5 space-y-3 bg-white  shadow-md">
         {/* top header */}
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -184,8 +184,10 @@ const Header = () => {
         </div>
 
         {/* low header */}
-        <div className="flex justify-evenly
-         w-full items-center">
+        <div
+          className="flex justify-evenly
+         w-full items-center"
+        >
           {/* Category */}
           <div className="hover:bg-sky-100 py-3 px-6 rounded-full">
             {/* Category button */}

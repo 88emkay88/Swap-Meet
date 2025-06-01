@@ -29,13 +29,15 @@ const ProductDetails = () => {
 
   if (!product) return <p>Product not found.</p>;
 
+  
+
   return (
     <>
       <div>
         <ProductsHeader />
 
         <div>
-          <Breadcrumbs currentPage={product.name} />
+          <Breadcrumbs currentPage={product.name} category={product.category} />
         </div>
 
         <div className="grid grid-cols-2 p-10">
@@ -44,7 +46,7 @@ const ProductDetails = () => {
             <img
               src={mainImage}
               alt={product.name}
-              className="shadow-2xl rounded-4xl"
+              className="shadow-2xl rounded-4xl w-5/6 h-100"
             />
 
             {/* Thumbnail selectors */}
