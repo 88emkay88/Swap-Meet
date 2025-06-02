@@ -83,7 +83,7 @@ export default function Accessories() {
   };
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <ProductsHeader />
 
       {/* Hero */}
@@ -93,7 +93,7 @@ export default function Accessories() {
           alt="Accessories hero"
           className="w-full h-full object-cover rounded-b-4xl"
         />
-        <h1 className="absolute top-[68%] left-[20%] text-5xl md:top-[20%] md:left-[10%] cursor-default text-white font-bold md:text-12xl">
+        <h1 className="absolute top-[28%] left-[10%] text-5xl md:top-[20%] md:left-[10%] cursor-default text-white font-bold md:text-12xl">
           Accessories
         </h1>
       </div>

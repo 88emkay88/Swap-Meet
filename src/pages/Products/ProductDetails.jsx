@@ -33,20 +33,20 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div>
+      <div className="overflow-x-hidden">
         <ProductsHeader />
 
         <div>
           <Breadcrumbs currentPage={product.name} category={product.category} />
         </div>
 
-        <div className="grid grid-cols-2 p-10">
+        <div className="grid md:grid-cols-2 md:p-10">
           {/* Main Image Display */}
-          <div className="h-150 p-50">
+          <div className="h-1/2 w  md:h-150 flex flex-col items-center p-4 md:p-50">
             <img
               src={mainImage}
               alt={product.name}
-              className="shadow-2xl rounded-4xl w-5/6 h-100"
+              className="shadow-2xl rounded-4xl md:w-5/6 w-5/6 md:h-100"
             />
 
             {/* Thumbnail selectors */}
@@ -57,7 +57,7 @@ const ProductDetails = () => {
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
                   onClick={() => setMainImage(img)}
-                  className={`W-20 h-20 rounded-3xl cursor-point ${
+                  className={`w-20 h-20 md:w-20 md:h-20 rounded-3xl cursor-point ${
                     mainImage === img ? "border-4 border-sky-500" : ""
                   }`}
                 />
@@ -65,13 +65,15 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="p-10 space-y-10">
+          <div className="md:p-10 p-8 space-y-10">
             <div>
               {/* Heading & Buttons */}
-              <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+              <div className="flex justify-between items-center mb-3">
+                <h1 className="md:text-3xl text-xl font-bold">
+                  {product.name}
+                </h1>
 
-                <div className="flex justify-between space-x-7 items-center">
+                <div className="flex justify-between space-x-7 items-center ">
                   <button>
                     <Heart />
                   </button>
@@ -84,11 +86,11 @@ const ProductDetails = () => {
 
               {/* Location & Date Posted */}
               <div className="flex justify-start space-x-10 text-gray-500">
-                <div className="flex">
+                <div className="flex text-sm md:text-lg">
                   <MapPin />
                   {product.location}
                 </div>
-                <div className="flex">
+                <div className="flex items-center text-xs md:text-md md:font-normal font-bold">
                   <Clock7 />
                   {product.datePosted}
                 </div>
@@ -96,7 +98,7 @@ const ProductDetails = () => {
             </div>
 
             {/* Condition */}
-            <div className="p-10 bg-sky-600 rounded-2xl text-sky-50">
+            <div className="p-10 md:w-full bg-sky-600 rounded-2xl text-sky-50">
               <h2 className="text-2xl font-semibold">Condition</h2>
               <p className="text-lg">{product.condition}</p>
             </div>
@@ -119,20 +121,22 @@ const ProductDetails = () => {
                     className="h-15 w-15 border object-cover rounded-full"
                   />
                 ) : (
-                  <div className="flex mr-2 border-2 w-10 h-10 rounded-full items-center justify-center">
+                  <div className="flex mr-2 border-2 md:w-10 w-15 h-10 md:h-10 rounded-full items-center justify-center">
                     <span>{userInitails}</span>
                   </div>
                 )}
 
                 <div className="space-y-1 ml-2 grid">
-                  <h2 className="text-2xl ">{product.seller.name}</h2>
+                  <h2 className="md:text-2xl text-xl">{product.seller.name}</h2>
                   <div className="flex space-x-2">
                     <p className="flex items-center space-x-2">
                       <Star className="fill-yellow-300 text-yellow-300" />
                       <span>{product.seller.sellerRating}</span>
                     </p>
                     <span>•</span>
-                    <p>Memeber since {product.seller.joinDate}</p>
+                    <p className="md:text-md text-sm ">
+                      Memeber since {product.seller.joinDate}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -140,13 +144,13 @@ const ProductDetails = () => {
               {/* response Rate & Completed Sales */}
               <div className="flex justify-between">
                 <div>
-                  <h3 className="text-xl">Response Rate</h3>
-                  <p className="text-center font-bold">
+                  <h3 className="md:text-xl text-sm">Response Rate</h3>
+                  <p className="text-center  font-bold">
                     %{product.seller.responseRate}
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-xl">Completed Sales</h3>
+                  <h3 className="md:text-xl text-sm">Completed Sales</h3>
                   <p className="text-center font-bold">
                     {product.seller.completedSales}
                   </p>
@@ -154,11 +158,11 @@ const ProductDetails = () => {
               </div>
 
               {/* Message About Item */}
-              <button className="flex justify-center rounded-2xl space-x-4 p-3 bg-sky-600 hover:bg-sky-400 cursor-pointer  text-sky-100">
+              <button className="flex justify-center items-center rounded-2xl md:space-x-4 p-3 bg-sky-600 hover:bg-sky-400 cursor-pointer  text-sky-100">
                 <span>
                   <MessageCircleQuestion />
                 </span>
-                <p>Message About This Item</p>
+                <p className="md:text-md text-sm">Message About This Item</p>
               </button>
             </div>
 

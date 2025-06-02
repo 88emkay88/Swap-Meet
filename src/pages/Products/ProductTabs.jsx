@@ -20,22 +20,22 @@ const ProductTabs = ({ description, details, price }) => {
     }
   return (
       <div className='mt-10'>
-          <div className='flex justify-evenly space-x-6 bg-gray-200 p-2 mb-8 rounded-xl font-bold'>
+          <div className='grid grid-cols-3 justify-evenly bg-gray-200 p-2  mb-8 rounded-xl text-sm font-bold'>
               <button
                   onClick={() => setActiveTab("description")}
-                  className={`p-3 w-60 cursor-pointer ${activeTab === "description" ? " bg-white rounded-xl" : "text-gray-600"}`}
+                  className={`p-3 text-xs  cursor-pointer ${activeTab === "description" ? " bg-white rounded-xl" : "text-gray-600"}`}
               >
                   Description
               </button>
               <button
                   onClick={() => setActiveTab("details")}
-                  className={`p-3 w-60 cursor-pointer  ${activeTab === "details" ? " bg-white rounded-xl" : "text-gray-600"}`}
+                  className={`p-3 cursor-pointer  ${activeTab === "details" ? " bg-white rounded-xl" : "text-gray-600"}`}
               >
                   Details
               </button>
               <button
                   onClick={() => setActiveTab("price")}
-                  className={`p-3 w-60 cursor-pointer  ${activeTab === "price" ? " bg-white rounded-xl" : "text-gray-600"}`}
+                  className={`p-3 cursor-pointer  ${activeTab === "price" ? " bg-white rounded-xl" : "text-gray-600"}`}
               >
                   Price
               </button>

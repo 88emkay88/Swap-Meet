@@ -16,17 +16,17 @@ const PopularCategories = () => {
     {
       img: "/src/assets/images/blender.png",
       heading: "Home Appliances",
-      link: "/electronics",
+      link: "/home-appliances",
     },
     {
       img: "/src/assets/images/console.png",
       heading: "Gaming",
-      link: "/electronics",
+      link: "/gaming",
     },
     {
       img: "/src/assets/images/basketball.png",
       heading: "Sports",
-      link: "/electronics",
+      link: "/sports",
     },
   ];
   return (

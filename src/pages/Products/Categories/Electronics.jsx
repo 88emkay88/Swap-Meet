@@ -1,4 +1,3 @@
-// src/pages/Electronics.jsx
 import React, { useState, useEffect } from "react";
 import ProductsHeader from "../ProductsHeader";
 import Breadcrumbs from "../../../components/Breadcrumbs";

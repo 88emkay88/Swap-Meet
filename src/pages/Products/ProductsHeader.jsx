@@ -37,13 +37,13 @@ const ProductsHeader = () => {
         }`}
       >
         {/* close button */}
-        <div className="flex justify-end p-4">
+        <div className="flex bg-white/88 backdrop-blur-3xl  justify-end p-4">
           <button onClick={() => setIsMenuOpen(false)}>
             <X className="w-6 h-6" />
           </button>
         </div>
 
-        <ul className="px-6 space-y-4">
+        <ul className="p-6 bg-white/88 backdrop-blur-3xl rounded-b-2xl space-y-4">
           <Link to="/" className="block text-lg">
             Home
           </Link>

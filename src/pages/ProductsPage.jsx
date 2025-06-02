@@ -4,7 +4,7 @@ import ProductsHeader from "./Products/ProductsHeader";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 import { Range } from "react-range";
-import { Star } from "lucide-react";
+import { SlidersHorizontal, Star } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
 import locationOptions from "../Data/locations";
 import products from "../Data/products";
@@ -77,7 +77,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <ProductsHeader />
 
       {/* Background picture */}
@@ -119,7 +119,7 @@ export default function ProductPage() {
         <div className="md:col-span-3 md:-translate-x-20 space-y-4">
           {/* Search */}
           <form
-            className="hidden md:block md:max-h-25 bg-white p-4 ring-1 ring-black/10 shadow-lg"
+            className=" flex md:block md:max-h-25 bg-white p-4 ring-1 ring-black/10 shadow-lg"
             method="get"
           >
             <input
@@ -127,8 +127,13 @@ export default function ProductPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search for products..."
-              className="p-4 w-full border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className="p-4 w-5/6 md:w-full border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-400"
             />
+
+            <button className="md:hidden ml-3 p-2 w-15 h-15 flex items-center justify-center rounded-3xl  border-2 border-sky-800">
+              <SlidersHorizontal />
+              
+            </button>
           </form>
 
           {/* Product Grid */}

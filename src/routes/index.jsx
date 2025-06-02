@@ -9,6 +9,9 @@ import UserProfile from "../pages/UserProfile";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Accessories from "../pages/Products/Categories/Accessories";
+import HomeAppliances from "../pages/Products/Categories/HomeAppliances";
+import Gaming from "../pages/Products/Categories/Gaming";
+import Sports from "../pages/Products/Categories/Sports";
 
 const routes = [
   {
@@ -34,6 +37,18 @@ const routes = [
   {
     path: "/accessories" ,
     element: <Accessories />
+  },
+  {
+    path: "/home-appliances",
+    element: <HomeAppliances />
+  },
+  {
+    path: "/gaming", 
+    element: <Gaming />
+  },
+  {
+    path: "/sports",
+    element: <Sports />
   },
   {
     path: "/:category/:id",
