@@ -73,7 +73,7 @@ const ProductDetails = () => {
                   {product.name}
                 </h1>
 
-                <div className="flex justify-between space-x-7 items-center ">
+                <div className="flex justify-between space-x-3 md:space-x-7 items-center ">
                   <button>
                     <Heart />
                   </button>

@@ -462,7 +462,7 @@ const products = [
         id: 12,
         name: "Adjustable Dumbbells",
         price: 1999,
-        category: "Fitness",
+        category: "Sports",
         subcategory: "Weights",
         images: [
             "https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg"
@@ -512,7 +512,7 @@ const products = [
         id: 14,
         name: "Wooden Bookshelf",
         price: 700,
-        category: "Furniture",
+        category: "Sports",
         subcategory: "Storage",
         images: [
             "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg"
@@ -537,7 +537,7 @@ const products = [
         id: 15,
         name: "Air Fryer",
         price: 1100,
-        category: "Kitchen",
+        category: "Home Appliances",
         subcategory: "Appliances",
         images: [
             "https://images.pexels.com/photos/5900085/pexels-photo-5900085.jpeg"
@@ -562,7 +562,7 @@ const products = [
         id: 16,
         name: "Gaming Keyboard",
         price: 490,
-        category: "Electronics",
+        category: "Gaming",
         subcategory: "Computer Accessories",
         images: [
             "https://images.pexels.com/photos/159651/keybord-computer-empty-white-159651.jpeg"
@@ -587,7 +587,7 @@ const products = [
         id: 17,
         name: "Nikon DSLR Camera",
         price: 4200,
-        category: "Photography",
+        category: "Gaming",
         subcategory: "Cameras",
         images: [
             "https://images.pexels.com/photos/274973/pexels-photo-274973.jpeg"
@@ -612,7 +612,7 @@ const products = [
         id: 18,
         name: "Portable BBQ Grill",
         price: 560,
-        category: "Outdoor",
+        category: "Home Appliances",
         subcategory: "Cooking",
         images: [
             "https://images.pexels.com/photos/1860207/pexels-photo-1860207.jpeg"
@@ -682,7 +682,7 @@ const products = [
         datePosted: "Posted 3 days ago",
         description: "Ergonomic office chair with adjustable height and lumbar support.",
         details: ["Mesh Back", "Swivel Base", "Adjustable Armrests"]
-      }
+    }
 ];
 
 export default products;
