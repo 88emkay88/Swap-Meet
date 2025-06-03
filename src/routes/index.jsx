@@ -12,6 +12,7 @@ import Accessories from "../pages/Products/Categories/Accessories";
 import HomeAppliances from "../pages/Products/Categories/HomeAppliances";
 import Gaming from "../pages/Products/Categories/Gaming";
 import Sports from "../pages/Products/Categories/Sports";
+import NewProducts from "../pages/newProducts";
 
 const routes = [
   {
@@ -35,24 +36,28 @@ const routes = [
     element: <Electronics />,
   },
   {
-    path: "/accessories" ,
-    element: <Accessories />
+    path: "/accessories",
+    element: <Accessories />,
   },
   {
     path: "/home-appliances",
-    element: <HomeAppliances />
+    element: <HomeAppliances />,
   },
   {
-    path: "/gaming", 
-    element: <Gaming />
+    path: "/gaming",
+    element: <Gaming />,
   },
   {
     path: "/sports",
-    element: <Sports />
+    element: <Sports />,
   },
   {
     path: "/:category/:id",
     element: <ProductDetails />,
+  },
+  {
+    path: "/new",
+    element: <NewProducts />,
   },
   {
     path: "/profile",

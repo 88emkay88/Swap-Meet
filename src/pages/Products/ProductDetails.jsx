@@ -14,6 +14,7 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import ProductTabs from "./ProductTabs";
 import { TbShoppingBagPlus } from "react-icons/tb";
 import Footer from "../../components/Footer";
+import { formatDistanceToNow } from "date-fns";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -92,7 +93,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex items-center text-xs md:text-md md:font-normal font-bold">
                   <Clock7 />
-                  {product.datePosted}
+                  {formatDistanceToNow(new Date(product.datePosted), {addSuffix: true})}
                 </div>
               </div>
             </div>

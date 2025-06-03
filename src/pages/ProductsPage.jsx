@@ -1,4 +1,3 @@
-// src/pages/ProductPage.jsx
 import React, { useEffect, useState } from "react";
 import ProductsHeader from "./Products/ProductsHeader";
 import Breadcrumbs from "../components/Breadcrumbs";
@@ -6,6 +5,7 @@ import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
 import locationOptions from "../Data/locations";
+import colorOption from "../Data/colors"
 import products from "../Data/products";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
@@ -29,7 +29,7 @@ const checkbox = [
   "Outdoors",
 ];
 
-const colorOption = ["Red", "Blue", "Black", "White", "Green", "Yellow"];
+
 
 export default function ProductPage() {
   const [search, setSearch] = useState("");

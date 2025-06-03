@@ -1,25 +1,45 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LowNav = () => {
   const lowNav = [
-    "New",
-    "Trending",
-    "Auction",
-    "Gifts",
-    "Top Sellers",
-    "Limited Additon",
+    {
+      name: "New",
+      link: "/new",
+    },
+    {
+      name: "Trending",
+      link: "",
+    },
+    {
+      name: "Auction",
+      link: "",
+    },
+    {
+      name: "Gifts",
+      link: "",
+    },
+    {
+      name: "Top Sellers",
+      link: "",
+    },
+    {
+      name: "Limited Additon",
+      link: "",
+    },
   ];
   return (
     <div className="hidden md:flex justify-center translate-x-15 space-x-3.5">
       <ul className="flex">
         {lowNav.map((opt, index) => (
           <button>
-            <li
-              key={`${opt}-${index}`}
-              className="hover:bg-sky-400 cursor-pointer py-1 px-4 rounded-full"
+            <Link
+              to={opt.link}
+              key={`${opt.name}-${index}`}
+              className="hover:bg-sky-400 py-1 px-4 rounded-full"
             >
-              {opt}
-            </li>
+              {opt.name}
+            </Link>
           </button>
         ))}
       </ul>

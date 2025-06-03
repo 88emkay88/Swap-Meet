@@ -23,7 +23,7 @@ const products = [
             responseRate: 72,
             completedSales: 3
         },
-        datePosted: "Posted 5 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Comfortable over-ear wireless headphones with crystal-clear audio and noise isolation. Ideal for long listening sessions.",
         details: ["Bluetooth 5.0", "Noise Isolation", "20h Battery Life", "Built-in Mic"]
     },
@@ -50,7 +50,7 @@ const products = [
             responseRate: 93,
             completedSales: 17
         },
-        datePosted: "Posted 1 week ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "A fashionable, warm jacket perfect for winter. Minimal signs of wear, suitable for casual or semi-formal use.",
         details: ["Size: Medium", "Material: Polyester", "Zipper Closure", "Hooded"]
     },
@@ -77,7 +77,7 @@ const products = [
             responseRate: 95,
             completedSales: 12
         },
-        datePosted: "Posted 2 days ago",
+        datePosted: "2024-06-01T12:00:00Z",
         description: "Brand new cordless power drill with a strong motor, perfect for heavy-duty DIY and professional tasks.",
         details: ["Cordless", "2 Speed Settings", "Includes Battery", "LED Light"]
     },
@@ -104,7 +104,7 @@ const products = [
             responseRate: 89,
             completedSales: 4
         },
-        datePosted: "Posted 3 week ago",
+        datePosted: "2024-05-30T09:00:00Z",
         description: "Complete 10-piece non-stick cookware set. Gently used and well maintained, great for any home kitchen.",
         details: ["10 Pieces", "Non-Stick Coating", "Dishwasher Safe", "Ergonomic Handles"]
     },
@@ -131,7 +131,7 @@ const products = [
             responseRate: 92,
             completedSales: 20
         },
-        datePosted: "Posted 2 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Adjustable smartphone stand suitable for all phone sizes. Perfect for video calls and watching videos.",
         details: ["Adjustable Height", "Non-Slip Base", "Aluminum Alloy", "Portable Design"]
     },
@@ -158,7 +158,7 @@ const products = [
             responseRate: 98,
             completedSales: 35
         },
-        datePosted: "Posted 3 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Portable Bluetooth speaker with excellent sound quality and long battery life.",
         details: ["Bluetooth 5.0", "10h Battery Life", "Water-Resistant", "Built-in Mic"]
     },
@@ -185,8 +185,7 @@ const products = [
             responseRate: 90,
             completedSales: 18
         },
-        datePosted: "Posted 1 day ago",
-        description: "High-precision gaming mouse with customizable DPI settings and RGB lighting.",
+       datePosted: "2024-05-29T14:30:00Z",        description: "High-precision gaming mouse with customizable DPI settings and RGB lighting.",
         details: ["Adjustable DPI", "Ergonomic Design", "RGB Lighting", "6 Programmable Buttons"]
     },
     {
@@ -212,7 +211,7 @@ const products = [
             responseRate: 95,
             completedSales: 25
         },
-        datePosted: "Posted 4 days ago",
+        datePosted: "2024-05-30T09:00:00Z",
         description: "Non-slip yoga mat with comfortable cushioning, ideal for all types of workouts.",
         details: ["Non-Slip Surface", "Eco-Friendly Material", "6mm Thickness", "Lightweight"]
     },
@@ -239,7 +238,7 @@ const products = [
             responseRate: 88,
             completedSales: 12
         },
-        datePosted: "Posted 1 week ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Durable mountain bike suitable for off-road trails and city commuting.",
         details: ["21-Speed Gear", "Front Suspension", "Aluminum Frame", "Disc Brakes"]
     },
@@ -266,7 +265,7 @@ const products = [
             responseRate: 97,
             completedSales: 28
         },
-        datePosted: "Posted 2 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Fast-boiling electric kettle with auto shut-off and boil-dry protection.",
         details: ["1.7L Capacity", "Stainless Steel", "Auto Shut-Off", "360° Swivel Base"]
     },
@@ -293,7 +292,7 @@ const products = [
             responseRate: 92,
             completedSales: 20
         },
-        datePosted: "Posted 2 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Adjustable smartphone stand suitable for all phone sizes. Perfect for video calls and watching videos.",
         details: ["Adjustable Height", "Non-Slip Base", "Aluminum Alloy", "Portable Design"]
     },
@@ -320,7 +319,7 @@ const products = [
             responseRate: 98,
             completedSales: 35
         },
-        datePosted: "Posted 3 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Portable Bluetooth speaker with excellent sound quality and long battery life.",
         details: ["Bluetooth 5.0", "10h Battery Life", "Water-Resistant", "Built-in Mic"]
     },
@@ -347,8 +346,7 @@ const products = [
             responseRate: 90,
             completedSales: 18
         },
-        datePosted: "Posted 1 day ago",
-        description: "High-precision gaming mouse with customizable DPI settings and RGB lighting.",
+       datePosted: "2024-05-29T14:30:00Z",        description: "High-precision gaming mouse with customizable DPI settings and RGB lighting.",
         details: ["Adjustable DPI", "Ergonomic Design", "RGB Lighting", "6 Programmable Buttons"]
     },
     {
@@ -374,7 +372,7 @@ const products = [
             responseRate: 95,
             completedSales: 25
         },
-        datePosted: "Posted 4 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Non-slip yoga mat with comfortable cushioning, ideal for all types of workouts.",
         details: ["Non-Slip Surface", "Eco-Friendly Material", "6mm Thickness", "Lightweight"]
     },
@@ -401,7 +399,7 @@ const products = [
             responseRate: 88,
             completedSales: 12
         },
-        datePosted: "Posted 1 week ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Durable mountain bike suitable for off-road trails and city commuting.",
         details: ["21-Speed Gear", "Front Suspension", "Aluminum Frame", "Disc Brakes"]
     },
@@ -428,7 +426,7 @@ const products = [
             responseRate: 97,
             completedSales: 28
         },
-        datePosted: "Posted 2 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Fast-boiling electric kettle with auto shut-off and boil-dry protection.",
         details: ["1.7L Capacity", "Stainless Steel", "Auto Shut-Off", "360° Swivel Base"]
     },
@@ -454,8 +452,7 @@ const products = [
             responseRate: 96,
             completedSales: 19
         },
-        datePosted: "Posted today",
-        description: "High-quality earbuds with noise cancellation and charging case.",
+       datePosted: "2024-05-29T14:30:00Z",    description: "High-quality earbuds with noise cancellation and charging case.",
         details: ["Bluetooth 5.1", "Noise Cancellation", "Touch Controls", "Water-Resistant"]
     },
     {
@@ -479,7 +476,7 @@ const products = [
             responseRate: 91,
             completedSales: 21
         },
-        datePosted: "Posted 2 hours ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Adjustable dumbbells from 5kg to 25kg, great for home workouts.",
         details: ["5–25kg", "Easy Adjustment", "Compact Storage"]
     },
@@ -504,7 +501,7 @@ const products = [
             responseRate: 93,
             completedSales: 11
         },
-        datePosted: "Posted 5 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Portable mini projector with HDMI and USB ports, ideal for movies.",
         details: ["1080p Supported", "HDMI/USB", "Built-in Speaker"]
     },
@@ -529,8 +526,7 @@ const products = [
             responseRate: 85,
             completedSales: 9
         },
-        datePosted: "Posted last week",
-        description: "5-tier wooden bookshelf with a classic design. Good condition.",
+       datePosted: "2024-05-29T14:30:00Z",        description: "5-tier wooden bookshelf with a classic design. Good condition.",
         details: ["Pine Wood", "5 Shelves", "1.8m Tall"]
     },
     {
@@ -554,7 +550,7 @@ const products = [
             responseRate: 98,
             completedSales: 33
         },
-        datePosted: "Posted 3 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "4L digital air fryer with timer and temperature control.",
         details: ["4L Capacity", "Digital Display", "Non-Stick Basket"]
     },
@@ -579,7 +575,7 @@ const products = [
             responseRate: 89,
             completedSales: 15
         },
-        datePosted: "Posted 2 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "RGB mechanical keyboard with blue switches and full-size layout.",
         details: ["Mechanical", "RGB Lighting", "Anti-Ghosting"]
     },
@@ -604,7 +600,7 @@ const products = [
             responseRate: 94,
             completedSales: 14
         },
-        datePosted: "Posted 1 hour ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Nikon D3500 DSLR camera with 18-55mm lens. Lightly used.",
         details: ["24.2MP", "Wi-Fi Enabled", "Includes Strap"]
     },
@@ -629,7 +625,7 @@ const products = [
             responseRate: 87,
             completedSales: 13
         },
-        datePosted: "Posted 6 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Compact BBQ grill for patios and camping trips.",
         details: ["Stainless Steel", "Foldable Legs", "Charcoal Powered"]
     },
@@ -654,7 +650,7 @@ const products = [
             responseRate: 90,
             completedSales: 17
         },
-        datePosted: "Posted 2 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Beginner-friendly acoustic guitar. Recently restrung.",
         details: ["6 String", "Steel Strings", "Natural Finish"]
     },
@@ -679,7 +675,7 @@ const products = [
             responseRate: 99,
             completedSales: 30
         },
-        datePosted: "Posted 3 days ago",
+       datePosted: "2024-05-29T14:30:00Z",
         description: "Ergonomic office chair with adjustable height and lumbar support.",
         details: ["Mesh Back", "Swivel Base", "Adjustable Armrests"]
     }

@@ -18,32 +18,20 @@ const Header = () => {
       link: "/electornics",
     },
     {
-      name: "Clothing & Accessories",
-      link: "",
+      name: "Accessories",
+      link: "/accessories",
     },
     {
-      name: "Home & Kitchen",
-      link: "",
+      name: "Home Appliances",
+      link: "/home-appliances",
     },
     {
-      name: "Toys & Games",
-      link: "",
+      name: "Games",
+      link: "/gaming",
     },
     {
-      name: "Books & Media",
-      link: "",
-    },
-    {
-      name: "Antiques & Collectibles",
-      link: "",
-    },
-    {
-      name: "Tools & DIY",
-      link: "",
-    },
-    {
-      name: "Sports & Outdoors",
-      link: "",
+      name: "Sports",
+      link: "/sports",
     },
   ];
 

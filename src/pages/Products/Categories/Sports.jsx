@@ -135,7 +135,7 @@ export default function Sports() {
         <div className="md:col-span-3 space-y-4 md:-translate-x-20">
           {/* Search Bar */}
           <form
-            className="hidden md:block bg-white p-4 ring-1 ring-black/10 shadow-lg rounded-2xl"
+            className="flex md:block bg-white p-4 ring-1 ring-black/10 shadow-lg rounded-2xl"
             method="get"
           >
             <input

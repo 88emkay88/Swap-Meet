@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import ProductsHeader from "../ProductsHeader";
-import Breadcrumbs from "../../../components/Breadcrumbs";
-import Footer from "../../../components/Footer";
-import ProductCard from "../ProductCard";
-import locationOptions from "../../../Data/locations";
-import colorOption from "../../../Data/colors";
-import products from "../../../Data/products";
-import Sidebar from "../Sidebar";
+import React, { useEffect, useState } from "react";
+import ProductsHeader from "./Products/ProductsHeader";
+import Breadcrumbs from "../components/Breadcrumbs";
+import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
+import ProductCard from "./Products/ProductCard";
+import locationOptions from "../Data/locations";
+import products from "../Data/products";
+import colorOption from "../Data/colors";
+import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
-import AccessoriesBg from "../../../assets/images/bg-accessories.jpg";
+import newBg from "../assets/images/New-Bg.jpg";
+import newBanner from "../assets/images/NewBanner.png";
 
-export default function Accessories() {
+const NewProducts = () => {
   //— State for filters & pagination
   const [search, setSearch] = useState("");
   const minPrice = 0;
@@ -25,50 +26,51 @@ export default function Accessories() {
   const productsPerPage = 9;
   const [showFilters, setShowFilters] = useState(false);
 
-  //— Filter only category === "Accessories"
-  const accessories = products.filter((p) => p.category === "Accessories");
+  //— Filter only category === "newest"
+  const sorted = [...products].sort(
+    (a, b) => new Date(b.datePosted) - new Date(a.datePosted)
+  );
 
   const checkbox = [
-    "Bags & Purses",
-    "Belts",
-    "Hats & Caps",
-    "Scarves & Shawls",
-    "Sunglasses",
-    "Watches",
-    "Jewelry",
-    "Hair Accessories",
-    "Wallets & Cardholders",
-    "Keychains & Charms",
-    "Gloves & Mittens",
-    "Ties & Bowties",
-    "Face Masks",
-    "Umbrellas",
-    "Brooches & Pins",
+    "Electronics",
+    "Clothing",
+    "Accessories",
+    "Home",
+    "Kitchen",
+    "Toys",
+    "Games",
+    "Books",
+    "Media",
+    "Antiques",
+    "Collectibles",
+    "Tools",
+    "DIY",
+    "Sports",
+    "Outdoors",
   ];
 
   const applyMobileFilters = () => {
     setShowFilters(false);
   };
 
-  //— Apply  filters
-  const filtered = accessories.filter((product) => {
+  const filteredProducts = sorted.filter((product) => {
     return (
       product.name.toLowerCase().includes(search.toLowerCase()) &&
       product.price >= values[0] &&
       product.price <= values[1] &&
       (!rating || product.rating === rating) &&
       (selectedCategories.length === 0 ||
-        selectedCategories.includes(product.subcategory)) &&
+        selectedCategories.includes(product.category)) &&
       (selectedColors.length === 0 || selectedColors.includes(product.color)) &&
       (selectedLocations.length === 0 ||
         selectedLocations.includes(product.location))
     );
   });
 
-  //— Pagination slice
+  // Slice Filtered products
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filtered.slice(
+  const currentProducts = filteredProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -94,25 +96,30 @@ export default function Accessories() {
   }, [currentPage]);
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-hidden">
       <ProductsHeader />
 
       {/* Background picture */}
-      <div className="relative h-60 md:h-150">
-        <img
-          src={AccessoriesBg}
-          alt="Accessories hero"
-          className="w-full h-full object-cover rounded-b-4xl"
-        />
-        <h1 className="absolute top-[28%] left-[10%] text-5xl md:top-[20%] md:left-[10%] cursor-default text-white font-bold md:text-12xl">
-          Accessories
-        </h1>
+      <div className="flex justify-center p-5 md:p-0 mt-7">
+        <div className="md:w-7/8 md:h-150 relative">
+          <img
+            src={newBg}
+            alt="shopping cart with cereals"
+            className="h-full w-full md:rounded-4xl rounded-xl "
+          />
+
+          <img src={newBanner} className="absolute md:-top-16 -top-3 -left-3 md:-left-15.5 w-2/8" />
+
+          <h1 className="absolute top-[45%] left-[12%] text-4xl md:text-5xl md:top-[10%] md:left-[14%] cursor-default text-white font-bold md:text-12xl">
+            New Products
+          </h1>
+        </div>
       </div>
 
       <Breadcrumbs />
 
+      {/* Sidebar Filters */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
-        {/* Sidebar */}
         <Sidebar
           checkbox={checkbox}
           colorOption={colorOption}
@@ -132,18 +139,18 @@ export default function Accessories() {
           resetFilters={resetFilters}
         />
 
-        <div className="md:col-span-3 space-y-4 md:-translate-x-20">
-          {/* Search Bar */}
+        <div className="md:col-span-3 md:-translate-x-20 space-y-4">
+          {/* Search */}
           <form
-            className="flex md:block bg-white p-4 ring-1 ring-black/10 shadow-lg rounded-2xl"
+            className=" flex md:block md:max-h-25 bg-white p-4 ring-1 ring-black/10 shadow-lg"
             method="get"
           >
             <input
               type="text"
-              className="w-full p-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
-              placeholder="Search Accessories..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search for products..."
+              className="p-4 w-5/6 md:w-full border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-400"
             />
 
             <button
@@ -318,38 +325,38 @@ export default function Accessories() {
 
           {/* Product Grid */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.length ? (
-              currentProducts.map((p) => (
+            {/* Products */}
+            {filteredProducts.length > 0 ? (
+              currentProducts.map((product) => (
                 <ProductCard
-                  key={p.id}
-                  id={p.id}
-                  title={p.name}
-                  image={p.images?.[0] || p.image}
-                  price={p.price}
-                  rating={p.rating}
-                  condition={p.condition}
-                  location={p.location}
-                  category={p.category}
-                  userName={p.seller.name}
-                  userAvatar={p.seller.avatar}
+                  key={product.id}
+                  id={product.id}
+                  title={product.name}
+                  price={product.price}
+                  rating={product.rating}
+                  image={product.images[0]}
+                  category={product.category}
+                  condition={product.condition}
+                  location={product.location}
+                  userName={product.seller.name}
+                  userAvatar={product.seller.avatar}
                 />
               ))
             ) : (
-              <p className="col-span-full text-gray-500">No products found.</p>
+              <p className="text-gray-500 col-span-full">No products found.</p>
             )}
           </section>
 
-          {/* Pagination */}
           <div className="flex justify-center mt-6 space-x-2">
             {Array.from(
-              { length: Math.ceil(filtered.length / productsPerPage) },
+              { length: Math.ceil(filteredProducts.length / productsPerPage) },
               (_, i) => (
                 <button
-                  key={i}
+                  key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
                   className={`px-4 py-2 rounded-full ${
                     currentPage === i + 1
-                      ? "bg-blue-500 text-white"
+                      ? "bg-blue-500 text-sky-200"
                       : "bg-gray-200 text-gray-800"
                   }`}
                 >
@@ -364,4 +371,6 @@ export default function Accessories() {
       <Footer />
     </div>
   );
-}
+};
+
+export default NewProducts;
