@@ -190,14 +190,17 @@ const Header = () => {
               <div className="absolute top-25 left-1 z-10 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black/10">
                 <ul className="py-1">
                   {categories.map((cat, i) => (
-                    <li key={i}>
+                    <Link
+                      key={i}
+                      to={cat.link}
+                      >
                       <a
                         href="#"
                         className="block px-4 py-2 text-sm hover:bg-blue-100"
                       >
                         {cat.name}
                       </a>
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               </div>

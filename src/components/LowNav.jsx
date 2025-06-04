@@ -13,7 +13,7 @@ const LowNav = () => {
     },
     {
       name: "Auction",
-      link: "",
+      link: "/auction",
     },
     {
       name: "Gifts",

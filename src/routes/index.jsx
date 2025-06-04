@@ -14,6 +14,7 @@ import Gaming from "../pages/Products/Categories/Gaming";
 import Sports from "../pages/Products/Categories/Sports";
 import NewProducts from "../pages/newProducts";
 import Trending from "../pages/Trending";
+import Auction from "../pages/Auction";
 
 const routes = [
   {
@@ -63,6 +64,10 @@ const routes = [
   {
     path: "/trending",
     element: <Trending />
+  },
+  {
+    path: "/auction", 
+    element: <Auction />
   },
   {
     path: "/profile",

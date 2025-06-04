@@ -118,8 +118,8 @@ const NewProducts = () => {
 
       <Breadcrumbs />
 
-      {/* Sidebar Filters */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+        {/* Sidebar Filters */}
         <Sidebar
           checkbox={checkbox}
           colorOption={colorOption}

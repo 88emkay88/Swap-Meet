@@ -22,7 +22,7 @@ const ProductsHeader = () => {
           <Link to={"/"} className="hover:text-sky-600">
             Home
           </Link>
-          <Link className="hover:text-sky-600">Auction</Link>
+          <Link to="/auction" className="hover:text-sky-600">Auction</Link>
           <Link className="hover:text-sky-600">Best Sellers</Link>
         </ul>
       </nav>
@@ -47,7 +47,7 @@ const ProductsHeader = () => {
           <Link to="/" className="block text-lg">
             Home
           </Link>
-          <Link className="block text-lg">Auction</Link>
+          <Link to="/auction" className="block text-lg">Auction</Link>
           <Link className="block text-lg">Best Sellers</Link>
           <Link to="/sign-up" className="block text-lg">
             Login
