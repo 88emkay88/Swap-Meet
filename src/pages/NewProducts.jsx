@@ -96,7 +96,7 @@ const NewProducts = () => {
   }, [currentPage]);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-x-hidden">
       <ProductsHeader />
 
       {/* Background picture */}

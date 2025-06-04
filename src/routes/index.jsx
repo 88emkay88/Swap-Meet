@@ -13,6 +13,7 @@ import HomeAppliances from "../pages/Products/Categories/HomeAppliances";
 import Gaming from "../pages/Products/Categories/Gaming";
 import Sports from "../pages/Products/Categories/Sports";
 import NewProducts from "../pages/newProducts";
+import Trending from "../pages/Trending";
 
 const routes = [
   {
@@ -58,6 +59,10 @@ const routes = [
   {
     path: "/new",
     element: <NewProducts />,
+  },
+  {
+    path: "/trending",
+    element: <Trending />
   },
   {
     path: "/profile",

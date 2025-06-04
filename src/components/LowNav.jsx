@@ -9,7 +9,7 @@ const LowNav = () => {
     },
     {
       name: "Trending",
-      link: "",
+      link: "/trending",
     },
     {
       name: "Auction",
