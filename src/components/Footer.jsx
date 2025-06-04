@@ -25,14 +25,19 @@ const Footer = () => {
         {/* Buyer */}
         <div>
           <h3 className="text-xl md:mb-5 font-semibold">Buy</h3>
-          <ul>
+          <ul className="grid">
             <Link
               to="/register"
               className="hover:underline text-md cursor-pointer"
             >
               Registration
             </Link>
-            <li className="hover:underline text-md cursor-pointer">Auction</li>
+            <Link
+              to="/auction"
+              className="hover:underline text-md cursor-pointer"
+            >
+              Auction
+            </Link>
             <li className="hover:underline text-md cursor-pointer">
               Gift Cards
             </li>

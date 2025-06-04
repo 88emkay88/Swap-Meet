@@ -15,6 +15,7 @@ import Sports from "../pages/Products/Categories/Sports";
 import NewProducts from "../pages/newProducts";
 import Trending from "../pages/Trending";
 import Auction from "../pages/Auction";
+import AuctionDetails from "../pages/Auction/AuctionDetails";
 
 const routes = [
   {
@@ -63,11 +64,15 @@ const routes = [
   },
   {
     path: "/trending",
-    element: <Trending />
+    element: <Trending />,
   },
   {
-    path: "/auction", 
-    element: <Auction />
+    path: "/auction",
+    element: <Auction />,
+  },
+  {
+    path: "/auction/:id",
+    element: <AuctionDetails />,
   },
   {
     path: "/profile",

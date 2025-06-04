@@ -3,6 +3,12 @@ const mockAuctions = [
         id: "auction1",
         title: "Vintage Gibson Guitar",
         image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        description: "A beautiful vintage Gibson Les Paul in excellent condition. This guitar has been well-maintained and features the classic humbucker pickups that Gibson is famous for. Perfect for both studio recording and live performances.",
+        images: [
+            "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        ],
         currentBid: 850,
         startingBid: 200,
         bidCount: 23,
@@ -13,6 +19,12 @@ const mockAuctions = [
         sellerAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
         isHot: true,
         endTime: new Date(Date.now() + 2 * 60 * 60 * 1000),
+        bids: [
+            { bidder: "GuitarHero", amount: 850, time: "2 minutes ago" },
+            { bidder: "MusicFan123", amount: 820, time: "15 minutes ago" },
+            { bidder: "RockStar", amount: 780, time: "32 minutes ago" },
+            { bidder: "VintageCollector", amount: 750, time: "1 hour ago" },
+        ]
     },
     {
         id: "auction2",
@@ -25,9 +37,15 @@ const mockAuctions = [
         category: "Electronics",
         condition: "Like New",
         seller: "GamerGirl",
-        sellerAvatar:"",
+        sellerAvatar: "",
         isHot: false,
         endTime: new Date(Date.now() + 36 * 60 * 60 * 1000),
+        bids: [
+            { bidder: "GuitarHero", amount: 850, time: "2 minutes ago" },
+            { bidder: "MusicFan123", amount: 820, time: "15 minutes ago" },
+            { bidder: "RockStar", amount: 780, time: "32 minutes ago" },
+            { bidder: "VintageCollector", amount: 750, time: "1 hour ago" },
+        ]
     },
     {
         id: "auction3",
@@ -43,6 +61,12 @@ const mockAuctions = [
         sellerAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
         isHot: false,
         endTime: new Date(Date.now() + 6 * 60 * 60 * 1000),
+        bids: [
+            { bidder: "GuitarHero", amount: 850, time: "2 minutes ago" },
+            { bidder: "MusicFan123", amount: 820, time: "15 minutes ago" },
+            { bidder: "RockStar", amount: 780, time: "32 minutes ago" },
+            { bidder: "VintageCollector", amount: 750, time: "1 hour ago" },
+        ]
     },
     {
         id: "auction4",
@@ -58,6 +82,12 @@ const mockAuctions = [
         sellerAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
         isHot: true,
         endTime: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        bids: [
+            { bidder: "GuitarHero", amount: 850, time: "2 minutes ago" },
+            { bidder: "MusicFan123", amount: 820, time: "15 minutes ago" },
+            { bidder: "RockStar", amount: 780, time: "32 minutes ago" },
+            { bidder: "VintageCollector", amount: 750, time: "1 hour ago" },
+        ]
     },
     {
         id: "auction5",
@@ -73,6 +103,12 @@ const mockAuctions = [
         sellerAvatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
         isHot: false,
         endTime: new Date(Date.now() + 4 * 60 * 60 * 1000),
+        bids: [
+            { bidder: "GuitarHero", amount: 850, time: "2 minutes ago" },
+            { bidder: "MusicFan123", amount: 820, time: "15 minutes ago" },
+            { bidder: "RockStar", amount: 780, time: "32 minutes ago" },
+            { bidder: "VintageCollector", amount: 750, time: "1 hour ago" },
+        ]
     },
     {
         id: "auction6",
@@ -88,7 +124,13 @@ const mockAuctions = [
         sellerAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
         isHot: false,
         endTime: new Date(Date.now() + 30 * 60 * 60 * 1000),
+        bids: [
+            { bidder: "GuitarHero", amount: 850, time: "2 minutes ago" },
+            { bidder: "MusicFan123", amount: 820, time: "15 minutes ago" },
+            { bidder: "RockStar", amount: 780, time: "32 minutes ago" },
+            { bidder: "VintageCollector", amount: 750, time: "1 hour ago" },
+        ]
     },
 ];
-  
+
 export default mockAuctions;

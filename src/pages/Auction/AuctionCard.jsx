@@ -107,9 +107,8 @@ const AuctionCard = ({ auction }) => {
           <span className="text-sm flex-1 font-medium">{auction.seller}</span>
           <Link
             to={`/auction/${auction.id}`}
-            className="px-3 py-2  flex rounded-2xl text-sky-100 items-center justify-center bg-blue-600 hover:bg-blue-700 shadow-md"
+            className="px-3 py-2 flex rounded-2xl text-sky-100 items-center justify-center bg-blue-600 hover:bg-blue-700 shadow-md"
           >
-            <Gavel className="mr-1" size={12} />
             <span className="text-xs">Bid Now</span>
           </Link>
         </div>
