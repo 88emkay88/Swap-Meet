@@ -17,12 +17,9 @@ const LowNav = () => {
     },
     {
       name: "Best Sellers",
-      link: "/bestsellers",
+      link: "/best-sellers",
     },
-    {
-      name: "Limited Additon",
-      link: "",
-    },
+
   ];
   return (
     <div className="hidden md:flex justify-center translate-x-15 space-x-3.5">

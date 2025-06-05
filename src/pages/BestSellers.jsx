@@ -322,7 +322,7 @@ const BestSellers = () => {
         {/* Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedItems.map((item) => (
-            <Link key={item.id} to={`/best-seller/${item.id}`}>
+            <Link key={item.id} to={`/best-sellers/${item.id}`}>
               <div className=" border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-full">
                 <div className="relative">
                   <div className="aspect-video overflow-hidden">
@@ -452,7 +452,7 @@ const BestSellers = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="px-5 py-1 bg-blue-600 text-sky-100 rounded-xl hover:bg-blue-500 transition-colors">
-              <Link className="flex items-center" to="/dashboard/post-item">
+              <Link className="flex items-center justify-center" to="/dashboard/post-item">
                 <ShoppingBag className="w-4 h-4 mr-2" />
                 <span>Sell Your Items</span>
               </Link>

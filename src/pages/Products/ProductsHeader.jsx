@@ -23,7 +23,7 @@ const ProductsHeader = () => {
             Home
           </Link>
           <Link to="/auction" className="hover:text-sky-600">Auction</Link>
-          <Link className="hover:text-sky-600">Best Sellers</Link>
+          <Link to="/best-sellers" className="hover:text-sky-600">Best Sellers</Link>
         </ul>
       </nav>
 
@@ -48,7 +48,7 @@ const ProductsHeader = () => {
             Home
           </Link>
           <Link to="/auction" className="block text-lg">Auction</Link>
-          <Link className="block text-lg">Best Sellers</Link>
+          <Link to="/best-sellers" className="block text-lg">Best Seller</Link>
           <Link to="/sign-up" className="block text-lg">
             Login
           </Link>

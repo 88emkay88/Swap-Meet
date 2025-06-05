@@ -39,7 +39,7 @@ const Header = () => {
     },
     {
       name: "Best Sellers",
-      link: "/bestsellers",
+      link: "/best-sellers",
     },
   ];
 

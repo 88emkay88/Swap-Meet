@@ -16,7 +16,7 @@ import NewProducts from "../pages/newProducts";
 import Trending from "../pages/Trending";
 import Auction from "../pages/Auction";
 import AuctionDetails from "../pages/Auction/AuctionDetails";
-import BestSellerDetails from "../pages/Auction/BestSeller/BestSellerDetails";
+import BestSellerDetails from "../pages/BestSeller/BestSellerDetails";
 import BestSellers from "../pages/BestSellers";
 
 const routes = [
@@ -73,7 +73,7 @@ const routes = [
     element: <Auction />,
   },
   {
-    path: "/bestsellers",
+    path: "/best-sellers",
     element: <BestSellers />,
   },
   {
