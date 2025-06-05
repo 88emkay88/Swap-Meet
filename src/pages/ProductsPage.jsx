@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
 import locationOptions from "../Data/locations";
-import colorOption from "../Data/colors"
+import colorOption from "../Data/Colors";
 import products from "../Data/products";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";

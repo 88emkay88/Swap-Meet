@@ -33,6 +33,14 @@ const Header = () => {
       name: "Sports",
       link: "/sports",
     },
+    {
+      name: "Auction",
+      link: "/auction",
+    },
+    {
+      name: "Best Sellers",
+      link: "/bestsellers",
+    },
   ];
 
   return (

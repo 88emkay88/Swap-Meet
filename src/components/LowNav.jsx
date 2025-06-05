@@ -16,12 +16,8 @@ const LowNav = () => {
       link: "/auction",
     },
     {
-      name: "Gifts",
-      link: "",
-    },
-    {
-      name: "Top Sellers",
-      link: "",
+      name: "Best Sellers",
+      link: "/bestsellers",
     },
     {
       name: "Limited Additon",

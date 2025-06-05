@@ -38,10 +38,11 @@ const Footer = () => {
             >
               Auction
             </Link>
-            <li className="hover:underline text-md cursor-pointer">
-              Gift Cards
-            </li>
-            <li className="hover:underline text-md cursor-pointer">Stores</li>
+            <Link
+              to={"/products"}
+              className="hover:underline text-md cursor-pointer">
+              Products
+            </Link>
           </ul>
         </div>
 

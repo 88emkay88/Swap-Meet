@@ -186,9 +186,9 @@ const AuctionDetails = () => {
             <div className="flex items-center">
               {/* User Avatar */}
               <div className="h-12 w-12 mr-2 mt-2 rounded-full bg-black/20 text-white flex items-center justify-center text-xs font-semibold overflow-hidden">
-                {auction.sellerAvatar ? (
+                {auction.image ? (
                   <img
-                    src={auction.sellerAvatar}
+                    src={auction.image}
                     alt={auction.seller}
                     className="h-full w-full object-cover rounded-full"
                   />
@@ -227,18 +227,19 @@ const AuctionDetails = () => {
             {auction.bids?.map((bid, index) => (
               <div
                 className="w-full py-2 border-b border-gray-300/75"
-                key={index}>
+                key={index}
+              >
                 <div className="flex w-full justify-between items-center py-2">
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-6 rounded-full bg-black/20 text-white flex items-center justify-center text-xs font-semibold overflow-hidden">
-                      {auction.sellerAvatar ? (
+                      {bid.bidderAvatar ? (
                         <img
-                          src={auction.sellerAvatar}
-                          alt={auction.seller}
+                          src={bid.bidderAvatar}
+                          alt={bid.bidder}
                           className="h-full w-full object-cover rounded-full"
                         />
                       ) : (
-                        sellerInitials
+                        bid.bidder.slice(0, 2).toUpperCase()
                       )}
                     </div>
                     <span className="font-medium">{bid.bidder}</span>

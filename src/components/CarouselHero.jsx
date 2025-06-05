@@ -68,7 +68,7 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
   }, [autoSlide, autoSlideInterval, heroContent.length]);
 
   return (
-    <div className="relative w-full md:h-200 lg:h-200 mx-auto">
+    <div className="relative w-full md:h-200 lg:h-200 mx-4">
       {/* Slider */}
       <div className="relative mx-5 md:mx-20 my-10 overflow-x-clip rounded-4xl">
         {heroContent.map((image, index) => (
