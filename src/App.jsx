@@ -1,14 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import routes from "./routes";
+import ScrollToTop from "./components/ScrollToTop";
+import "./App.css";
 
 function App() {
   return (
-    <Routes>
-      {routes.map(({ path, element }, index) => (
-        <Route key={index} path={path} element={element} />
-      ))}
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        {routes.map(({ path, element }, index) => (
+          <Route key={index} path={path} element={element} />
+        ))}
+      </Routes>
+    </>
   );
 }
 

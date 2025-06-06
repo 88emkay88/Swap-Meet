@@ -40,7 +40,8 @@ const Footer = () => {
             </Link>
             <Link
               to={"/products"}
-              className="hover:underline text-md cursor-pointer">
+              className="hover:underline text-md cursor-pointer"
+            >
               Products
             </Link>
           </ul>
@@ -49,34 +50,50 @@ const Footer = () => {
         {/* Seller */}
         <div>
           <h3 className="text-xl md:mb-5 font-semibold">Sell</h3>
-          <ul>
-            <li className="hover:underline text-md cursor-pointer">
+          <ul className="grid">
+            <Link
+              to="/start-selling"
+              className="hover:underline text-md cursor-pointer"
+            >
               Start selling
-            </li>
-            <li className="hover:underline text-md cursor-pointer">
+            </Link>
+            <Link
+              to="/how-to-sell"
+              className="hover:underline text-md cursor-pointer"
+            >
               How to sell
-            </li>
-            <li className="hover:underline text-md cursor-pointer">
-              Whole sellers
-            </li>
-            <li className="hover:underline text-md cursor-pointer">
-              Affiliates
-            </li>
+            </Link>
           </ul>
         </div>
 
         {/* Help */}
         <div>
           <h3 className="text-xl md:mb-5 font-semibold">Help</h3>
-          <ul>
-            <li className="hover:underline text-md cursor-pointer">
-              Seller Center
-            </li>
-            <li className="hover:underline text-md cursor-pointer">
+          <ul className="grid">
+            <Link
+              to="/help-center"
+              className="hover:underline text-md cursor-pointer"
+            >
+              Help Center
+            </Link>
+            <Link
+              to="/contact-us"
+              className="hover:underline text-md cursor-pointer"
+            >
               Contact Us
-            </li>
-            <li className="hover:underline text-md cursor-pointer">Returns</li>
-            <li className="hover:underline text-md cursor-pointer">Escrow</li>
+            </Link>
+            <Link
+              to="/returns"
+              className="hover:underline text-md cursor-pointer"
+            >
+              Returns
+            </Link>
+            <Link
+              to="/escrow"
+              className="hover:underline text-md cursor-pointer"
+            >
+              Escrow
+            </Link>
           </ul>
         </div>
 

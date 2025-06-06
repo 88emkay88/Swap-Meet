@@ -4,7 +4,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import Footer from "../../../components/Footer";
 import ProductCard from "../ProductCard";
 import locationOptions from "../../../Data/locations";
-import colorOption from "../../../Data/colors";
+import colorOption from "../../../Data/Colors";
 import products from "../../../Data/products";
 import Sidebar from "../Sidebar";
 import { SlidersHorizontal, X } from "lucide-react";
@@ -104,7 +104,7 @@ export default function Accessories() {
           alt="Accessories hero"
           className="w-full h-full object-cover rounded-b-4xl"
         />
-        <h1 className="absolute top-[28%] left-[10%] text-5xl md:top-[20%] md:left-[10%] cursor-default text-white font-bold md:text-12xl">
+        <h1 className="absolute top-[28%] left-[10%] text-5xl md:top-[20%] md:left-[6%] cursor-default text-white font-bold md:text-12xl">
           Accessories
         </h1>
       </div>

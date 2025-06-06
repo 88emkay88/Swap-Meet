@@ -18,6 +18,12 @@ import Auction from "../pages/Auction";
 import AuctionDetails from "../pages/Auction/AuctionDetails";
 import BestSellerDetails from "../pages/BestSeller/BestSellerDetails";
 import BestSellers from "../pages/BestSellers";
+import StartSelling from "../pages/StartSelling";
+import HowToSell from "../pages/HowToSell";
+import HelpCenter from "../pages/HelpCenter";
+import ContactUs from "../pages/ContactUs";
+import Returns from "../pages/Returns";
+import Escrow from "../pages/Escrow";
 
 const routes = [
   {
@@ -71,6 +77,30 @@ const routes = [
   {
     path: "/auction",
     element: <Auction />,
+  },
+  {
+    path: "/returns",
+    element: <Returns />,
+  },
+  {
+    path: "/escrow",
+    element: <Escrow />,
+  },
+  {
+    path: "start-selling",
+    element: <StartSelling />,
+  },
+  {
+    path: "how-to-sell",
+    element: <HowToSell />,
+  },
+  {
+    path: "/help-center",
+    element: <HelpCenter />,
+  },
+  {
+    path: "/contact-us",
+    element: <ContactUs />,
   },
   {
     path: "/best-sellers",
