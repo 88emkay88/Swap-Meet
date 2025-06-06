@@ -30,8 +30,6 @@ const ProductDetails = () => {
 
   if (!product) return <p>Product not found.</p>;
 
-  
-
   return (
     <>
       <div className="overflow-x-hidden">
@@ -41,15 +39,16 @@ const ProductDetails = () => {
           <Breadcrumbs currentPage={product.name} category={product.category} />
         </div>
 
-        <div className="grid md:grid-cols-2 md:p-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Main Image Display */}
-          <div className="h-1/2 w  md:h-150 flex flex-col items-center p-4 md:p-50">
-            <img
-              src={mainImage}
-              alt={product.name}
-              className="shadow-2xl rounded-4xl md:w-5/6 w-5/6 md:h-100"
-            />
-
+          <div className="space-y-4 p-10">
+            <div className="aspect-square overflow-hidden rounded-2xl shadow-md">
+              <img
+                src={mainImage}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
             {/* Thumbnail selectors */}
             <div className="flex gap-2 mt-4">
               {(product.images || [product.image]).map((img, index) => (
@@ -58,8 +57,8 @@ const ProductDetails = () => {
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
                   onClick={() => setMainImage(img)}
-                  className={`w-20 h-20 md:w-20 md:h-20 rounded-3xl cursor-point ${
-                    mainImage === img ? "border-4 border-sky-500" : ""
+                  className={`w-20 h-20 rounded-md overflow-hidden border ${
+                    mainImage === img ? "border-blue-500" : "border-gray-200"
                   }`}
                 />
               ))}
@@ -93,7 +92,9 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex items-center text-xs md:text-md md:font-normal font-bold">
                   <Clock7 />
-                  {formatDistanceToNow(new Date(product.datePosted), {addSuffix: true})}
+                  {formatDistanceToNow(new Date(product.datePosted), {
+                    addSuffix: true,
+                  })}
                 </div>
               </div>
             </div>

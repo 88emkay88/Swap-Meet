@@ -108,7 +108,7 @@ const NewProducts = () => {
             className="h-full w-full md:rounded-4xl rounded-xl "
           />
 
-          <img src={newBanner} className="absolute md:-top-16 -top-3 -left-3 md:-left-15.5 w-2/8" />
+          <img src={newBanner} className="absolute md:-top-14 -top-3 -left-3 md:-left-14 w-2/8" />
 
           <h1 className="absolute top-[45%] left-[12%] text-4xl md:text-5xl md:top-[10%] md:left-[14%] cursor-default text-white font-bold md:text-12xl">
             New Products

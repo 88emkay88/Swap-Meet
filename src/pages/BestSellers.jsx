@@ -85,7 +85,7 @@ const BestSellers = () => {
     if (rank === 1) return "bg-yellow-500 text-white";
     if (rank === 2) return "bg-gray-400 text-white";
     if (rank === 3) return "bg-amber-600 text-white";
-    return "bg-swap text-white";
+    else return "bg-sky-700 text-sky-200"
   };
 
   return (
@@ -167,7 +167,7 @@ const BestSellers = () => {
                   {/* Card Content */}
                   <div className="pt-0 text-center">
                     <div className="mb-4">
-                      <div className="text-2xl font-bold">{item.price}</div>
+                      <div className="text-2xl font-bold text-sky-400">{item.price}</div>
                       {item.originalPrice && (
                         <div className="line-through">
                           Was {item.originalPrice}
@@ -378,7 +378,7 @@ const BestSellers = () => {
 
                   <div className="space-y-3">
                     <div className="text-center">
-                      <div className="text-xl font-bold">{item.price}</div>
+                      <div className="text-xl font-bold text-sky-400">{item.price}</div>
                       {item.originalPrice && (
                         <div className="text-sm line-through">
                           Was {item.originalPrice}
@@ -452,7 +452,7 @@ const BestSellers = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="px-5 py-1 bg-blue-600 text-sky-100 rounded-xl hover:bg-blue-500 transition-colors">
-              <Link className="flex items-center justify-center" to="/dashboard/post-item">
+              <Link className="flex items-center justify-center" to="">
                 <ShoppingBag className="w-4 h-4 mr-2" />
                 <span>Sell Your Items</span>
               </Link>
