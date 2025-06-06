@@ -126,17 +126,17 @@ const AuctionDetails = () => {
           <div className="px-4 py-2 border border-gray-300/85 shadow-lg rounded-xl">
             {/* header */}
             <h1 className="flex text-xl items-center gap-2">
-              <DollarSign className="w-5 h-5" />
+              <span className="font-extrabold text-2xl">R</span>
               <span>Current Bid</span>
             </h1>
 
             {/* Content */}
             <div className="space-y-4">
               <div className="text-3xl font-bold text-green-600">
-                ${auction.currentBid}
+                R{auction.currentBid}
               </div>
               <div className="flex justify-between text-sm md:text-lg">
-                <span>Starting bid: ${auction.startingBid}</span>
+                <span>Starting bid: R{auction.startingBid}</span>
                 <div className="flex items-cnter gap-1">
                   <Users className="w-5 h-6" />
                   <span>{auction.bidCount} bids</span>

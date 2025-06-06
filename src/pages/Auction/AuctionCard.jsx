@@ -67,11 +67,11 @@ const AuctionCard = ({ auction }) => {
           <div className="flex justify-between items-center">
             <span className="text-sm md:text-md ">Current Bid</span>
             <span className="text-xl font-bold text-green-600">
-              ${auction.currentBid}
+              R{auction.currentBid}
             </span>
           </div>
           <div className="flex justify-between items-center text-sm md:text-md ">
-            <span>Started at ${auction.startingBid}</span>
+            <span>Started at R{auction.startingBid}</span>
             <div className="flex items-center gap-1">
               <User className="w-3 h-3" />
               <span>{auction.bidCount} bids</span>

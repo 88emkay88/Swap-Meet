@@ -85,7 +85,7 @@ const BestSellers = () => {
     if (rank === 1) return "bg-yellow-500 text-white";
     if (rank === 2) return "bg-gray-400 text-white";
     if (rank === 3) return "bg-amber-600 text-white";
-    else return "bg-sky-700 text-sky-200"
+    else return "bg-sky-700 text-sky-200";
   };
 
   return (
@@ -167,7 +167,9 @@ const BestSellers = () => {
                   {/* Card Content */}
                   <div className="pt-0 text-center">
                     <div className="mb-4">
-                      <div className="text-2xl font-bold text-sky-400">{item.price}</div>
+                      <div className="text-2xl font-bold text-sky-400">
+                        {item.price}
+                      </div>
                       {item.originalPrice && (
                         <div className="line-through">
                           Was {item.originalPrice}
@@ -378,7 +380,9 @@ const BestSellers = () => {
 
                   <div className="space-y-3">
                     <div className="text-center">
-                      <div className="text-xl font-bold text-sky-400">{item.price}</div>
+                      <div className="text-xl font-bold text-sky-400">
+                        {item.price}
+                      </div>
                       {item.originalPrice && (
                         <div className="text-sm line-through">
                           Was {item.originalPrice}
@@ -443,23 +447,27 @@ const BestSellers = () => {
         )}
 
         {/* Call to Action */}
-        <div className="mt-16 text-center bg-gradient-to-r from-yellow-50 to-amber-50 p-8 rounded-lg border border-yellow-200">
-          <Crown className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold mb-4">Want to Be a Best Seller?</h3>
-          <p className="mb-6 max-w-2xl mx-auto">
-            Join our community of successful sellers and share your items with
-            thousands of potential buyers.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-5 py-1 bg-blue-600 text-sky-100 rounded-xl hover:bg-blue-500 transition-colors">
-              <Link className="flex items-center justify-center" to="">
-                <ShoppingBag className="w-4 h-4 mr-2" />
-                <span>Sell Your Items</span>
-              </Link>
-            </button>
-            <button className="px-5 py-1 bg-blue-600 text-sky-100 rounded-xl hover:bg-blue-500 transition-colors">
-              <Link to="/auction">Start an Auction</Link>
-            </button>
+        <div className="p-20">
+          <div className="mt-16 text-center bg-gradient-to-r from-yellow-50 to-amber-50 p-8 rounded-lg border border-yellow-200">
+            <Crown className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-4">
+              Want to Be a Best Seller?
+            </h3>
+            <p className="mb-6 max-w-2xl mx-auto">
+              Join our community of successful sellers and share your items with
+              thousands of potential buyers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-5 py-1 bg-blue-600 text-sky-100 rounded-xl hover:bg-blue-500 transition-colors">
+                <Link className="flex items-center justify-center" to="">
+                  <ShoppingBag className="w-4 h-4 mr-2" />
+                  <span>Sell Your Items</span>
+                </Link>
+              </button>
+              <button className="px-5 py-1 bg-blue-600 text-sky-100 rounded-xl hover:bg-blue-500 transition-colors">
+                <Link to="/auction">Start an Auction</Link>
+              </button>
+            </div>
           </div>
         </div>
       </div>
