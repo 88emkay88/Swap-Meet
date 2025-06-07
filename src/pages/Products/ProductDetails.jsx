@@ -19,16 +19,16 @@ import { formatDistanceToNow } from "date-fns";
 const ProductDetails = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === parseInt(id));
-  const userInitails = product.seller.name
-    .split(" ")
-    .map((n) => n[0])
-    .join("");
-
   const [mainImage, setMainImage] = useState(
     product?.images?.[0] || product.images
   );
 
   if (!product) return <p>Product not found.</p>;
+
+  const userInitails = product?.seller?.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
 
   return (
     <>

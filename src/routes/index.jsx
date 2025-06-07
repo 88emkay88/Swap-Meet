@@ -32,6 +32,7 @@ import Listings from "../pages/user/seller/Listings";
 import PostItem from "../pages/user/seller/PostItem"
 import SellerProfile from "../pages/user/seller/SellerProfile";
 import SellerSettings from "../pages/user/seller/SellerSettings";
+import Users from "../pages/admin/Users";
 
 const routes = [
   {
@@ -167,7 +168,10 @@ const routes = [
   {
     path: "/admin",
     element: <AdminRoutes />,
-    children: [{ path: "", element: <AdminDashboard /> }],
+    children: [
+      { path: "", element: <AdminDashboard /> },
+      { path: "/admin/users", element: <Users /> },
+    ],
   },
 ];
 

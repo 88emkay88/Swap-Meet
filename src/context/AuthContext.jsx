@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   
 
   useEffect(() => {
-    const mockUser = { token: "dev-token", role: "buyer" };
+    const mockUser = { token: "dev-token", role: "admin" };
     setUser(mockUser);
     setIsLoading(false); 
   }, []);
