@@ -2,8 +2,6 @@ import React from "react";
 import { Range } from "react-range";
 import { Star } from "lucide-react";
 
-
-
 const Sidebar = ({
   checkbox,
   colorOption,
@@ -22,42 +20,33 @@ const Sidebar = ({
   handleChange,
   resetFilters,
 }) => {
-  
-
   return (
     <aside className="hidden md:block md:col-span-1 space-y-6">
       {/* Popular Categories */}
-      <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
+      <div className="bg-white p-5 w-2/3 ring-1 ring-black/10 shadow-lg">
         <h1 className="font-semibold text-lg mb-2">Popular Categories</h1>
-        <div>
-          {checkbox.map((name, index) => (
-            <div
-              key={index}
-              className="flex items-center space-x-2 mb-1 text-sm"
-            >
-              <input
-                type="checkbox"
-                name={name}
-                id={name}
-                checked={selectedCategories.includes(name)}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setSelectedCategories((prev) =>
-                    prev.includes(value)
-                      ? prev.filter((c) => c !== value)
-                      : [...prev, value]
-                  );
-                }}
-                value={name}
-              />
-              <label htmlFor={name}>{name}</label>
-            </div>
+        <select
+          value={selectedCategories[0] || ""}
+          onChange={(e) => {
+            const selected = Array.from(
+              e.target.selectedOptions,
+              (option) => option.value
+            );
+            setSelectedCategories(selected);
+          }}
+          className="w-full p-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">Select Category</option>
+          {checkbox.map((category, idx) => (
+            <option key={`${category}-${idx}`} value={category}>
+              {category}
+            </option>
           ))}
-        </div>
+        </select>
       </div>
 
       {/* Filter by price */}
-      <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
+      <div className="bg-white p-4 w-2/3 ring-1 ring-black/10 shadow-lg">
         <h1 className="font-semibold text-lg mb-2">Filter by price</h1>
         <div>
           <Range
@@ -95,7 +84,7 @@ const Sidebar = ({
       </div>
 
       {/* Ratings */}
-      <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
+      <div className="bg-white p-4 w-2/3 ring-1 ring-black/10 shadow-lg">
         <h1 className="font-semibold text-lg mb-2">Ratings</h1>
         <div className="flex space-x-1.5">
           {[1, 2, 3, 4, 5].map((star) => (
@@ -113,58 +102,47 @@ const Sidebar = ({
       </div>
 
       {/* Locations */}
-      <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
+      <div className="bg-white p-4 w-2/3 ring-1 ring-black/10 shadow-lg">
         <h1 className="font-semibold text-lg mb-2">Locations</h1>
-        <div>
-          {locationOptions.map((location, index) => (
-            <div
-              key={index}
-              className="flex items-center space-x-2 mb-1 text-sm"
-            >
-              <input
-                type="checkbox"
-                name={location}
-                id={location}
-                checked={selectedLocations.includes(location)}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setSelectedLocations((prev) =>
-                    prev.includes(value)
-                      ? prev.filter((loc) => loc !== value)
-                      : [...prev, value]
-                  );
-                }}
-                value={location}
-              />
-              <label htmlFor={location}>{location}</label>
-            </div>
+        <select
+          value={selectedLocations[0] || ""}
+          onChange={(e) => {
+            const options = Array.from(e.target.selectedOptions).map(
+              (opt) => opt.value
+            );
+            setSelectedLocations(options);
+          }}
+          className="w-full p-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">Select Location</option>
+          {locationOptions.map((location, idx) => (
+            <option value={location} key={`${location}-${idx}`}>
+              {location}
+            </option>
           ))}
-        </div>
+        </select>
       </div>
 
       {/* Colors */}
-      <div className="bg-white p-4 w-1/2 ring-1 ring-black/10 shadow-lg">
+      <div className="bg-white p-4 w-2/3 ring-1 ring-black/10 shadow-lg">
         <h1 className="font-semibold text-lg mb-2">Colors</h1>
-        <div className="space-y-2 text-sm">
-          {colorOption.map((color) => (
-            <label key={color} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                value={color}
-                checked={selectedColors.includes(color)}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setSelectedColors((prev) =>
-                    prev.includes(value)
-                      ? prev.filter((c) => c !== value)
-                      : [...prev, value]
-                  );
-                }}
-              />
-              <span>{color}</span>
-            </label>
+        <select
+          value={selectedColors[0] || ""}
+          onChange={(e) => {
+            const options = Array.from(e.target.selectedOptions).map(
+              (opt) => opt.value
+            );
+            setSelectedColors(options);
+          }}
+          className="w-full p-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">Select Color</option>
+          {colorOption.map((color, idx) => (
+            <option key={`${color}-${idx}`} value={color}>
+              {color}
+            </option>
           ))}
-        </div>
+        </select>
       </div>
 
       {/* Reset button */}

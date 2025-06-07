@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import BuyerSideBar from "./BuyerSideBar";
+import SellersSideBar from "./SellersSideBar";
 import Footer from "../../../components/Footer";
 
-export default function Settings() {
+export default function SellerSettings() {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(false);
   const [marketingEmails, setMarketingEmails] = useState(true);
@@ -18,7 +18,7 @@ export default function Settings() {
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <div className="grid grid-cols-1 md:grid-cols-4">
 
-        <BuyerSideBar />
+        <SellersSideBar />
 
         <div className="w-full p-10 col-span-3 mx-auto">
           <h1 className="text-4xl font-bold mb-8 text-center text-blue-500">

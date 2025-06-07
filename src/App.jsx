@@ -1,17 +1,15 @@
-import { Routes, Route } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import routes from "./routes";
 import ScrollToTop from "./components/ScrollToTop";
 import "./App.css";
 
 function App() {
+  const element = useRoutes(routes); // handles nested routes properly
+
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        {routes.map(({ path, element }, index) => (
-          <Route key={index} path={path} element={element} />
-        ))}
-      </Routes>
+      {element}
     </>
   );
 }

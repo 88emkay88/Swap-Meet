@@ -5,14 +5,14 @@ import Home from "../pages/Home";
 import ProductsPage from "../pages/ProductsPage";
 import Register from "../pages/Register";
 import SignUp from "../pages/SignUp";
-import UserProfile from "../pages/UserProfile";
+import BuyerDashBoard from "../pages/user/buyer/BuyerDashBoard";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Accessories from "../pages/Products/Categories/Accessories";
 import HomeAppliances from "../pages/Products/Categories/HomeAppliances";
 import Gaming from "../pages/Products/Categories/Gaming";
 import Sports from "../pages/Products/Categories/Sports";
-import NewProducts from "../pages/newProducts";
+import NewProducts from "../pages/NewProducts";
 import Trending from "../pages/Trending";
 import Auction from "../pages/Auction";
 import AuctionDetails from "../pages/Auction/AuctionDetails";
@@ -24,6 +24,14 @@ import HelpCenter from "../pages/HelpCenter";
 import ContactUs from "../pages/ContactUs";
 import Returns from "../pages/Returns";
 import Escrow from "../pages/Escrow";
+import Favorites from "../pages/user/buyer/Favorites";
+import BuyerProfile from "../pages/user/buyer/BuyerProfile";
+import Settings from "../pages/user/buyer/Settings";
+import SellerDashboard from "../pages/user/seller/SellerDashBoard";
+import Listings from "../pages/user/seller/Listings";
+import PostItem from "../pages/user/seller/PostItem"
+import SellerProfile from "../pages/user/seller/SellerProfile";
+import SellerSettings from "../pages/user/seller/SellerSettings";
 
 const routes = [
   {
@@ -115,9 +123,46 @@ const routes = [
     element: <AuctionDetails />,
   },
   {
-    path: "/profile",
+    path: "/buyer-dashboard",
     element: <PrivateRoutes />,
-    children: [{ path: "", element: <UserProfile /> }],
+    children: [
+      { path: "", element: <BuyerDashBoard /> },
+      {
+        path: "/buyer-dashboard/favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "/buyer-dashboard/profile",
+        element: <BuyerProfile />,
+      },
+      {
+        path: "/buyer-dashboard/settings",
+        element: <Settings />,
+      },
+    ],
+  },
+  {
+    path: "/seller-dashboard",
+    element: <PrivateRoutes />,
+    children: [
+      { path: "", element: <SellerDashboard /> },
+      {
+        path: "/seller-dashboard/listings",
+        element: <Listings />,
+      },
+      {
+        path: "/seller-dashboard/post-item",
+        element: <PostItem />,
+      },
+      {
+        path: "/seller-dashboard/profile",
+        element: <SellerProfile />,
+      },
+      {
+        path: "/seller-dashboard/settings",
+        element: <SellerSettings />,
+      },
+    ],
   },
   {
     path: "/admin",
