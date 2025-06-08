@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { TbReportMoney } from "react-icons/tb";
 import {
   LayoutDashboard,
   Users,
   BarChart3,
   Settings,
   Shield,
-  DollarSign,
   FileText,
   ChevronLeft,
   ChevronRight,
@@ -20,7 +20,7 @@ const AdminSidebar = () => {
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
     { icon: Users, label: "Users", path: "/admin/users" },
     { icon: BarChart3, label: "Analytics", path: "/admin/analytics" },
-    { icon: DollarSign, label: "Payments", path: "/admin/payments" },
+    { icon: TbReportMoney, label: "Payments", path: "/admin/payments" },
     { icon: FileText, label: "Reports", path: "/admin/reports" },
     { icon: Shield, label: "Security", path: "/admin/security" },
     { icon: Settings, label: "Settings", path: "/admin/settings" },

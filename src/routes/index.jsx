@@ -33,6 +33,11 @@ import PostItem from "../pages/user/seller/PostItem"
 import SellerProfile from "../pages/user/seller/SellerProfile";
 import SellerSettings from "../pages/user/seller/SellerSettings";
 import Users from "../pages/admin/Users";
+import AdminAnalytics from "../pages/admin/AdminAnalytics";
+import AdminPayments from "../pages/admin/AdminPayments"
+import AdminReports from "../pages/admin/AdminReports";
+import AdminSecurity from "../pages/admin/AdminSecurity"
+import AdminSettings from "../pages/admin/AdminSettings";
 
 const routes = [
   {
@@ -171,6 +176,11 @@ const routes = [
     children: [
       { path: "", element: <AdminDashboard /> },
       { path: "/admin/users", element: <Users /> },
+      { path: "/admin/analytics", element: <AdminAnalytics /> },
+      { path: "/admin/payments", element: <AdminPayments /> },
+      { path: "/admin/reports", element: <AdminReports /> },
+      { path: "/admin/security", element: <AdminSecurity /> },
+      { path: "/admin/settings", element: <AdminSettings /> },
     ],
   },
 ];
