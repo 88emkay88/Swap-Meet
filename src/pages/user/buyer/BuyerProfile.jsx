@@ -106,7 +106,7 @@ const BuyerProfile = () => {
   const [tab, setTab] = useState("profile");
 
   return (
-    <div className="max-w-full">
+    <div className="max-w-full py-10">
       <div className="grid grid-cols-1 md:grid-cols-4">
         <BuyerSideBar />
         <div className=" col-span-3 mx-auto p-10">

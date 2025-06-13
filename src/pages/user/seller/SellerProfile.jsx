@@ -39,7 +39,7 @@ const SellerProfile = () => {
   };
 
   return (
-    <div>
+    <div className="py-10 ">
       <div className="grid grid-cols-1 md:grid-cols-4">
         <SellerSideBar />
         <div className="space-y-6 max-w-4xl col-span-3 p-10">

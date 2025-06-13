@@ -49,7 +49,7 @@ const Favorites = () => {
   };
 
   return (
-    <div>
+    <div className="py-10">
       <div className="grid grid-cols-1 md:grid-cols-4">
         <BuyerSideBar />
         {/* Content */}

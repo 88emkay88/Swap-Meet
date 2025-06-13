@@ -1,9 +1,36 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import { useAuth } from "../../context/AuthContext";
 
 const SignUp = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const res = await fetch("http://localhost/swapmeet-backend/login.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      login(data.user); // store in context
+      if (data.user.role === "seller") {
+        navigate("/seller-dashboard");
+      } else {
+        navigate("/buyer-dashboard");
+      }
+    } else {
+      alert(data.message);
+    }
+  };
+
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
       <div className="relative bg-gray-200 p-8 md:p-10 space-y-4 rounded-4xl md:w-110 shadow-2xl">
@@ -24,9 +51,10 @@ const SignUp = () => {
 
         <h2 className="text-2xl cursor-default">Sign in to your account</h2>
 
-        <form className="grid gap-3" method="POST">
+        <form className="grid gap-3" method="POST" onSubmit={handleLogin}>
           <label className="font-bold">Email</label>
           <input
+            name="email"
             type="email"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -34,6 +62,7 @@ const SignUp = () => {
 
           <label className="font-bold">Password</label>
           <input
+            name="password"
             type="password"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -56,7 +85,7 @@ const SignUp = () => {
         </form>
 
         <p className="text-sm cursor-default">
-          Don't have an account?{" "}
+          Don't have an account?
           <Link to="/register" className="font-semibold underline">
             Register
           </Link>

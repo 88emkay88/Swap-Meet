@@ -8,5 +8,5 @@ export default function PrivateRoutes() {
 
   console.log("PrivateRoute user: ", user);
 
-  return user?.token ? <Outlet /> : <Navigate to="/seller-dashboard" />;
+  return user?.role ? <Outlet /> : <Navigate to="/" />;
 }

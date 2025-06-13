@@ -4,22 +4,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // // Check if user is stored in local storage
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("swapmeet-user");
-  //   if (storedUser) setUser(JSON.parse(storedUser));
-  // }, []);
-
-  
-  
-
+  // Check if user is stored in local storage
   useEffect(() => {
-    const mockUser = { token: "dev-token", role: "admin" };
-    setUser(mockUser);
-    setIsLoading(false); 
+    const storedUser = localStorage.getItem("swapmeet-user");
+    if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
+
 
   // Login function
   const login = (userData) => {

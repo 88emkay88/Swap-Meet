@@ -39,7 +39,7 @@ const SellerDashboard = () => {
   const [rating] = useState("4.8/5");
 
   return (
-    <>
+    <div className="py-10">
       <div className="grid grid-cols-1 md:grid-cols-4">
         <SellersSideBar />
         <div className="space-y-8 col-span-3 p-10">
@@ -183,7 +183,7 @@ const SellerDashboard = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

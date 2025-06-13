@@ -99,7 +99,7 @@ const Listings = () => {
   };
 
   return (
-    <div>
+    <div className="py-10">
       <div className="grid grid-cols-1 md:grid-cols-4">
         <SellerSideBar />
         <div className="space-y-6 col-span-3 py-10 pr-10">

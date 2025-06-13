@@ -1,14 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
 const Register = () => {
+  const [role, setRole] = useState("buyer");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const navigate = useNavigate();
+  var [passwordMatch, setPasswordMatch] = useState(true);
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setPasswordMatch(false);
+      return;
+    }
+
+    const formData = new FormData(e.target);
+    formData.append("role", role);
+
+    try {
+      const res = await fetch(
+        "http://localhost/swapmeet-backend/register.php",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Registered successfull!");
+        navigate("/sign-up");
+      } else {
+        alert("Registration failed: " + data.message);
+      }
+    } catch (err) {
+      console.log("Error: ", err);
+      alert("Something went wrong.");
+    }
+  };
+
   return (
     <div className="w-screen  flex flex-col items-center justify-center p-20">
       <div className="relative flex-grow flex-cols p-10 w-90 md:w-150 bg-gray-200 rounded-4xl shadow-2xl">
         {/* Back Button  */}
-        <Link className="absolute md:top-8" to="/sign-up">
+        <Link className="absolute md:top-8" to="/">
           <IoArrowBack size={20} />
         </Link>
 
@@ -24,10 +64,15 @@ const Register = () => {
 
         <h2 className="text-2xl cursor-default my-5">Create your account</h2>
 
-        <form method="POST" className="grid space-y-2 mt-4">
+        <form
+          method="POST"
+          className="grid space-y-2 mt-4"
+          onSubmit={handleRegister}
+        >
           {/* Name */}
           <label>Name</label>
           <input
+            name="name"
             type="text"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -36,6 +81,7 @@ const Register = () => {
           {/* Surname */}
           <label>Surname</label>
           <input
+            name="surname"
             type="text"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -44,6 +90,7 @@ const Register = () => {
           {/* Username */}
           <label>Username</label>
           <input
+            name="username"
             type="text"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -52,6 +99,7 @@ const Register = () => {
           {/* email field */}
           <label>Email</label>
           <input
+            name="email"
             type="email"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -60,6 +108,7 @@ const Register = () => {
           {/* Telephone number */}
           <label>Phone Number</label>
           <input
+            name="number"
             type="tel"
             className="border-1 rounded-full h-8 p-3"
             required
@@ -68,24 +117,45 @@ const Register = () => {
           {/* Password */}
           <label>Password</label>
           <input
+            value={password}
+            name="password"
             type="password"
-            className="border-1 rounded-full h-8 p-3"
+            className={`border-1 rounded-full h-8 p-3 ${
+              !passwordMatch ? "border-red-500" : ""
+            }
+              `}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
 
           {/* Password Confirmation */}
           <label>Confirm Password</label>
           <input
+            name="confirmPassword"
+            value={confirmPassword}
             type="password"
-            className="border-1 rounded-full h-8 p-3"
+            className={`border-1 rounded-full h-8 p-3 ${
+              !passwordMatch ? "border-red-500" : ""
+            }
+              `}
+            onChange={(e) => {
+              const value = e.target.value;
+              setconfirmPassword(value);
+              setPasswordMatch(password === value);
+            }}
             required
           />
 
           <div className="grid mt-3 space-y-2">
             <label>Select your user role</label>
-            <select required className="bg-gray-100 p-2 rounded-xl">
-              <option>Buyer</option>
-              <option>Seller</option>
+            <select
+              required
+              className="bg-gray-100 p-2 rounded-xl"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
             </select>
           </div>
 

@@ -15,7 +15,7 @@ export default function SellerSettings() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen bg-gray-100 py-10 ">
       <div className="grid grid-cols-1 md:grid-cols-4">
 
         <SellersSideBar />

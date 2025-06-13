@@ -8,9 +8,11 @@ import {
 } from "lucide-react";
 import LowNav from "./LowNav";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const { user, Logout } = useAuth();
 
   const categories = [
     {
@@ -42,6 +44,14 @@ const Header = () => {
       link: "/best-sellers",
     },
   ];
+
+  const getUserInitials = (user) => {
+    if (!user?.FirstName || !user?.LastName) return "";
+    return (
+      user.FirstName.charAt(0).toUpperCase() +
+      user.LastName.charAt(0).toUpperCase()
+    );
+  };
 
   return (
     <>
@@ -108,12 +118,30 @@ const Header = () => {
           </div>
 
           <div className="flex space-x-4 items-center">
-            <Link
-              to="/sign-up"
-              className="hover:bg-sky-400 px-2 py-1 rounded-full font-semibold"
-            >
-              Sign in
-            </Link>
+            {user ? (
+              <div className="relative group">
+                <Link to={`/${user.role}-dashboard`}>
+                  {user.avatar ? (
+                    <img
+                      src={user.avatar}
+                      alt={user.UserName}
+                      className="h-10 w-10 rounded-full border"
+                    />
+                  ) : (
+                      <div
+                      className=" flex items-center justify-center border w-10 h-10 rounded-full"
+                      >{getUserInitials(user)}</div>
+                  )}
+                </Link>
+              </div>
+            ) : (
+              <Link
+                to="/sign-up"
+                className="hover:bg-sky-400 px-2 py-1 rounded-full font-semibold"
+              >
+                Sign in
+              </Link>
+            )}
 
             <a href="#">
               <Heart
@@ -198,10 +226,7 @@ const Header = () => {
               <div className="absolute top-25 left-1 z-10 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black/10">
                 <ul className="py-1">
                   {categories.map((cat, i) => (
-                    <Link
-                      key={i}
-                      to={cat.link}
-                      >
+                    <Link key={i} to={cat.link}>
                       <a
                         href="#"
                         className="block px-4 py-2 text-sm hover:bg-blue-100"

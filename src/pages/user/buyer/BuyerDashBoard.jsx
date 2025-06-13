@@ -31,7 +31,7 @@ const suggestedItems = [
 
 const BuyerDashBoard = () => {
   return (
-      <div className="">
+      <div className="py-10">
       <div className="grid grid-cols-1 md:grid-cols-4">
         <BuyerSideBar />
 
