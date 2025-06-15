@@ -38,6 +38,7 @@ import AdminPayments from "../pages/admin/AdminPayments"
 import AdminReports from "../pages/admin/AdminReports";
 import AdminSecurity from "../pages/admin/AdminSecurity"
 import AdminSettings from "../pages/admin/AdminSettings";
+import Cart from "../pages/user/buyer/Cart";
 
 const routes = [
   {
@@ -136,6 +137,10 @@ const routes = [
       {
         path: "/buyer-dashboard/favorites",
         element: <Favorites />,
+      },
+      {
+        path: "/buyer-dashboard/cart",
+        element: <Cart />,
       },
       {
         path: "/buyer-dashboard/profile",

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import products from "../../Data/products";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductsHeader from "./ProductsHeader";
 import {
   Clock7,
@@ -15,6 +15,9 @@ import ProductTabs from "./ProductTabs";
 import { TbShoppingBagPlus } from "react-icons/tb";
 import Footer from "../../components/Footer";
 import { formatDistanceToNow } from "date-fns";
+import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
+import { useFavorites } from "../../context/FavoritesContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -22,6 +25,11 @@ const ProductDetails = () => {
   const [mainImage, setMainImage] = useState(
     product?.images?.[0] || product.images
   );
+  const { addToCart } = useCart();
+
+  const { user } = useAuth();
+
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   if (!product) return <p>Product not found.</p>;
 
@@ -74,9 +82,31 @@ const ProductDetails = () => {
                 </h1>
 
                 <div className="flex justify-between space-x-3 md:space-x-7 items-center ">
-                  <button>
-                    <Heart />
-                  </button>
+                  {user ? (
+                    user.role === "buyer" && (
+                      <button
+                        onClick={() => {
+                          toggleFavorite(product);
+                        }}
+                        className=" cursor-pointer"
+                      >
+                        <Heart
+                          className={`transition ${
+                            isFavorite(id)
+                              ? "fill-red-600 text-red-600"
+                              : "hover:text-red-600"
+                          }`}
+                        />
+                      </button>
+                    )
+                  ) : (
+                    <button
+                      title="Favorites"
+                      onClick={() => alert("Sign in to an account")}
+                    >
+                      <Heart />
+                    </button>
+                  )}
 
                   <button>
                     <Share2 />
@@ -168,7 +198,13 @@ const ProductDetails = () => {
               </button>
             </div>
 
-            <button className="flex items-center space-x-2 justify-center w-full bg-sky-600 p-5 text-sky-100 rounded-2xl hover:bg-sky-400 cursor-pointer">
+            <button
+              onClick={() => {
+                addToCart(product);
+                alert("Product added to cart");
+              }}
+              className="flex items-center space-x-2 justify-center w-full bg-sky-600 p-5 text-sky-100 rounded-2xl hover:bg-sky-400 cursor-pointer"
+            >
               <span>
                 <TbShoppingBagPlus size={35} />
               </span>

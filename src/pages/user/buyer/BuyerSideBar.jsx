@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
-import { Home, Heart, User, Settings, ShoppingCart } from "lucide-react";
+import { Home, Heart, User, Settings, ShoppingCart, ShoppingBagIcon } from "lucide-react";
 
 const BuyerSideBar = () => {
   const navLinks = [
     { to: "/buyer-dashboard", icon: Home, label: "Dashboard" },
     { to: "/buyer-dashboard/favorites", icon: Heart, label: "Favorites" },
+    { to: "/buyer-dashboard/cart", icon: ShoppingBagIcon, label: "Cart" },
     { to: "/buyer-dashboard/profile", icon: User, label: "Profile" },
     { to: "/buyer-dashboard/settings", icon: Settings, label: "Settings" },
   ];

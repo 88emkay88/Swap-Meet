@@ -1,6 +1,8 @@
 import { Heart, Star } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
+import { useFavorites } from "../../context/FavoritesContext";
 
 const ProductCard = ({
   id,
@@ -30,6 +32,10 @@ const ProductCard = ({
       poor: "bg-red-300",
     }[condition] || "bg-gray-300";
 
+  const { addToCart } = useCart();
+
+  const { toggleFavorite, isFavorite } = useFavorites();
+
   return (
     <div>
       <div
@@ -50,8 +56,28 @@ const ProductCard = ({
             {condition}
           </div>
 
-          <button className="absolute top-2 left-2 cursor-pointer">
-            <Heart className="hover:text-red-600" />
+          <button
+            onClick={() => {
+              toggleFavorite({
+                id,
+                title,
+                image,
+                price,
+                rating,
+                category,
+                condition,
+                location,
+                userName,
+                userAvatar,
+              });
+            }}
+            className="absolute top-2 left-2 cursor-pointer"
+          >
+            <Heart
+              className={`transition ${
+                isFavorite(id) ? "fill-red-600 text-red-600" : "hover:text-red-600"
+              }`}
+            />
           </button>
         </div>
 
@@ -73,7 +99,25 @@ const ProductCard = ({
           </div>
 
           <div className="absolute right-5 bg-sky-500 md:bg-white text-sm -translate-y-6.5 md:translate-y-0 md:hover:bg-sky-200 px-3 py-1 rounded-full">
-            <button>Add To Cart</button>
+            <button
+              onClick={() => {
+                addToCart({
+                  id,
+                  title,
+                  image,
+                  price,
+                  rating,
+                  category,
+                  condition,
+                  location,
+                  userName,
+                  userAvatar,
+                });
+                alert("Product added to cart");
+              }}
+            >
+              Add To Cart
+            </button>
           </div>
 
           <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">

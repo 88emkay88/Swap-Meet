@@ -91,7 +91,7 @@ export default function ProductPage() {
   }, [currentPage]);
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="">
       <ProductsHeader />
 
       {/* Background picture */}

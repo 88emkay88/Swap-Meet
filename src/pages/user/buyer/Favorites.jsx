@@ -1,51 +1,20 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Search } from "lucide-react";
-
+import { useFavorites } from "../../../context/FavoritesContext";
 import Footer from "../../../components/Footer";
+import { useAuth } from "../../../context/AuthContext";
 import BuyerSideBar from "./BuyerSideBar";
 
-const mockFavorites = [
-  {
-    id: "fav1",
-    title: "Vintage Film Camera",
-    image:
-      "https://images.unsplash.com/photo-1580707221190-bd94d9087b7f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    category: "Electronics",
-    condition: "Good",
-    location: "Seattle, WA",
-    userName: "John Doe",
-    userAvatar: "https://randomuser.me/api/portraits/men/32.jpg",
-  },
-  {
-    id: "fav2",
-    title: "Wireless Earbuds",
-    image:
-      "https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    category: "Electronics",
-    condition: "Like New",
-    location: "Portland, OR",
-    userName: "Emma Wilson",
-    userAvatar: "https://randomuser.me/api/portraits/women/44.jpg",
-  },
-  {
-    id: "fav3",
-    title: "Vintage Vinyl Records",
-    image:
-      "https://images.unsplash.com/photo-1603048588665-791ca8aea617?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    category: "Music",
-    condition: "Good",
-    location: "Chicago, IL",
-    userName: "David Parker",
-    userAvatar: "https://randomuser.me/api/portraits/men/55.jpg",
-  },
-];
-
 const Favorites = () => {
-  const [favorites, setFavorites] = useState(mockFavorites);
+  const { favorites, toggleFavorite } = useFavorites();
+  const { user, Logout } = useAuth();
 
-  const removeFavorite = (id) => {
-    setFavorites((prev) => prev.filter((item) => item.id !== id));
+  const getUserInitials = (user) => {
+    if (!user?.FirstName || !user?.LastName) return "";
+    return (
+      user.FirstName.charAt(0).toUpperCase() +
+      user.LastName.charAt(0).toUpperCase()
+    );
   };
 
   return (
@@ -88,11 +57,17 @@ const Favorites = () => {
                       <p className="text-sm text-gray-400">{item.location}</p>
                     </div>
                     <div className="flex items-center mt-4">
-                      <img
-                        src={item.userAvatar}
-                        alt={item.userName}
-                        className="w-8 h-8 rounded-full mr-2"
-                      />
+                      {user.avatar ? (
+                        <img
+                          src={user.avatar}
+                          alt={user.UserName}
+                          className="h-10 w-10 rounded-full border"
+                        />
+                      ) : (
+                        <div className=" flex items-center justify-center border w-10 h-10 rounded-full">
+                          {getUserInitials(item.userName)}
+                        </div>
+                      )}
                       <span className="text-sm text-gray-700">
                         {item.userName}
                       </span>
@@ -100,7 +75,7 @@ const Favorites = () => {
                   </div>
 
                   <button
-                    onClick={() => removeFavorite(item.id)}
+                    onClick={() => toggleFavorite(item)}
                     className="absolute top-2 right-2 bg-white/80 hover:bg-white/90 p-2 rounded-full"
                   >
                     <Heart className="h-4 w-4 fill-red-500 text-red-500" />

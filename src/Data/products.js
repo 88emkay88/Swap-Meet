@@ -44,9 +44,9 @@ const products = [
         location: "Johannesburg",
         seller: {
             name: "Dracos Revenge",
-            avatar: "",
+            avatar: "", // don't need
             sellerRating: 4.2,
-            joinDate: "February 2023",
+            joinDate: "February 2023",  // don't need
             responseRate: 93,
             completedSales: 17
         },

@@ -9,6 +9,7 @@ import {
 import LowNav from "./LowNav";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -52,6 +53,8 @@ const Header = () => {
       user.LastName.charAt(0).toUpperCase()
     );
   };
+
+  const { cartItems } = useCart();
 
   return (
     <>
@@ -119,7 +122,15 @@ const Header = () => {
 
           <div className="flex space-x-4 items-center">
             {user ? (
-              <div className="relative group">
+              <div className="relative flex gap-4 group">
+                {user.role === "buyer" && (
+                  <Link to="/buyer-dashboard/favorites">
+                    <Heart
+                      size={40}
+                      className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
+                    />
+                  </Link>
+                )}
                 <Link to={`/${user.role}-dashboard`}>
                   {user.avatar ? (
                     <img
@@ -128,9 +139,9 @@ const Header = () => {
                       className="h-10 w-10 rounded-full border"
                     />
                   ) : (
-                      <div
-                      className=" flex items-center justify-center border w-10 h-10 rounded-full"
-                      >{getUserInitials(user)}</div>
+                    <div className=" flex items-center justify-center border w-10 h-10 rounded-full">
+                      {getUserInitials(user)}
+                    </div>
                   )}
                 </Link>
               </div>
@@ -143,22 +154,15 @@ const Header = () => {
               </Link>
             )}
 
-            <a href="#">
-              <Heart
-                size={40}
-                className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
-              />
-            </a>
-
-            <a href="#" className="relative">
+            <Link to="/buyer-dashboard/cart" className="relative">
               <div className="group absolute left-6 -top-1 bg-blue-800 py-0.2 px-2 rounded-full text-blue-50">
-                0
+                {cartItems.length}
               </div>
               <ShoppingBagIcon
                 size={40}
                 className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
               />
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -181,29 +185,30 @@ const Header = () => {
 
           {/* button group */}
           <div className="flex items-center">
-            <Link
-              to="/sign-up"
-              className="hover:bg-gray-200 px-2 py-1 rounded-full font-semibold"
-            >
-              Sign in
-            </Link>
+            {user ? (
+              user.role === "buyer" && (
+                <>
+                  <Link to="/buyer-dashboard/favorites">
+                    <Heart
+                      size={40}
+                      className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
+                    />
+                  </Link>
 
-            <a href="#">
-              <Heart
-                size={40}
-                className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
-              />
-            </a>
-
-            <a href="#" className="relative">
-              <div className="group absolute left-6 -top-1 bg-blue-800 py-0.2 px-2 rounded-full text-blue-50">
-                0
-              </div>
-              <ShoppingBagIcon
-                size={40}
-                className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
-              />
-            </a>
+                  <Link to="/buyer-dashboard/favorites" className="relative">
+                    <div className="group absolute left-6 -top-1 bg-blue-800 py-0.2 px-2 rounded-full text-blue-50">
+                      {cartItems.length}
+                    </div>
+                    <ShoppingBagIcon
+                      size={40}
+                      className="hover:bg-sky-200 hover:text-blue-800 px-2 py-1 rounded-full"
+                    />
+                  </Link>
+                </>
+              )
+            ) : (
+              <Link to="/sign-up">sign up</Link>
+            )}
           </div>
         </div>
 
