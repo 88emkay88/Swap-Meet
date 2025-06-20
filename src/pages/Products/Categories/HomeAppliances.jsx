@@ -4,7 +4,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import Footer from "../../../components/Footer";
 import ProductCard from "../ProductCard";
 import locationOptions from "../../../Data/locations";
-import colorOption from "../../../Data/Colors";
+import colorOption from "../../../Data/colors";
 import products from "../../../Data/products";
 import Sidebar from "../Sidebar";
 import { SlidersHorizontal, X } from "lucide-react";

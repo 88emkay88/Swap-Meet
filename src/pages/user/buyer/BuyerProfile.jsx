@@ -11,23 +11,27 @@ import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { TbWorldSearch } from "react-icons/tb";
 import BuyerSideBar from "./BuyerSideBar";
 import Footer from "../../../components/Footer";
+import { useAuth } from "../../../context/AuthContext";
+import { format } from "date-fns";
 
 const BuyerProfile = () => {
-  const [profileImage, setProfileImage] = useState(
-    "https://randomuser.me/api/portraits/men/32.jpg"
-  );
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     displayName: "John Doe",
     email: "john.doe@example.com",
     phone: "(081) 123-4567",
-    location: "Mindrand, Johnannesberg",
+    location: "Midrand, Johnannesburg",
     bio: "Avid collector and swap enthusiast. Love finding unique items and giving old things new life. Looking for vintage tech, cameras, and vinyl records.",
     preferences: "Electronics, Vintage Items, Photography Equipment",
     instagram: "@johndoe",
     twitter: "@johndoe",
     website: "johndoe.com",
   });
+
+  const { user } = useAuth();
+
+  const joinDate = new Date(user.Created_at);
+  const formattedDate = format(joinDate, "MMM yyyy");
 
   // Simple toast with Tailwind, shown for 3s
   const [toast, setToast] = useState(null);
@@ -38,17 +42,20 @@ const BuyerProfile = () => {
     }
   }, [toast]);
 
+  const getUserInitials = (user) => {
+    if (!user?.FirstName || !user?.LastName) return "";
+    return (
+      user.FirstName.charAt(0).toUpperCase() +
+      user.LastName.charAt(0).toUpperCase()
+    );
+  };
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleUploadImage = () => {
-    const randomId = Math.floor(Math.random() * 100);
-    const gender = Math.random() > 0.5 ? "men" : "women";
-    setProfileImage(
-      `https://randomuser.me/api/portraits/${gender}/${randomId}.jpg`
-    );
     setToast({
       title: "Profile photo updated",
       description: "Your profile photo has been updated successfully.",
@@ -65,28 +72,6 @@ const BuyerProfile = () => {
       setIsEditing(false);
     }, 500);
   };
-
-  const ratings = [
-    {
-      name: "Sarah Johnson",
-      rating: 5,
-      comment:
-        "Great swap partner! Very responsive and the item was exactly as described.",
-      date: "2 months ago",
-    },
-    {
-      name: "Michael Chen",
-      rating: 4,
-      comment: "Good experience overall. Punctual and reliable.",
-      date: "3 months ago",
-    },
-    {
-      name: "Emma Wilson",
-      rating: 5,
-      comment: "Amazing! Would definitely swap with John again.",
-      date: "4 months ago",
-    },
-  ];
 
   const badges = [
     {
@@ -121,13 +106,19 @@ const BuyerProfile = () => {
           {/* Profile Header */}
           <div className="flex flex-col md:flex-row gap-6 items-center md:items-start mb-8">
             <div className="relative">
-              <div className="rounded-full overflow-hidden h-32 w-32 border border-gray-300/75">
-                <img
-                  src={profileImage}
-                  alt={formData.displayName}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              {user.Avatar ? (
+                <div className="rounded-full overflow-hidden h-32 w-32 border border-gray-300/75">
+                  <img
+                    src={user.Avatar}
+                    alt={`${user.FirstName} ${user.LastName}`}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ) : (
+                <div className=" flex items-center justify-center border w-30 h-30 rounded-full">
+                  {getUserInitials(user)}
+                </div>
+              )}
               <button
                 onClick={handleUploadImage}
                 className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition"
@@ -140,13 +131,13 @@ const BuyerProfile = () => {
             <div className="text-center md:text-left flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                  <h1 className="text-3xl font-bold">{formData.displayName}</h1>
+                  <h1 className="text-3xl font-bold">{user.UserName}</h1>
                   <div className="flex items-center justify-center md:justify-start gap-2 text-gray-500 mt-1">
                     <MapPin size={16} />
-                    <span>{formData.location}</span>
+                    <span>{user?.Location || "unknown"}</span>
                     <span>•</span>
                     <Calendar size={16} />
-                    <span>Member since May 2022</span>
+                    <span>Member since {formattedDate}</span>
                   </div>
                 </div>
                 {!isEditing && (
@@ -179,7 +170,7 @@ const BuyerProfile = () => {
           {/* Tabs */}
           <div className="w-full mb-6 border-b border-gray-300/75">
             <nav className="flex justify-around md:justify-start md:gap-8">
-              {["profile", "ratings", "stats"].map((t) => (
+              {["profile"].map((t) => (
                 <button
                   key={t}
                   onClick={() => setTab(t)}
@@ -189,11 +180,7 @@ const BuyerProfile = () => {
                       : "border-transparent text-gray-600 hover:text-blue-500"
                   }`}
                 >
-                  {t === "profile"
-                    ? "Profile"
-                    : t === "ratings"
-                    ? "Ratings & Reviews"
-                    : "Stats"}
+                  {t === "profile" ? "Profile" : "Stats"}
                 </button>
               ))}
             </nav>
@@ -375,30 +362,36 @@ const BuyerProfile = () => {
                 ) : (
                   <>
                     <h2 className="text-xl font-semibold mb-2">About Me</h2>
-                    <p className="text-gray-700 mb-4">{formData.bio}</p>
+                    <p className="text-gray-700 mb-4">
+                      {user?.About || "No bio"}
+                    </p>
 
                     <h2 className="text-xl font-semibold mb-2">Preferences</h2>
-                    <p className="text-gray-700 mb-6">{formData.preferences}</p>
+                    <p className="text-gray-700 mb-6">
+                      {user?.Buyerpreferences || "No preferences."}
+                    </p>
 
                     <h2 className="text-xl font-semibold mb-2">Contact Info</h2>
                     <ul className="space-y-1 text-gray-700 mb-6">
                       <li>
-                        <strong>Email:</strong> {formData.email}
+                        <strong>Email:</strong> {user.Email}
                       </li>
                       <li>
-                        <strong>Phone:</strong> {formData.phone}
+                        <strong>Phone:</strong> {user.PhoneNumber}
                       </li>
                       <li>
-                        <strong>Location:</strong> {formData.location}
+                        <strong>Location:</strong> {user.Location || "unknown"}
                       </li>
                       <li>
-                        <strong>Instagram:</strong> {formData.instagram}
+                        <strong>Instagram:</strong>{" "}
+                        {user?.InstaHandle || "unknown"}
                       </li>
                       <li>
-                        <strong>Twitter:</strong> {formData.twitter}
+                        <strong>Twitter:</strong>{" "}
+                        {user?.TwitterHandle || "unknown"}
                       </li>
                       <li>
-                        <strong>Website:</strong> {formData.website}
+                        <strong>Website:</strong> {user?.Website || "unkown"}
                       </li>
                     </ul>
                   </>
@@ -406,58 +399,6 @@ const BuyerProfile = () => {
               </>
             )}
 
-            {tab === "ratings" && (
-              <div className="grid md:grid-cols-3 gap-6">
-                {ratings.map(({ name, rating, comment, date }, idx) => (
-                  <div
-                    key={idx}
-                    className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-4 flex flex-col h-full"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="rounded-full bg-gray-200 h-10 w-10 flex items-center justify-center text-gray-600 font-semibold uppercase">
-                        {name.charAt(0)}
-                      </div>
-                      <div>
-                        <p className="font-semibold">{name}</p>
-                        <p className="text-xs text-gray-500">{date}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1 mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={
-                            i < rating ? "text-yellow-400" : "text-gray-300"
-                          }
-                        />
-                      ))}
-                    </div>
-                    <p className="text-gray-700 flex-grow">{comment}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {tab === "stats" && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Statistics</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-6 text-center">
-                    <h3 className="text-3xl font-bold mb-2">120</h3>
-                    <p className="text-gray-600">Swaps Completed</p>
-                  </div>
-                  <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-6 text-center">
-                    <h3 className="text-3xl font-bold mb-2">4.8/5</h3>
-                    <p className="text-gray-600">Average Rating</p>
-                  </div>
-                  <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-6 text-center">
-                    <h3 className="text-3xl font-bold mb-2">36</h3>
-                    <p className="text-gray-600">Active Listings</p>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>

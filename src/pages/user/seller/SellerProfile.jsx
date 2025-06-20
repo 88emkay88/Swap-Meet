@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   User,
   Mail,
@@ -15,23 +15,73 @@ import {
 } from "lucide-react";
 import SellerSideBar from "./SellersSideBar";
 import Footer from "../../../components/Footer";
+import { useAuth } from "../../../context/AuthContext";
+import { format, formatDistanceToNowStrict } from "date-fns";
 
 const SellerProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const { user } = useAuth();
   const [profileData, setProfileData] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@email.com",
-    phone: "+27 (71) 123-4567",
-    businessName: "John's Vintage Shop",
-    businessType: "Individual Seller",
-    location: "Midrand, SA",
-    bio: "Passionate collector and seller of vintage items. Specializing in electronics, cameras, and retro accessories. Member since 2023.",
-    website: "www.johnsvintageshop.com",
+    firstName: "", 
+    lastName: "", 
+    email: "",
+    phone: "", 
+    businessName: "", 
+    address: "", 
+    bio: "",
+    website: ""
   });
 
-  const handleSave = () => {
-    setIsEditing(false);
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        firstName: user.FirstName || "",
+        lastName: user.LastName || "",
+        email: user.Email || "",
+        phone: user.PhoneNumber || "",
+        businessName: user.storeName || "",
+        address: user.Location || "",
+        bio: user.Bio || "",
+        website: user.Website || "",
+      });
+    }
+  }, [user]);
+
+  const joinDate = new Date(user.Created_at);
+  const formattedDate = format(joinDate, "MMM yyyy");
+  const timeAgo = formatDistanceToNowStrict(joinDate);
+
+  const handleSave = async () => {
+    const updatedData = {
+      UserId: user.UserId,
+      FirstName: profileData.firstName,
+      LastName: profileData.lastName,
+      StoreName: profileData.businessName,
+    };
+
+    try {
+      const res = await fetch(
+        "http://localhost/swapmeet-backend/update-profile.php",
+        {
+          method: "POST",
+          header: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      const text = await res.text();
+      console.log("Raw response:", text);
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Profile updated!");
+        setIsEditing(false);
+      } else {
+        alert("Failed to update profile.");
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+    }
   };
 
   const handleCancel = () => {
@@ -90,8 +140,8 @@ const SellerProfile = () => {
 
                 <div className="flex items-center gap-4 mb-4">
                   <div className="h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center text-lg">
-                    {profileData.firstName[0]}
-                    {profileData.lastName[0]}
+                    {user.FirstName[0]}
+                    {user.LastName[0]}
                   </div>
                   {isEditing && (
                     <button className="border px-3 py-1 rounded text-sm">
@@ -117,7 +167,7 @@ const SellerProfile = () => {
                       </label>
                       <input
                         id={field.key}
-                        value={profileData[field.key]}
+                        value={profileData[field.key] || ""}
                         onChange={(e) =>
                           setProfileData({
                             ...profileData,
@@ -132,7 +182,7 @@ const SellerProfile = () => {
                 </div>
               </div>
 
-              <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-1/2 p-6">
+              <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-6">
                 <h2 className="text-xl font-semibold mb-1">
                   Business Information
                 </h2>
@@ -142,8 +192,7 @@ const SellerProfile = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
                     { label: "Business Name", key: "businessName" },
-                    { label: "Business Type", key: "businessType" },
-                    { label: "Location", key: "location" },
+                    { label: "Address", key: "address" },
                     { label: "Website", key: "website" },
                   ].map((field) => (
                     <div key={field.key} className="space-y-2">
@@ -196,8 +245,9 @@ const SellerProfile = () => {
                       <span className="text-sm">Rating</span>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold">4.8/5</div>
-                      <div className="text-xs text-gray-500">12 reviews</div>
+                      <div className="font-semibold">
+                        {user.sellerProfile.SellerRating}/5
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
@@ -206,7 +256,9 @@ const SellerProfile = () => {
                       <span className="text-sm">Total Sales</span>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold">24</div>
+                      <div className="font-semibold">
+                        {user.sellerProfile.CompletedSales}
+                      </div>
                       <div className="text-xs text-gray-500">items sold</div>
                     </div>
                   </div>
@@ -216,8 +268,8 @@ const SellerProfile = () => {
                       <span className="text-sm">Member Since</span>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold">Jan 2023</div>
-                      <div className="text-xs text-gray-500">1 year</div>
+                      <div className="font-semibold">{formattedDate}</div>
+                      <div className="text-xs text-gray-500">{timeAgo}</div>
                     </div>
                   </div>
                 </div>

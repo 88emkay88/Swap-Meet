@@ -1,10 +1,8 @@
 import React, { useState, createContext, useContext } from "react";
 import { useAuth } from "./AuthContext";
 
-
 // Created context
 const CartContext = createContext();
-
 
 // Created provider
 export const CartProvider = ({ children }) => {
@@ -22,30 +20,56 @@ export const CartProvider = ({ children }) => {
 
     // Send to Backend
     try {
-      const res = await fetch("http://localhost/swapmeet-backend/add-to-cart.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          UserId: user?.UserId,
-          ProductId: product.id,
-        }),
-      });
+      const res = await fetch(
+        "http://localhost/swapmeet-backend/add-to-cart.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            UserId: user?.UserId,
+            ProductId: product.ProductId,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (!data.success) {
         console.warn("Server rejected cart item:", data.message);
       }
     } catch (error) {
-      console.error("failed to sync with backend:", error)
+      console.error("failed to sync with backend:", error);
     }
   };
 
-  const removeFromCart = (id) => {
+  const removeFromCart = async (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
+
+    try {
+      await fetch("http://localhost/swapmeet-backend/remove-from-cart.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          UserId: user?.UserId,
+          ProductId: id.ProductId,
+        }),
+      });
+    } catch (err) {
+      console.error("Fail to remove item from server:", err);
+    }
   };
 
-  const clearCart = () => {
+  const clearCart = async () => {
     setCartItems([]);
+
+    try {
+      await fetch("http://localhost/swapmeet-backend/clear-cart.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: user?.UserId }),
+      });
+    } catch (err) {
+      console.error("Failed to clear cart on server:", err);
+    }
   };
 
   return (

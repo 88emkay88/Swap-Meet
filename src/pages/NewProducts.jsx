@@ -33,20 +33,10 @@ const NewProducts = () => {
 
   const checkbox = [
     "Electronics",
-    "Clothing",
     "Accessories",
-    "Home",
-    "Kitchen",
-    "Toys",
-    "Games",
-    "Books",
-    "Media",
-    "Antiques",
-    "Collectibles",
-    "Tools",
-    "DIY",
+    "Gaming",
     "Sports",
-    "Outdoors",
+    "Auction"
   ];
 
   const applyMobileFilters = () => {

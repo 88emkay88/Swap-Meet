@@ -1,5 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
-import { Home, Heart, User, Settings, ShoppingCart, ShoppingBagIcon } from "lucide-react";
+import {
+  Home,
+  Heart,
+  User,
+  Settings,
+  ShoppingCart,
+  ShoppingBagIcon,
+} from "lucide-react";
+
+import { useAuth } from "../../../context/AuthContext";
 
 const BuyerSideBar = () => {
   const navLinks = [
@@ -9,6 +18,8 @@ const BuyerSideBar = () => {
     { to: "/buyer-dashboard/profile", icon: User, label: "Profile" },
     { to: "/buyer-dashboard/settings", icon: Settings, label: "Settings" },
   ];
+
+  const { logout } = useAuth();
 
   return (
     <aside className="h-full border-r hidden md:block">
@@ -45,19 +56,25 @@ const BuyerSideBar = () => {
             </li>
           ))}
         </ul>
-
         <div className="px-6 mt-8">
           <div className="border-t pt-6">
             <p className="text-sm text-gray-600 mb-3">Want to sell items?</p>
             <button
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded text-sm"
-              onClick={() =>
-                (window.location.href = "/auth/signup?type=seller")
-              }
+              onClick={() => (window.location.href = "/register")}
             >
               Become a Seller
             </button>
           </div>
+        </div>
+
+        <div className="flex h-full justify-center items-end w-full mt-3">
+          <button
+            className="px-6 py-2 rounded-full bg-blue-400 hover:bg-blue-500"
+            onClick={() => logout()}
+          >
+            log out
+          </button>
         </div>
       </nav>
     </aside>

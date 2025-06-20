@@ -5,7 +5,7 @@ import Footer from "../../../components/Footer";
 import ProductCard from "../ProductCard";
 import locationOptions from "../../../Data/locations";
 import products from "../../../Data/products";
-import colorOption from "../../../Data/Colors";
+import colorOption from "../../../Data/colors";
 import Sidebar from "../Sidebar";
 import { SlidersHorizontal, X } from "lucide-react";
 import { Range } from "react-range";
@@ -43,7 +43,6 @@ export default function Electronics() {
     "Home Audio",
     "Vehicle Electronics",
     "GPS",
-    "Video Games & Consoles",
     "Virtual Reality",
   ];
 

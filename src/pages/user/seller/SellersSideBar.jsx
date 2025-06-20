@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { Home, Package, PlusCircle, User, Settings, ShoppingCart } from "lucide-react";
+import { useAuth } from "../../../context/AuthContext";
 
 const SellerSideBar = () => {
   const navLinks = [
@@ -9,6 +10,8 @@ const SellerSideBar = () => {
     { to: "/seller-dashboard/profile", icon: User, label: "Profile" },
     { to: "/seller-dashboard/settings", icon: Settings, label: "Settings" },
   ];
+
+  const { logout } = useAuth();
 
   return (
     <aside className="w-64 h-screen sticky top-0 border-r  hidden md:block">
@@ -44,6 +47,14 @@ const SellerSideBar = () => {
             </li>
           ))}
         </ul>
+        <div className="flex justify-center w-full mt-3">
+          <button
+            className="px-6 py-2 rounded-full bg-blue-400 hover:bg-blue-500"
+            onClick={() => logout()}
+          >
+            log out
+          </button>
+        </div>
       </nav>
     </aside>
   );

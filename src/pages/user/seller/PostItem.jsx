@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Upload, Info, Plus, X } from "lucide-react";
-import SellersSideBar from "./SellersSideBar"
+import SellersSideBar from "./SellersSideBar";
 import Footer from "../../../components/Footer";
+import { Form } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+
 // Mock categories
 const categories = ["Electronics", "Accessories", "Games", "Sports", "Auction"];
 
@@ -10,6 +13,7 @@ const conditions = ["New", "Like New", "Excellent", "Good", "Fair", "Poor"];
 
 const PostItem = () => {
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0.00);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [condition, setCondition] = useState("");
@@ -19,17 +23,47 @@ const PostItem = () => {
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
 
-  const handleImageUpload = () => {
+  const uploadToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "sm_product_images");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dcbt2u7wr/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const result = await res.json();
     setUploadingImage(true);
 
-    setTimeout(() => {
-      const imageId = Math.floor(Math.random() * 1000);
-      const newImage = `https://source.unsplash.com/random/800x600?sig=${imageId}`;
-      setImages((prev) => [...prev, newImage]);
-      setUploadingImage(false);
-    }, 1500);
+    return result.secure_url;
   };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const localUrl = URL.createObjectURL(file);
+    setImages((prev) => [...prev, { url: localUrl, isLoading: true }]);
+
+    try {
+      const uploadedUrl = await uploadToCloudinary(file);
+      setImages((prev) =>
+        prev.map((img) =>
+          img.url === localUrl ? { url: uploadedUrl, isLoading: false } : img
+        )
+      );
+    } catch (err) {
+      console.error("Image upload failed:", err);
+      setImages((prev) => prev.filter((img) => img.url !== localUrl));
+    }
+  };
+  
 
   const removeImage = (index) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
@@ -53,17 +87,34 @@ const PostItem = () => {
       return;
     }
 
+    const itemData = {
+      name: title,
+      price,
+      description,
+      category,
+      condition,
+      location,
+      tags,
+      images, // from Cloudinary
+      sellerId: user.UserId,
+    };
+
     setIsLoading(true);
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setTimeout(() => {
-        window.location.href = "/dashboard/listings";
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+    const res = await fetch("http://localhost/swapmeet-backend/post-item.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(itemData),
+    });
+
+    const data = await res.json();
+    setIsLoading(false);
+
+    if (data.success) {
+      alert("Item posted!");
+      window.location.href = "/seller-dashboard/listings";
+    } else {
+      alert(data.message || "Something went wrong.");
     }
   };
 
@@ -85,16 +136,21 @@ const PostItem = () => {
                 Item Images
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {images.map((image, index) => (
+                {images.map((img, index) => (
                   <div
                     key={index}
                     className="relative aspect-square border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-full overflow-hidden"
                   >
                     <img
-                      src={image}
+                      src={img.url}
                       alt={`Item image ${index + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover opacity-90"
                     />
+                    {img.isLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                      </div>
+                    )}
                     <button
                       type="button"
                       onClick={() => removeImage(index)}
@@ -106,12 +162,7 @@ const PostItem = () => {
                 ))}
 
                 {images.length < 5 && (
-                  <button
-                    type="button"
-                    onClick={handleImageUpload}
-                    disabled={uploadingImage}
-                    className="flex flex-col items-center justify-center border-2 border-dashed rounded-2xl aspect-square text-gray-400 hover:text-black hover:border-gray-400 transition-colors"
-                  >
+                  <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-2xl aspect-square text-gray-400 hover:text-black hover:border-gray-400 transition-colors">
                     {uploadingImage ? (
                       <div className="flex flex-col items-center">
                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-500"></div>
@@ -125,7 +176,13 @@ const PostItem = () => {
                         </span>
                       </>
                     )}
-                  </button>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
                 )}
               </div>
               <p className="text-sm text-gray-500 flex items-center gap-1">
@@ -145,6 +202,21 @@ const PostItem = () => {
                   placeholder="Enter a descriptive title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                  required
+                  className="w-full border border-gray-300 rounded-xl px-3 py-2"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="title" className="block font-medium">
+                  Item Price
+                </label>
+                <input
+                  id="price"
+                  type="number"
+                  placeholder="Enter a price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                   required
                   className="w-full border border-gray-300 rounded-xl px-3 py-2"
                 />
@@ -226,7 +298,6 @@ const PostItem = () => {
             </div>
 
             <div className="space-y-4">
-              
               <div className="space-y-2">
                 <label htmlFor="tags" className="block font-medium">
                   Tags

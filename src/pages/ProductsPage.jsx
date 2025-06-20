@@ -5,31 +5,13 @@ import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
 import locationOptions from "../Data/locations";
-import colorOption from "../Data/Colors";
+import colorOption from "../Data/colors";
 import products from "../Data/products";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
 import bluebg from "../assets/images/blue-bg.jpg";
 
-const checkbox = [
-  "Electronics",
-  "Clothing",
-  "Accessories",
-  "Home",
-  "Kitchen",
-  "Toys",
-  "Games",
-  "Books",
-  "Media",
-  "Antiques",
-  "Collectibles",
-  "Tools",
-  "DIY",
-  "Sports",
-  "Outdoors",
-];
-
-
+const checkbox = ["Electronics", "Accessories", "Gaming", "Sports", "Auction"];
 
 export default function ProductPage() {
   const [search, setSearch] = useState("");

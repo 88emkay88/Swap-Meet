@@ -124,12 +124,23 @@ const Header = () => {
             {user ? (
               <div className="relative flex gap-4 group">
                 {user.role === "buyer" && (
-                  <Link to="/buyer-dashboard/favorites">
-                    <Heart
-                      size={40}
-                      className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
-                    />
-                  </Link>
+                  <>
+                    <Link to="/buyer-dashboard/favorites">
+                      <Heart
+                        size={40}
+                        className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
+                      />
+                    </Link>
+                    <Link to="/buyer-dashboard/cart" className="relative">
+                      <div className="group absolute left-6 -top-1 bg-blue-800 py-0.2 px-2 rounded-full text-blue-50">
+                        {cartItems.length}
+                      </div>
+                      <ShoppingBagIcon
+                        size={40}
+                        className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
+                      />
+                    </Link>
+                  </>
                 )}
                 <Link to={`/${user.role}-dashboard`}>
                   {user.avatar ? (
@@ -153,16 +164,6 @@ const Header = () => {
                 Sign in
               </Link>
             )}
-
-            <Link to="/buyer-dashboard/cart" className="relative">
-              <div className="group absolute left-6 -top-1 bg-blue-800 py-0.2 px-2 rounded-full text-blue-50">
-                {cartItems.length}
-              </div>
-              <ShoppingBagIcon
-                size={40}
-                className="hover:bg-sky-400 hover:text-blue-800 px-2 py-1 rounded-full"
-              />
-            </Link>
           </div>
         </div>
 
