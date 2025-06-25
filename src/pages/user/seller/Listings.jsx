@@ -64,7 +64,7 @@ const Listings = () => {
   };
 
   return (
-    <div className="py-10 px-5">
+    <div className="py-10">
       <MobileSellerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
         <div className="hidden md:block">

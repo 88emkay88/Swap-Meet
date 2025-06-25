@@ -29,16 +29,18 @@ import BuyerProfile from "../pages/user/buyer/BuyerProfile";
 import Settings from "../pages/user/buyer/Settings";
 import SellerDashboard from "../pages/user/seller/SellerDashBoard";
 import Listings from "../pages/user/seller/Listings";
-import PostItem from "../pages/user/seller/PostItem"
+import PostItem from "../pages/user/seller/PostItem";
 import SellerProfile from "../pages/user/seller/SellerProfile";
 import SellerSettings from "../pages/user/seller/SellerSettings";
 import Users from "../pages/admin/Users";
 import AdminAnalytics from "../pages/admin/AdminAnalytics";
-import AdminPayments from "../pages/admin/AdminPayments"
+import AdminPayments from "../pages/admin/AdminPayments";
 import AdminReports from "../pages/admin/AdminReports";
-import AdminSecurity from "../pages/admin/AdminSecurity"
+import AdminSecurity from "../pages/admin/AdminSecurity";
 import AdminSettings from "../pages/admin/AdminSettings";
 import Cart from "../pages/user/buyer/Cart";
+import SellerOrders from "../pages/user/seller/SellerOrders";
+import BuyerOrders from "../pages/user/buyer/BuyerOrders";
 
 const routes = [
   {
@@ -147,6 +149,10 @@ const routes = [
         element: <BuyerProfile />,
       },
       {
+        path: "/buyer-dashboard/orders",
+        element: <BuyerOrders />,
+      },
+      {
         path: "/buyer-dashboard/settings",
         element: <Settings />,
       },
@@ -172,6 +178,10 @@ const routes = [
       {
         path: "/seller-dashboard/settings",
         element: <SellerSettings />,
+      },
+      {
+        path: "/seller-dashboard/orders",
+        element: <SellerOrders />,
       },
     ],
   },

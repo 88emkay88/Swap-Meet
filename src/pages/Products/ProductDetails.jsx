@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProductsHeader from "./ProductsHeader";
-import {
-  Clock7,
-  Heart,
-  MapPin,
-  MessageCircleQuestion,
-  Share2,
-  Star,
-} from "lucide-react";
+import { Clock7, Heart, MapPin, Share2, Star } from "lucide-react";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import ProductTabs from "./ProductTabs";
 import { TbShoppingBagPlus } from "react-icons/tb";
@@ -57,7 +50,8 @@ const ProductDetails = () => {
 
   if (!product) return <p>Product not found.</p>;
 
-  const userInitails = user?.UserName.split(" ")
+  const userInitails = product?.sellerName
+    .split(" ")
     .map((n) => n[0])
     .join("");
 
@@ -181,10 +175,10 @@ const ProductDetails = () => {
             <div className=" grid space-y-5 p-8 border-1 border-gray-300 rounded-2xl shadow">
               {/* Seller Details */}
               <div className="flex items-center">
-                {user.Avatar !== "" ? (
+                {product.SellerAvatar ? (
                   <img
-                    src={user.Avatar}
-                    alt={`${user.FirstName} ${user.LastName}`}
+                    src={product.SellerAvatar}
+                    alt={`${product.sellerName}`}
                     className="h-15 w-15 border object-cover rounded-full"
                   />
                 ) : (
@@ -194,15 +188,15 @@ const ProductDetails = () => {
                 )}
 
                 <div className="space-y-1 ml-2 grid">
-                  <h2 className="md:text-2xl text-xl">{user.UserName}</h2>
+                  <h2 className="md:text-2xl text-xl">{product.sellerName}</h2>
                   <div className="flex space-x-2">
                     <p className="flex items-center space-x-2">
                       <Star className="fill-yellow-300 text-yellow-300" />
-                      <span>{user.sellerProfile.sellerRating}</span>
+                      <span>{product.sellerRating}</span>
                     </p>
                     <span>•</span>
                     <p className="md:text-md text-sm ">
-                      Memeber since {formatDate(user.Join_date)}
+                      Memeber since {formatDate(product.sellerJoinDate)}
                     </p>
                   </div>
                 </div>
@@ -213,28 +207,21 @@ const ProductDetails = () => {
                 <div>
                   <h3 className="md:text-xl text-sm">Response Rate</h3>
                   <p className="text-center  font-bold">
-                    %{user.sellerProfile.ResponseRate}
+                    %{product.ResponseRate}
                   </p>
                 </div>
                 <div>
                   <h3 className="md:text-xl text-sm">Completed Sales</h3>
                   <p className="text-center font-bold">
-                    {user.sellerProfile.CompletedSales}
+                    {product.CompletedSales}
                   </p>
                 </div>
               </div>
-
-              {/* Message About Item */}
-              <button className="flex justify-center items-center rounded-2xl md:space-x-4 p-3 bg-sky-600 hover:bg-sky-400 cursor-pointer  text-sky-100">
-                <span>
-                  <MessageCircleQuestion />
-                </span>
-                <p className="md:text-md text-sm">Message About This Item</p>
-              </button>
             </div>
 
             <button
               onClick={() => {
+                console.log("Adding to cart:", product)
                 addToCart(product);
                 alert("Product added to cart");
               }}

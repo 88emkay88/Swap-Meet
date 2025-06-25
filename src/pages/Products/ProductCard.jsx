@@ -102,16 +102,16 @@ const ProductCard = ({
             <button
               onClick={() => {
                 addToCart({
-                  id,
+                  ProductId: id,
                   title,
-                  image,
+                  mainImage: image,
                   price,
                   rating,
                   category,
                   condition,
                   location,
-                  userName,
-                  userAvatar,
+                  sellerName: userName,
+                  sellerAvater: userAvatar,
                 });
                 alert("Product added to cart");
               }}

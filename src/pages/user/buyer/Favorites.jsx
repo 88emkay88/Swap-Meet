@@ -8,14 +8,11 @@ import MobileBuyerMenu from "./MobileBuyerMenu";
 
 const Favorites = () => {
   const { favorites, toggleFavorite } = useFavorites();
-  const { user, Logout } = useAuth();
+  const { Logout } = useAuth();
 
-  const getUserInitials = (user) => {
-    if (!user?.FirstName || !user?.LastName) return "";
-    return (
-      user.FirstName.charAt(0).toUpperCase() +
-      user.LastName.charAt(0).toUpperCase()
-    );
+  const getUserInitials = (item) => {
+    if (!item?.userName) return "";
+    return item.userName.charAt(0).toUpperCase();
   };
 
   return (
@@ -44,7 +41,7 @@ const Favorites = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {favorites.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.ProductId}
                   className="relative border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
                 >
                   <img
@@ -61,15 +58,15 @@ const Favorites = () => {
                       <p className="text-sm text-gray-400">{item.location}</p>
                     </div>
                     <div className="flex items-center mt-4">
-                      {user.avatar ? (
+                      {item.sellerAvatar ? (
                         <img
-                          src={user.avatar}
-                          alt={user.UserName}
+                          src={item.sellerAvatar}
+                          alt={item.userName}
                           className="h-10 w-10 rounded-full border"
                         />
                       ) : (
                         <div className=" flex items-center justify-center border w-10 h-10 rounded-full">
-                          {getUserInitials(item.userName)}
+                          {getUserInitials(item)}
                         </div>
                       )}
                       <span className="text-sm text-gray-700">

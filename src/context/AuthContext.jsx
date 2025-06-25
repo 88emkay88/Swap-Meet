@@ -11,9 +11,8 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(false);      
+    setIsLoading(false);
   }, []);
-
 
   // Login function
   const login = (userData) => {
@@ -25,6 +24,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("swapmeet-user");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("favorites");
   };
 
   // context value

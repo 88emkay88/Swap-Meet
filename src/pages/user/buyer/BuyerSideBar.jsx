@@ -6,6 +6,7 @@ import {
   Settings,
   ShoppingCart,
   ShoppingBagIcon,
+  Truck
 } from "lucide-react";
 
 import { useAuth } from "../../../context/AuthContext";
@@ -15,6 +16,7 @@ const BuyerSideBar = () => {
     { to: "/buyer-dashboard", icon: Home, label: "Dashboard" },
     { to: "/buyer-dashboard/favorites", icon: Heart, label: "Favorites" },
     { to: "/buyer-dashboard/cart", icon: ShoppingBagIcon, label: "Cart" },
+    { to: "/buyer-dashboard/orders", icon: Truck, label: "Orders" },
     { to: "/buyer-dashboard/profile", icon: User, label: "Profile" },
     { to: "/buyer-dashboard/settings", icon: Settings, label: "Settings" },
   ];

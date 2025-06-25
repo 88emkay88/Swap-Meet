@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { useAuth } from "./AuthContext";
 
 // Created context
@@ -9,8 +9,21 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const { user } = useAuth();
 
+  // Load cart from loacalStroage
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
+
+  // Save cart to local storage
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems))
+  }, [cartItems])
+
   const addToCart = async (product) => {
-    const exists = cartItems.find((item) => item.id === product.id);
+    const exists = cartItems.find((item) => item.ProductId === product.ProductId);
     if (exists) {
       alert("Item is already in your cart.");
       return;
@@ -42,7 +55,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = async (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+    setCartItems(cartItems.filter((item) => item.ProductId !== id));
 
     try {
       await fetch("http://localhost/swapmeet-backend/remove-from-cart.php", {
@@ -50,7 +63,7 @@ export const CartProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           UserId: user?.UserId,
-          ProductId: id.ProductId,
+          ProductId: id,
         }),
       });
     } catch (err) {

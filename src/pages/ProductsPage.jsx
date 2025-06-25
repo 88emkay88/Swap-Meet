@@ -10,7 +10,6 @@ import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
 import bluebg from "../assets/images/blue-bg.jpg";
 
-
 const checkbox = ["Electronics", "Accessories", "Gaming", "Sports", "Auction"];
 
 export default function ProductPage() {
@@ -36,6 +35,7 @@ export default function ProductPage() {
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
+          console.log("products", data.products);
         } else {
           console.error(data.message);
         }

@@ -66,20 +66,20 @@ const Cart = () => {
             <div className="lg:w-2/3 space-y-4">
               {cartItems.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.ProductId}
                   className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-6"
                 >
                   <div className="flex gap-4">
                     <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
                       <img
-                        src={item.image}
+                        src={item?.mainImage || null}
                         alt={item.title}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
                       <Link
-                        to={`/product/${item.id}`}
+                        to={`/product/${item.ProductId}`}
                         className="font-medium text-lg hover:text-blue-500 block truncate"
                       >
                         {item.title}
@@ -93,22 +93,21 @@ const Cart = () => {
                       </div>
                       <div className="flex items-center gap-2 mt-2">
                         <div className="h-6 w-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs">
-                          {item.userName
-                            .split(" ")
+                          {item.sellerName
+                            ?.split(" ")
                             .map((n) => n[0])
                             .join("")}
                         </div>
-                        <span className="text-sm">{item.userName}</span>
+                        <span className="text-sm">{item.sellerName}</span>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <button className="text-sm border border-gray-300 rounded px-3 py-1 flex items-center gap-1">
-                        <MessageSquare className="w-4 h-4" />
-                        Message
-                      </button>
                       <button
-                        className="text-sm border border-gray-300 rounded px-3 py-1 flex items-center gap-1"
-                        onClick={() => removeFromCart(item.id)}
+                        className="text-sm border border-gray-300 rounded px-3 py-1 flex items-center gap-1 cursor-pointer"
+                        onClick={() => {
+                          removeFromCart(item.ProductId)
+                          alert("Item removed");
+                        }}
                       >
                         <Trash2 className="w-4 h-4" />
                         Remove

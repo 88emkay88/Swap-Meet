@@ -1,5 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
-import { Home, Package, PlusCircle, User, Settings, ShoppingCart } from "lucide-react";
+import {
+  Home,
+  Package,
+  PlusCircle,
+  User,
+  Settings,
+  ShoppingCart,
+  Truck,
+} from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
 
 const SellerSideBar = () => {
@@ -7,6 +15,7 @@ const SellerSideBar = () => {
     { to: "/seller-dashboard", icon: Home, label: "Dashboard" },
     { to: "/seller-dashboard/listings", icon: Package, label: "My Listings" },
     { to: "/seller-dashboard/post-item", icon: PlusCircle, label: "Post Item" },
+    { to: "/seller-dashboard/orders", icon: Truck, label: "Orders" },
     { to: "/seller-dashboard/profile", icon: User, label: "Profile" },
     { to: "/seller-dashboard/settings", icon: Settings, label: "Settings" },
   ];

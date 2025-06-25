@@ -39,6 +39,9 @@ const MobileSellerMenu = () => {
           <Link to="/seller-dashboard/post-item" className="block text-lg">
             Post Items
           </Link>
+          <Link to="/seller-dashboard/orders" className="block text-lg">
+            Orders
+          </Link>
           <Link to="/seller-dashboard/profile" className="block text-lg">
             Profile
           </Link>
