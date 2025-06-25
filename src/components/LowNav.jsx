@@ -28,7 +28,7 @@ const LowNav = () => {
           <button>
             <Link
               to={opt.link}
-              key={`${opt.name}-${index}`}
+              key={`${index}`}
               className="hover:bg-sky-400 py-1 px-4 rounded-full"
             >
               {opt.name}

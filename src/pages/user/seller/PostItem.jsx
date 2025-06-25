@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Upload, Info, Plus, X } from "lucide-react";
 import SellersSideBar from "./SellersSideBar";
 import Footer from "../../../components/Footer";
-import { Form } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-
-// Mock categories
-const categories = ["Electronics", "Accessories", "Games", "Sports", "Auction"];
+import MobileSellerMenu from "./MobileSellerMenu";
 
 // Mock conditions
 const conditions = ["New", "Like New", "Excellent", "Good", "Fair", "Poor"];
 
 const PostItem = () => {
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0.00);
+  const [price, setPrice] = useState(0.0);
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [subcategory, setSubcategory] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedSubcategory, setSelectedSubcategory] = useState("");
   const [condition, setCondition] = useState("");
   const [location, setLocation] = useState("");
   const [images, setImages] = useState([]);
@@ -23,7 +23,52 @@ const PostItem = () => {
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [color, setColor] = useState("");
+  const [details, setDetails] = useState([""]);
   const { user } = useAuth();
+
+  const colors = [
+    "Red",
+    "Blue",
+    "Black",
+    "White",
+    "Green",
+    "Yellow",
+    "Orange",
+    "Pink",
+    "Gray",
+    "Purple",
+  ];
+
+  useEffect(() => {
+    //  Fetches categories on load
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/get-categories.php"
+        );
+        const data = await res.json();
+
+        if (data.success) {
+          setCategories(data.categories);
+        }
+      } catch (err) {
+        console.error("Fail to fetch categories", err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handleCategoryChange = (e) => {
+    const selectedId = e.target.value;
+    setSelectedCategoryId(selectedId);
+    setSelectedSubcategory("");
+
+    // Find subcategories for selected categories
+    const selected = categories.find((cat) => cat.id.toString() === selectedId);
+    setSubcategory(selected ? selected.subcategories : []);
+  };
 
   const uploadToCloudinary = async (file) => {
     const data = new FormData();
@@ -63,7 +108,6 @@ const PostItem = () => {
       setImages((prev) => prev.filter((img) => img.url !== localUrl));
     }
   };
-  
 
   const removeImage = (index) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
@@ -80,6 +124,19 @@ const PostItem = () => {
     setTags((prev) => prev.filter((t) => t !== tag));
   };
 
+  const addDetail = () => setDetails([...details, ""]);
+
+  const updateDetail = (i, value) => {
+    const updated = [...details];
+    updated[i] = value;
+    setDetails(updated);
+  };
+
+  const removeDetail = (i) => {
+    const updated = details.filter((_, index) => index !== i);
+    setDetails(updated);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,16 +144,21 @@ const PostItem = () => {
       return;
     }
 
+    const imageUrls = images.map((img) => img.url);
+
     const itemData = {
       name: title,
       price,
       description,
-      category,
+      category: selectedCategoryId,
+      subcategory: selectedSubcategory,
+      color,
       condition,
       location,
       tags,
-      images, // from Cloudinary
-      sellerId: user.UserId,
+      details: details.filter((d) => d.trim() !== ""),
+      images: imageUrls,
+      sellerId: user.sellerProfile.sellerID,
     };
 
     setIsLoading(true);
@@ -120,9 +182,12 @@ const PostItem = () => {
 
   return (
     <div className="py-10">
+      <MobileSellerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <SellersSideBar />
-        <div className=" mx-auto py-8 col-span-3">
+        <div className="hidden md:block">
+          <SellersSideBar />
+        </div>
+        <div className=" mx-10 py-8 col-span-3">
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2">Post an Item</h1>
             <p className="text-gray-500">
@@ -237,14 +302,46 @@ const PostItem = () => {
                 />
               </div>
 
+              <div className="space-y-2">
+                <label htmlFor="details" className="block font-medium">
+                  Details
+                </label>
+                {details.map((detail, i) => (
+                  <div key={i} className="flex gap-2 mb-2">
+                    <input
+                      type="text"
+                      value={detail}
+                      onChange={(e) => updateDetail(i, e.target.value)}
+                      className="felx-1 border border-gray-300 rounded-xl px-3 py-2"
+                      placeholder={`Detail ${i + 1}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeDetail(i)}
+                      className="text-red-600 hover:underline"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={addDetail}
+                  className="text-blue-600 hover:bg-blue-400 px-4 py-2 rounded-2xl"
+                >
+                  + Add Detail
+                </button>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="category" className="block font-medium">
+                  <label htmlFor="categories" className="block font-medium">
                     Category
                   </label>
                   <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    value={selectedCategoryId}
+                    onChange={handleCategoryChange}
                     required
                     className="w-full border border-gray-300 rounded-xl px-3 py-2"
                   >
@@ -252,12 +349,35 @@ const PostItem = () => {
                       Select a category
                     </option>
                     {categories.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
                       </option>
                     ))}
                   </select>
                 </div>
+
+                {selectedCategoryId && subcategory.length > 0 && (
+                  <div className="space-y-2">
+                    <label htmlFor="subcategory" className="block font-medium">
+                      Subcategory
+                    </label>
+                    <select
+                      value={selectedSubcategory}
+                      onChange={(e) => setSelectedSubcategory(e.target.value)}
+                      required
+                      className="w-full border border-gray-300 rounded-xl px-3 py-2"
+                    >
+                      <option value="" disabled>
+                        Select a subcategory
+                      </option>
+                      {subcategory.map((sub) => (
+                        <option key={sub.id} value={sub.id}>
+                          {sub.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
                 <div className="space-y-2">
                   <label htmlFor="condition" className="block font-medium">
@@ -279,6 +399,28 @@ const PostItem = () => {
                     ))}
                   </select>
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="color" className="block font-medium">
+                  Color
+                </label>
+                <select
+                  id="color"
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
+                  required
+                  className="w-full border border-gray-300 rounded-xl px-3 py-2"
+                >
+                  <option value="" disabled>
+                    Select color
+                  </option>
+                  {colors.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="space-y-2">

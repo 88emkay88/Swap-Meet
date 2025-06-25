@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PlusCircle, MoreHorizontal, Search, Filter } from "lucide-react";
-import SellerSideBar from "./SellersSideBar";
+import SellersSideBar from "./SellersSideBar";
 import Footer from "../../../components/Footer";
 import { useAuth } from "../../../context/AuthContext";
+import MobileSellerMenu from "./MobileSellerMenu";
 
 const Listings = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,24 +13,28 @@ const Listings = () => {
   const [userItems, setUserItems] = useState([]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !user.sellerProfile || !user.sellerProfile.sellerID) return;
 
     const fetchUserItems = async () => {
+      console.log("Fetching with sellerID:", user.sellerProfile.sellerID);
+
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-seller-products.php?UserId=${user.UserId}`
+          `http://localhost/swapmeet-backend/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
         );
-
         const data = await res.json();
 
         if (data.success) {
           setUserItems(data.products);
+          console.log("Fetched products:", data.products);
+        } else {
+          console.error("Fetch failed:", data.message);
         }
       } catch (err) {
         console.error("Error fetching seller listings", err);
       }
-      fetchUserItems();
     };
+
     fetchUserItems();
   }, [user]);
 
@@ -59,9 +64,12 @@ const Listings = () => {
   };
 
   return (
-    <div className="py-10">
+    <div className="py-10 px-5">
+      <MobileSellerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <SellerSideBar />
+        <div className="hidden md:block">
+          <SellersSideBar />
+        </div>
         <div className="space-y-6 col-span-3 py-10 pr-10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
@@ -120,9 +128,6 @@ const Listings = () => {
                   </th>
                   <th className="px-4 py-2 text-left">Status</th>
                   <th className="px-4 py-2 text-left hidden md:table-cell">
-                    Views
-                  </th>
-                  <th className="px-4 py-2 text-left hidden md:table-cell">
                     Date Added
                   </th>
                   <th className="px-4 py-2 text-right">Actions</th>
@@ -131,7 +136,7 @@ const Listings = () => {
               <tbody>
                 {sortedListings.length > 0 ? (
                   sortedListings.map((listing) => (
-                    <tr key={listing.id} className="border-t">
+                    <tr key={listing.ProductId} className="border-t">
                       <td className="px-4 py-2">
                         <div className="flex items-center gap-3">
                           <img
@@ -153,12 +158,29 @@ const Listings = () => {
                       <td className="px-4 py-2 hidden md:table-cell">
                         {listing.condition}
                       </td>
+                      <td className="px-4 py-2">
+                        <span
+                          className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                            listing.Status === "Active"
+                              ? "bg-green-100 text-green-800"
+                              : listing.Status === "Sold"
+                              ? "bg-gray-300 text-gray-700"
+                              : listing.Status === "Inactive"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-red-100 text-red-700"
+                          }
+                          `}
+                        >
+                          {listing.Status}
+                        </span>
+                      </td>
+
                       <td className="px-4 py-2 hidden md:table-cell">
                         {formatDate(listing.dateAdded)}
                       </td>
                       <td className="px-4 py-2 text-right">
                         <button className="text-blue-500 hover:underline text-sm">
-                          <Link to={`/product/${listing.id}`}>View</Link>
+                          <Link to={`/product/${listing.ProductId}`}>View</Link>
                         </button>
                       </td>
                     </tr>

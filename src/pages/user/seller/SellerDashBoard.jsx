@@ -7,10 +7,11 @@ import { FaClipboardCheck } from "react-icons/fa";
 import Footer from "../../../components/Footer";
 import SellersSideBar from "./SellersSideBar";
 import { useAuth } from "../../../context/AuthContext";
+import MobileSellerMenu from "./MobileSellerMenu";
 
 const SellerDashboard = () => {
   const [listingCount, setListCount] = useState(0);
-  const [SellerRating, setSellerRating] = useState(null);
+  const [SellerRating, setSellerRating] = useState("");
   const [userItems, setUserItems] = useState([]);
   const { user } = useAuth();
   const [Completion, setCompletion] = useState({ percent: 0, step: [] });
@@ -35,7 +36,7 @@ const SellerDashboard = () => {
   useEffect(() => {
     const fetchListings = async () => {
       const res = await fetch(
-        `http://localhost/swapmeet-backend/seller-dashboard.php?UserId=${user.UserId}`
+        `http://localhost/swapmeet-backend/seller-dashboard.php?sellerId=${user.sellerProfile.sellerID}`
       );
 
       const data = await res.json();
@@ -52,14 +53,14 @@ const SellerDashboard = () => {
       if (!user) return;
 
       const res = await fetch(
-        `http://localhost/swapmeet-backend/seller-dashboard.php?UserId=${user.UserId}`
+        `http://localhost/swapmeet-backend/seller-dashboard.php?sellerId=${user.sellerProfile.sellerID}`
       );
 
       const data = await res.json();
 
       if (data.success) {
         setListCount(data.listingCount);
-        setSellerRating(data.sellerInfo?.SellerRating ?? 0);
+        setSellerRating(data.sellerProfile?.SellerRating ?? "0.00");
       }
     };
 
@@ -72,17 +73,16 @@ const SellerDashboard = () => {
     const fetchUserItems = async () => {
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-seller-products.php?UserId=${user.UserId}`
+          `http://localhost/swapmeet-backend/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
         );
         const data = await res.json();
         if (data.success) {
           setUserItems(data.products);
+          console.log("products: ", data.products);
         }
       } catch (err) {
         console.error("Error fetching seller listings", err);
       }
-
-      fetchUserItems();
     };
 
     fetchUserItems();
@@ -92,8 +92,11 @@ const SellerDashboard = () => {
 
   return (
     <div className="py-10">
+      <MobileSellerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <SellersSideBar />
+        <div className="hidden md:block">
+          <SellersSideBar />
+        </div>
         <div className="space-y-8 col-span-3 p-10">
           {/* Welcome Section */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -126,12 +129,16 @@ const SellerDashboard = () => {
                 <Star className="h-4 w-4 " />
               </div>
               <div className="text-2xl font-bold">
-                {SellerRating ? SellerRating / 5 : <p>No ratings yet</p>}
+                {SellerRating === "0.00" ? (
+                  <p>No ratings yet</p>
+                ) : (
+                  <p>{SellerRating}</p>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Your Items and Suggestions */}
+          {/* Your Items */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-full p-4">
@@ -147,11 +154,11 @@ const SellerDashboard = () => {
                     View All
                   </Link>
                 </div>
-                {userItems > 0 ? (
+                {userItems.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     {userItems.map((item) => (
                       <div
-                        key={item.id}
+                        key={item.ProductId}
                         className="border rounded-2xl border-gray-300/75 p-4"
                       >
                         <img
@@ -160,7 +167,7 @@ const SellerDashboard = () => {
                           className="w-full h-40 object-cover rounded-lg mb-2"
                         />
                         <h3 className="font-medium text-base">{item.title}</h3>
-                        <p className="text-sm ">{item.location}</p>
+                        <p className="text-sm ">{item.Location}</p>
                       </div>
                     ))}
                   </div>

@@ -1,17 +1,16 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
 
 export default function PrivateRoutes() {
   const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    if (!isLoading && !user?.role) {
-      alert("Please Login to access this page.");
-    }
-  }, [user, isLoading]);
+  if (isLoading) {
+    <div>Loading...</div>;
+  }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (!user || !user.role) {
+    return <Navigate to="/sign-up" replace />;
+  }
 
-  return user?.role ? <Outlet /> : <Navigate to="/" />;
+  return <Outlet />;
 }

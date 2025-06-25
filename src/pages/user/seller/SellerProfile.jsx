@@ -13,23 +13,24 @@ import {
   Save,
   X,
 } from "lucide-react";
-import SellerSideBar from "./SellersSideBar";
+import SellersSideBar from "./SellersSideBar";
 import Footer from "../../../components/Footer";
 import { useAuth } from "../../../context/AuthContext";
 import { format, formatDistanceToNowStrict } from "date-fns";
+import MobileSellerMenu from "./MobileSellerMenu";
 
 const SellerProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useAuth();
   const [profileData, setProfileData] = useState({
-    firstName: "", 
-    lastName: "", 
+    firstName: "",
+    lastName: "",
     email: "",
-    phone: "", 
-    businessName: "", 
-    address: "", 
+    phone: "",
+    businessName: "",
+    address: "",
     bio: "",
-    website: ""
+    website: "",
   });
 
   useEffect(() => {
@@ -90,8 +91,11 @@ const SellerProfile = () => {
 
   return (
     <div className="py-10 ">
+      <MobileSellerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <SellerSideBar />
+        <div className="hidden md:block">
+          <SellersSideBar />
+        </div>
         <div className="space-y-6 max-w-4xl col-span-3 p-10">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
@@ -236,7 +240,7 @@ const SellerProfile = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-1/2 p-6">
+              <div className="border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 p-6">
                 <h2 className="text-xl font-semibold mb-4">Seller Stats</h2>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -246,7 +250,11 @@ const SellerProfile = () => {
                     </div>
                     <div className="text-right">
                       <div className="font-semibold">
-                        {user.sellerProfile.SellerRating}/5
+                        {user.sellerProfile.SellerRating == "0.00" ? (
+                          <p>No ratings</p>
+                        ) : (
+                          <p>{user.sellerProfile.SellerRating} / 5</p>
+                        )}
                       </div>
                     </div>
                   </div>

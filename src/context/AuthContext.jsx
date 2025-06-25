@@ -3,12 +3,15 @@ import { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("swapmeet-user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-  // Check if user is stored in local storage
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const storedUser = localStorage.getItem("swapmeet-user");
-    if (storedUser) setUser(JSON.parse(storedUser));
+    setIsLoading(false);      
   }, []);
 
 
@@ -26,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
   // context value
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

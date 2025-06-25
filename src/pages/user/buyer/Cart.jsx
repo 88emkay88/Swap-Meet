@@ -4,15 +4,19 @@ import { Trash2, ArrowLeft, MessageSquare, ShoppingBag } from "lucide-react";
 
 import BuyerSideBar from "./BuyerSideBar";
 import Footer from "../../../components/Footer";
+import MobileBuyerMenu from "./MobileBuyerMenu";
 
 const Cart = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
 
   if (cartItems.length === 0) {
     return (
-      <div className="py-20 max-h-screen w-full">
+      <div className="py-10 max-h-screen w-full">
+        <MobileBuyerMenu />
         <div className="grid grid-cols-1 md:grid-cols-4 w-full">
-          <BuyerSideBar />
+          <div className="hidden md:block">
+            <BuyerSideBar />
+          </div>
           <div className="mx-auto text-center col-span-3">
             <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
             <p className="text-gray-500 mb-8">
@@ -25,16 +29,19 @@ const Cart = () => {
               Browse Items
             </Link>
           </div>
-            </div>
+        </div>
         <Footer />
       </div>
     );
   }
 
   return (
-    <div className="py-20">
+    <div className="py-10">
+      <MobileBuyerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <BuyerSideBar />
+        <div className="hidden md:block">
+          <BuyerSideBar />
+        </div>
 
         {/* Content */}
         <div className="mx-auto px-4 col-span-3">
@@ -48,8 +55,8 @@ const Cart = () => {
             <div>
               <h1 className="text-3xl font-bold">Shopping Cart</h1>
               <p className="text-gray-500">
-                {cartItems.length} {cartItems.length === 1 ? "item" : "items"} saved
-                for potential swaps
+                {cartItems.length} {cartItems.length === 1 ? "item" : "items"}{" "}
+                saved for potential swaps
               </p>
             </div>
           </div>
@@ -149,7 +156,7 @@ const Cart = () => {
         </div>
       </div>
 
-          <Footer />
+      <Footer />
     </div>
   );
 };

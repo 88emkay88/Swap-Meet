@@ -13,6 +13,7 @@ import BuyerSideBar from "./BuyerSideBar";
 import Footer from "../../../components/Footer";
 import { useAuth } from "../../../context/AuthContext";
 import { format } from "date-fns";
+import MobileBuyerMenu from "./MobileBuyerMenu";
 
 const BuyerProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -92,8 +93,11 @@ const BuyerProfile = () => {
 
   return (
     <div className="max-w-full py-10">
+      <MobileBuyerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <BuyerSideBar />
+        <div className="hidden md:block">
+          <BuyerSideBar />
+        </div>
         <div className=" col-span-3 mx-auto p-10">
           {/* Toast */}
           {toast && (
@@ -398,7 +402,6 @@ const BuyerProfile = () => {
                 )}
               </>
             )}
-
           </div>
         </div>
       </div>

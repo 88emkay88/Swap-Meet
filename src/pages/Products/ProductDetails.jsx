@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import products from "../../Data/products";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProductsHeader from "./ProductsHeader";
 import {
@@ -21,22 +20,55 @@ import { useFavorites } from "../../context/FavoritesContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
-  const [mainImage, setMainImage] = useState(
-    product?.images?.[0] || product.images
-  );
   const { addToCart } = useCart();
-
   const { user } = useAuth();
-
   const { toggleFavorite, isFavorite } = useFavorites();
+  const [products, setProducts] = useState([]);
+  const [mainImage, setMainImage] = useState("");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/get-all-products.php"
+        );
+        const data = await res.json();
+
+        if (data.success) {
+          setProducts(data.products);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error("Error fetching products", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const product = products.find((p) => p.ProductId === parseInt(id));
+
+  useEffect(() => {
+    if (product) {
+      setMainImage(product.mainImage || product.images?.[0] || "");
+    }
+  }, [product]);
 
   if (!product) return <p>Product not found.</p>;
 
-  const userInitails = product?.seller?.name
-    .split(" ")
+  const userInitails = user?.UserName.split(" ")
     .map((n) => n[0])
     .join("");
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
 
   return (
     <>
@@ -44,7 +76,10 @@ const ProductDetails = () => {
         <ProductsHeader />
 
         <div>
-          <Breadcrumbs currentPage={product.name} category={product.category} />
+          <Breadcrumbs
+            currentPage={product.title}
+            category={product.category}
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -53,7 +88,7 @@ const ProductDetails = () => {
             <div className="aspect-square overflow-hidden rounded-2xl shadow-md">
               <img
                 src={mainImage}
-                alt={product.name}
+                alt={product.title}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -78,7 +113,7 @@ const ProductDetails = () => {
               {/* Heading & Buttons */}
               <div className="flex justify-between items-center mb-3">
                 <h1 className="md:text-3xl text-xl font-bold">
-                  {product.name}
+                  {product.title}
                 </h1>
 
                 <div className="flex justify-between space-x-3 md:space-x-7 items-center ">
@@ -122,7 +157,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex items-center text-xs md:text-md md:font-normal font-bold">
                   <Clock7 />
-                  {formatDistanceToNow(new Date(product.datePosted), {
+                  {formatDistanceToNow(new Date(product.dateAdded), {
                     addSuffix: true,
                   })}
                 </div>
@@ -139,17 +174,17 @@ const ProductDetails = () => {
             <ProductTabs
               details={product.details}
               description={product.description}
-              price={product.price}
+              price={product.Price}
             />
 
             {/* Seller card */}
             <div className=" grid space-y-5 p-8 border-1 border-gray-300 rounded-2xl shadow">
               {/* Seller Details */}
               <div className="flex items-center">
-                {product.seller.avatar !== "" ? (
+                {user.Avatar !== "" ? (
                   <img
-                    src={product.seller.avatar}
-                    alt={product.seller.name}
+                    src={user.Avatar}
+                    alt={`${user.FirstName} ${user.LastName}`}
                     className="h-15 w-15 border object-cover rounded-full"
                   />
                 ) : (
@@ -159,15 +194,15 @@ const ProductDetails = () => {
                 )}
 
                 <div className="space-y-1 ml-2 grid">
-                  <h2 className="md:text-2xl text-xl">{product.seller.name}</h2>
+                  <h2 className="md:text-2xl text-xl">{user.UserName}</h2>
                   <div className="flex space-x-2">
                     <p className="flex items-center space-x-2">
                       <Star className="fill-yellow-300 text-yellow-300" />
-                      <span>{product.seller.sellerRating}</span>
+                      <span>{user.sellerProfile.sellerRating}</span>
                     </p>
                     <span>•</span>
                     <p className="md:text-md text-sm ">
-                      Memeber since {product.seller.joinDate}
+                      Memeber since {formatDate(user.Join_date)}
                     </p>
                   </div>
                 </div>
@@ -178,13 +213,13 @@ const ProductDetails = () => {
                 <div>
                   <h3 className="md:text-xl text-sm">Response Rate</h3>
                   <p className="text-center  font-bold">
-                    %{product.seller.responseRate}
+                    %{user.sellerProfile.ResponseRate}
                   </p>
                 </div>
                 <div>
                   <h3 className="md:text-xl text-sm">Completed Sales</h3>
                   <p className="text-center font-bold">
-                    {product.seller.completedSales}
+                    {user.sellerProfile.CompletedSales}
                   </p>
                 </div>
               </div>

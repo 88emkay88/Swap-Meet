@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { useFavorites } from "../../../context/FavoritesContext";
 import Footer from "../../../components/Footer";
 import { useEffect, useState } from "react";
+import MobileBuyerMenu from "./MobileBuyerMenu";
 
 
 const BuyerDashBoard = () => {
@@ -36,9 +37,11 @@ const BuyerDashBoard = () => {
 
   return (
     <div className="py-10">
+      <MobileBuyerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <BuyerSideBar />
-
+        <div className="hidden md:block">
+          <BuyerSideBar />
+        </div>
         <div className="col-span-3 p-10 space-y-8">
           {/* Welcome Section */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -163,7 +166,7 @@ const BuyerDashBoard = () => {
               </div>
 
               {/* Become a Seller */}
-              <div className="p-5 border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 h-1/3">
+              <div className="p-5 border rounded-2xl border-gray-300/75 hover:shadow-lg transition-shadow duration-300 md:h-1/3">
                 <h2 className="text-lg font-semibold mb-1">Start Selling</h2>
                 <p className="text-sm text-gray-500 mb-1">
                   Have items you want to swap? Become a seller!

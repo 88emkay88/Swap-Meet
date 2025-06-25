@@ -6,10 +6,10 @@ import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
 import locationOptions from "../Data/locations";
 import colorOption from "../Data/colors";
-import products from "../Data/products";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
 import bluebg from "../assets/images/blue-bg.jpg";
+
 
 const checkbox = ["Electronics", "Accessories", "Gaming", "Sports", "Auction"];
 
@@ -25,6 +25,27 @@ export default function ProductPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
   const [showFilters, setShowFilters] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/get-all-products.php"
+        );
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.products);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error("Error fetching products", err);
+      }
+    };
+
+    fetchAllProducts();
+  }, []);
 
   const applyMobileFilters = () => {
     setShowFilters(false);
@@ -32,9 +53,9 @@ export default function ProductPage() {
 
   const filteredProducts = products.filter((product) => {
     return (
-      product.name.toLowerCase().includes(search.toLowerCase()) &&
-      product.price >= values[0] &&
-      product.price <= values[1] &&
+      product.title.toLowerCase().includes(search.toLowerCase()) &&
+      product.Price >= values[0] &&
+      product.Price <= values[1] &&
       (!rating || product.rating === rating) &&
       (selectedCategories.length === 0 ||
         selectedCategories.includes(product.category)) &&
@@ -302,17 +323,17 @@ export default function ProductPage() {
             {filteredProducts.length > 0 ? (
               currentProducts.map((product) => (
                 <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  title={product.name}
-                  price={product.price}
+                  key={product.ProductId}
+                  id={product.ProductId}
+                  title={product.title}
+                  price={product.Price}
                   rating={product.rating}
-                  image={product.images[0]}
+                  image={product.mainImage}
                   category={product.category}
                   condition={product.condition}
                   location={product.location}
-                  userName={product.seller.name}
-                  userAvatar={product.seller.avatar}
+                  userName={product?.sellerName || ""}
+                  userAvatar={product?.Avatar || ""}
                 />
               ))
             ) : (

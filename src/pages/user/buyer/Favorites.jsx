@@ -4,6 +4,7 @@ import { useFavorites } from "../../../context/FavoritesContext";
 import Footer from "../../../components/Footer";
 import { useAuth } from "../../../context/AuthContext";
 import BuyerSideBar from "./BuyerSideBar";
+import MobileBuyerMenu from "./MobileBuyerMenu";
 
 const Favorites = () => {
   const { favorites, toggleFavorite } = useFavorites();
@@ -19,11 +20,14 @@ const Favorites = () => {
 
   return (
     <div className="py-10">
+      <MobileBuyerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <BuyerSideBar />
+        <div className="hidden md:block">
+          <BuyerSideBar />
+        </div>
         {/* Content */}
         <div className="col-span-3 p-10">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-3 md:mb-0">
             <div>
               <h1 className="text-3xl font-bold">My Favorites</h1>
               <p className="text-gray-500">Items you've saved for later</p>

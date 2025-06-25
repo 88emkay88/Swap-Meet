@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BuyerSideBar from "./BuyerSideBar";
 import Footer from "../../../components/Footer";
+import MobileBuyerMenu from "./MobileBuyerMenu";
 
 export default function Settings() {
   const [emailNotifications, setEmailNotifications] = useState(true);
@@ -16,9 +17,11 @@ export default function Settings() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <MobileBuyerMenu />
       <div className="grid grid-cols-1 md:grid-cols-4">
-
-        <BuyerSideBar />
+        <div className="hidden md:block">
+          <BuyerSideBar />
+        </div>
 
         <div className="w-full p-10 col-span-3 mx-auto">
           <h1 className="text-4xl font-bold mb-8 text-center text-blue-500">
