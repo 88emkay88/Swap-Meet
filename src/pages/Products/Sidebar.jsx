@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 const Sidebar = ({
   checkbox,
   colorOption,
-  locationOptions,
+  dynamicLocations,
   selectedCategories,
   setSelectedCategories,
   selectedColors,
@@ -115,7 +115,7 @@ const Sidebar = ({
           className="w-full p-2 border border-gray-300 rounded-lg"
         >
           <option value="">Select Location</option>
-          {locationOptions.map((location, idx) => (
+          {dynamicLocations.map((location, idx) => (
             <option value={location} key={`${location}-${idx}`}>
               {location}
             </option>

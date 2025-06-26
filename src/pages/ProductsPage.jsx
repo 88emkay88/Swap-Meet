@@ -4,7 +4,6 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
-import locationOptions from "../Data/locations";
 import colorOption from "../Data/colors";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
@@ -16,7 +15,7 @@ export default function ProductPage() {
   const [search, setSearch] = useState("");
   const minPrice = 0;
   const maxPrice = 10000;
-  const [values, setValues] = useState([100, 1500]);
+  const [values, setValues] = useState([100, 4300]);
   const [rating, setRating] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
@@ -35,7 +34,6 @@ export default function ProductPage() {
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
-          console.log("products", data.products);
         } else {
           console.error(data.message);
         }
@@ -46,6 +44,10 @@ export default function ProductPage() {
 
     fetchAllProducts();
   }, []);
+
+  const dynamicLocations = [
+    ...new Set(products.map((p) => p.location).filter(Boolean)),
+  ];
 
   const applyMobileFilters = () => {
     setShowFilters(false);
@@ -65,6 +67,7 @@ export default function ProductPage() {
     );
   });
 
+  console.log("filtered products", filteredProducts);
   // Slice Filtered products
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -117,7 +120,7 @@ export default function ProductPage() {
         <Sidebar
           checkbox={checkbox}
           colorOption={colorOption}
-          locationOptions={locationOptions}
+          dynamicLocations={dynamicLocations}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
           selectedColors={selectedColors}
@@ -264,7 +267,7 @@ export default function ProductPage() {
                       className="w-full p-2 border border-gray-300 rounded-lg"
                     >
                       <option value="">Select Location</option>
-                      {locationOptions.map((location, idx) => (
+                      {dynamicLocations.map((location, idx) => (
                         <option value={location} key={`${location}-${idx}`}>
                           {location}
                         </option>
@@ -328,7 +331,7 @@ export default function ProductPage() {
                   title={product.title}
                   price={product.Price}
                   rating={product.rating}
-                  image={product.mainImage}
+                  image={product.mainImage || ""}
                   category={product.category}
                   condition={product.condition}
                   location={product.location}

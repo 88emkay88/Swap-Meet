@@ -1,11 +1,9 @@
-import products from "../Data/products";
 import React, { useEffect, useState } from "react";
 import ProductsHeader from "./Products/ProductsHeader";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
-import locationOptions from "../Data/locations";
 import colorOption from "../Data/colors";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
@@ -16,35 +14,52 @@ const Trending = () => {
   const [search, setSearch] = useState("");
   const minPrice = 0;
   const maxPrice = 10000;
-  const [values, setValues] = useState([100, 1500]);
+  const [values, setValues] = useState([100, 4300]);
   const [rating, setRating] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
   const productsPerPage = 9;
   const [showFilters, setShowFilters] = useState(false);
 
+  // fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await fetch(
+        "http://localhost/swapmeet-backend/get-all-products.php"
+      );
+
+      const data = await res.json();
+      try {
+        if (data.success) {
+          setProducts(data.products);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error("Faild to fetch products due to error: ", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const dynamicLocations = [
+    ...new Set(products.map((p) => p.location).filter(Boolean)),
+  ];
+
   const trending = products
-    .filter((p) => p.rating >= 4 && p.seller.completedSales >= 10)
-    .sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted));
+    .filter((p) => p.rating >= 4 && p.CompletedSales >= 10)
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
 
   const checkbox = [
     "Electronics",
-    "Clothing",
     "Accessories",
-    "Home",
-    "Kitchen",
-    "Toys",
-    "Games",
-    "Books",
-    "Media",
-    "Antiques",
-    "Collectibles",
-    "Tools",
-    "DIY",
+    "Gaming",
     "Sports",
-    "Outdoors",
+    "Auction",
   ];
 
   const applyMobileFilters = () => {
@@ -53,9 +68,9 @@ const Trending = () => {
 
   const filteredProducts = trending.filter((product) => {
     return (
-      product.name.toLowerCase().includes(search.toLowerCase()) &&
-      product.price >= values[0] &&
-      product.price <= values[1] &&
+      product.title.toLowerCase().includes(search.toLowerCase()) &&
+      product.Price >= values[0] &&
+      product.Price <= values[1] &&
       (!rating || product.rating === rating) &&
       (selectedCategories.length === 0 ||
         selectedCategories.includes(product.category)) &&
@@ -64,6 +79,8 @@ const Trending = () => {
         selectedLocations.includes(product.location))
     );
   });
+
+  console.log("filtered product ", filteredProducts);
 
   // Slice Filtered products
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -118,7 +135,7 @@ const Trending = () => {
         <Sidebar
           checkbox={checkbox}
           colorOption={colorOption}
-          locationOptions={locationOptions}
+          dynamicLocations={dynamicLocations}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
           selectedColors={selectedColors}
@@ -265,7 +282,7 @@ const Trending = () => {
                       className="w-full p-2 border border-gray-300 rounded-lg"
                     >
                       <option value="">Select Location</option>
-                      {locationOptions.map((location, idx) => (
+                      {dynamicLocations.map((location, idx) => (
                         <option value={location} key={`${location}-${idx}`}>
                           {location}
                         </option>
@@ -321,19 +338,19 @@ const Trending = () => {
           {/* Product Grid */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredProducts.length ? (
-              currentProducts.map((p) => (
+              currentProducts.map((product) => (
                 <ProductCard
-                  key={p.id}
-                  id={p.id}
-                  title={p.name}
-                  image={p.images?.[0] || p.image}
-                  price={p.price}
-                  rating={p.rating}
-                  condition={p.condition}
-                  location={p.location}
-                  category={p.category}
-                  userName={p.seller.name}
-                  userAvatar={p.seller.avatar}
+                  key={product.ProductId}
+                  id={product.ProductId}
+                  title={product.title}
+                  price={product.Price}
+                  rating={product.rating}
+                  image={product.mainImage}
+                  category={product.category}
+                  condition={product.condition}
+                  location={product.location}
+                  userName={product?.sellerName || ""}
+                  userAvatar={product?.Avatar || ""}
                 />
               ))
             ) : (

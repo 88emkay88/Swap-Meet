@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/CartContext.jsx";
 import { FavoritesProvider } from "./context/FavoritesContext.jsx";
+import { EscrowProvider } from "./context/EscrowContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <CartProvider>
           <FavoritesProvider>
-            <App />
+            <EscrowProvider>
+              <App />
+            </EscrowProvider>
           </FavoritesProvider>
         </CartProvider>
       </AuthProvider>

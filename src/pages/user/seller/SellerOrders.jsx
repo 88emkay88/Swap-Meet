@@ -9,7 +9,9 @@ const SellerOrders = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [orders, setOrders] = useState([]);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
   const { user } = useAuth();
+
 
   // fetch orders
   useEffect(() => {
@@ -29,7 +31,7 @@ const SellerOrders = () => {
           setOrders(data.orders);
           console.log("orders: ", data.orders);
         } else {
-          console.error("Fetching products Failed");
+          console.error("Fetching orders Failed");
         }
       } catch (err) {
         console.error("Error fetching orders for sellers ", err);
@@ -66,9 +68,6 @@ const SellerOrders = () => {
     }
   };
 
-  const handleStatusUpdate = (orderId, newStatus) => {
-    console.log(`Updating order ${orderId} to status: ${newStatus}`);
-  };
 
   const handleShipOrder = (orderId) => {
     console.log(`Shipping order ${orderId}`);
@@ -179,74 +178,136 @@ const SellerOrders = () => {
                   <tbody>
                     {filteredOrders > 0 ? (
                       filteredOrders.map((order) => (
-                        <tr key={order.OrderID} className="border-t">
-                          <td className="p-2">
-                            <p className="font-medium">{order.OrderID}</p>
-                            <p className="text-sm text-gray-500">
-                              {new Date(order.orderDate).toLocaleDateString()}
-                            </p>
-                          </td>
-                          <td className="p-2">
-                            <div className="flex items-center gap-2">
-                              <div className="h-8 w-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs">
-                                {order.buyerName
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")}
+                        <React.Fragment key={order.OrderID}>
+                          <tr key={order.OrderID} className="border-t">
+                            <td className="p-2">
+                              <p className="font-medium">{order.OrderID}</p>
+                              <p className="text-sm text-gray-500">
+                                {new Date(order.orderDate).toLocaleDateString()}
+                              </p>
+                            </td>
+                            <td className="p-2">
+                              <div className="flex items-center gap-2">
+                                <div className="h-8 w-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs">
+                                  {order.buyerName
+                                    .split(" ")
+                                    .map((n) => n[0])
+                                    .join("")}
+                                </div>
+                                <div>
+                                  <p className="font-medium">
+                                    {order.buyerName}
+                                  </p>
+                                  <p className="text-sm text-gray-500">
+                                    {order.buyerEmail}
+                                  </p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="font-medium">{order.buyerName}</p>
-                                <p className="text-sm text-gray-500">
-                                  {order.buyerEmail}
-                                </p>
+                            </td>
+                            <td className="p-2">
+                              <div className="flex items-center gap-2">
+                                <img
+                                  src={order.productImage}
+                                  alt={order.productTitle}
+                                  className="w-10 h-10 rounded object-cover"
+                                />
+                                <div>
+                                  <p className="font-medium">
+                                    {order.productTitle}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td className="p-2">
-                            <div className="flex items-center gap-2">
-                              <img
-                                src={order.productImage}
-                                alt={order.productTitle}
-                                className="w-10 h-10 rounded object-cover"
-                              />
-                              <div>
-                                <p className="font-medium">
-                                  {order.productTitle}
-                                </p>
+                            </td>
+                            <td className="p-2 font-medium">
+                              R{(order.Amount / 100).toFixed(2)}
+                            </td>
+                            <td className="p-2">
+                              <span
+                                className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(
+                                  order.Status
+                                )}`}
+                              >
+                                {order.Status.charAt(0).toUpperCase() +
+                                  order.Status.slice(1)}
+                              </span>
+                            </td>
+                            <td className="p-2">
+                              <div className="flex gap-1">
+                                {order.Status === "processing" && (
+                                  <button
+                                    className="bg-blue-500 text-white text-sm px-3 py-1 rounded flex items-center gap-1"
+                                    onClick={() =>
+                                      handleShipOrder(order.OrderID)
+                                    }
+                                  >
+                                    <Truck className="w-4 h-4" /> Ship
+                                  </button>
+                                )}
+                                <button>view</button>
                               </div>
-                            </div>
-                          </td>
-                          <td className="p-2 font-medium">
-                            R{(order.Amount / 100).toFixed(2)}
-                          </td>
-                          <td className="p-2">
-                            <span
-                              className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(
-                                order.Status
-                              )}`}
-                            >
-                              {order.Status.charAt(0).toUpperCase() +
-                                order.Status.slice(1)}
-                            </span>
-                          </td>
-                          <td className="p-2">
-                            <div className="flex gap-1">
-                              {order.Status === "processing" && (
-                                <button
-                                  className="bg-blue-500 text-white text-sm px-3 py-1 rounded flex items-center gap-1"
-                                  onClick={() => handleShipOrder(order.OrderID)}
+                            </td>
+                          </tr>
+                          {selectedOrderId === order.OrderID &&
+                            order.EscrowID && (
+                              <tr className="bg-blue-50">
+                                <td
+                                  colSpan={6}
+                                  className="p-4 text-sm space-y-2"
                                 >
-                                  <Truck className="w-4 h-4" /> Ship
-                                </button>
-                              )}
-                              <button>view</button>
-                            </div>
-                          </td>
-                        </tr>
+                                  <p>
+                                    <strong>Escrow ID:</strong> {order.EscrowID}
+                                  </p>
+                                  <p>
+                                    <strong>Status:</strong>{" "}
+                                    {order.escrowStatus}
+                                  </p>
+                                  <p>
+                                    <strong>Created:</strong>{" "}
+                                    {new Date(
+                                      order.escrowCreatedAt
+                                    ).toLocaleDateString()}
+                                  </p>
+                                  <p>
+                                    <strong>Delivery Deadline:</strong>{" "}
+                                    {new Date(
+                                      order.DeliveryDeadline
+                                    ).toLocaleDateString()}
+                                  </p>
+                                  <div className="flex gap-2">
+                                    <button
+                                      className="bg-blue-500 text-white px-3 py-1 rounded text-sm"
+                                      onClick={() =>
+                                        console.log(
+                                          "Releasing payment for:",
+                                          order.EscrowID
+                                        )
+                                      }
+                                    >
+                                      Release Payment
+                                    </button>
+                                    <button
+                                      className="bg-red-500 text-white px-3 py-1 rounded text-sm"
+                                      onClick={() =>
+                                        console.log(
+                                          "Filing dispute for:",
+                                          order.EscrowID
+                                        )
+                                      }
+                                    >
+                                      Dispute
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
+                        </React.Fragment>
                       ))
                     ) : (
-                      <tr colSpan={6} className="flex justify-center">
-                        <td>
+                      <tr>
+                        <td
+                          colSpan={6}
+                          className="text-center py-4 text-gray-500"
+                        >
                           <p>No Orders yet</p>
                         </td>
                       </tr>

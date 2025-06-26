@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductsHeader from "./Products/ProductsHeader";
 import { Clock, FlameIcon, Gavel, Search } from "lucide-react";
 import mockAuctions from "../Data/mockAuctions";
@@ -8,9 +8,30 @@ import Footer from "../components/Footer";
 
 const Auction = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [auctions, setAuctions] = useState([]);
   const [filter, setFilter] = useState("all");
 
-  const filteredAuctions = mockAuctions.filter((auction) => {
+  useEffect(() => {
+    const fetchAuctions = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/get-auctions.php"
+        );
+        const data = await res.json();
+        if (data.success) {
+          setAuctions(data.auctions);
+        } else {
+          console.error("Failed to fetch auctions", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching auctions", error);
+      }
+    };
+
+    fetchAuctions();
+  }, []);
+
+  const filteredAuctions = auctions.filter((auction) => {
     const matchesSearch =
       auction.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       auction.category.toLowerCase().includes(searchQuery.toLowerCase());
@@ -137,22 +158,23 @@ const Auction = () => {
 
       {/* CTA for Sellers */}
       <div className="px-8">
-      <div className="text-center mt-20 py-16 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-3xl border">
-        <h2 className="text-3xl font-bold mb-6">
-          Ready to Start Your Own Auction?
-        </h2>
-        <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          List your items and let our community bid on them. It's easy, secure,
-          and profitable!
-        </p>
-        <button className="bg-blue-600 hover:bg-blue-700 rounded-full px-10 py-4 text-lg font-semibold shadow-lg">
-          <Link
-            className="flex items-center text-sky-200"
-            to="/dashboard/post-item">
-            <Gavel className="w-5 h-5 mr-2" />
-            <span>Start an Auction</span>
-          </Link>
-        </button>
+        <div className="text-center mt-20 py-16 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-3xl border">
+          <h2 className="text-3xl font-bold mb-6">
+            Ready to Start Your Own Auction?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            List your items and let our community bid on them. It's easy,
+            secure, and profitable!
+          </p>
+          <button className="bg-blue-600 hover:bg-blue-700 rounded-full px-10 py-4 text-lg font-semibold shadow-lg">
+            <Link
+              className="flex items-center text-sky-200"
+              to="/dashboard/post-item"
+            >
+              <Gavel className="w-5 h-5 mr-2" />
+              <span>Start an Auction</span>
+            </Link>
+          </button>
         </div>
       </div>
 

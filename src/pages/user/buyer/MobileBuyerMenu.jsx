@@ -39,6 +39,9 @@ const MobileBuyerMenu = () => {
           <Link to="/buyer-dashboard/cart" className="block text-lg">
             Cart
           </Link>
+          <Link to="/buyer-dashboard/orders" className="block text-lg">
+            Orders
+          </Link>
           <Link to="/buyer-dashboard/profile" className="block text-lg">
             Profile
           </Link>

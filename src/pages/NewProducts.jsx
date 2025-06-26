@@ -4,8 +4,6 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "./Products/ProductCard";
-import locationOptions from "../Data/locations";
-import products from "../Data/products";
 import colorOption from "../Data/colors";
 import Sidebar from "./Products/Sidebar";
 import { Range } from "react-range";
@@ -17,18 +15,46 @@ const NewProducts = () => {
   const [search, setSearch] = useState("");
   const minPrice = 0;
   const maxPrice = 10000;
-  const [values, setValues] = useState([100, 1500]);
+  const [values, setValues] = useState([100, 4300]);
   const [rating, setRating] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
   const productsPerPage = 9;
   const [showFilters, setShowFilters] = useState(false);
 
+  const dynamicLocations = [
+    ...new Set(products.map((p) => p.location).filter(Boolean)),
+  ];
+
+  // Fetch Products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/get-all-products.php"
+        );
+
+        const data = await res.json();
+
+        if (data.success) {
+          setProducts(data.products);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error("Error fetching Products", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   //— Filter only category === "newest"
   const sorted = [...products].sort(
-    (a, b) => new Date(b.datePosted) - new Date(a.datePosted)
+    (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
   );
 
   const checkbox = [
@@ -36,7 +62,7 @@ const NewProducts = () => {
     "Accessories",
     "Gaming",
     "Sports",
-    "Auction"
+    "Auction",
   ];
 
   const applyMobileFilters = () => {
@@ -45,9 +71,9 @@ const NewProducts = () => {
 
   const filteredProducts = sorted.filter((product) => {
     return (
-      product.name.toLowerCase().includes(search.toLowerCase()) &&
-      product.price >= values[0] &&
-      product.price <= values[1] &&
+      product.title.toLowerCase().includes(search.toLowerCase()) &&
+      product.Price >= values[0] &&
+      product.Price <= values[1] &&
       (!rating || product.rating === rating) &&
       (selectedCategories.length === 0 ||
         selectedCategories.includes(product.category)) &&
@@ -98,7 +124,10 @@ const NewProducts = () => {
             className="h-full w-full md:rounded-4xl rounded-xl "
           />
 
-          <img src={newBanner} className="absolute md:-top-14 -top-3 -left-3 md:-left-14 w-2/8" />
+          <img
+            src={newBanner}
+            className="absolute md:-top-14 -top-3 -left-3 md:-left-14 w-2/8"
+          />
 
           <h1 className="absolute top-[45%] left-[12%] text-4xl md:text-5xl md:top-[10%] md:left-[14%] cursor-default text-white font-bold md:text-12xl">
             New Products
@@ -113,7 +142,7 @@ const NewProducts = () => {
         <Sidebar
           checkbox={checkbox}
           colorOption={colorOption}
-          locationOptions={locationOptions}
+          dynamicLocations={dynamicLocations}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
           selectedColors={selectedColors}
@@ -260,7 +289,7 @@ const NewProducts = () => {
                       className="w-full p-2 border border-gray-300 rounded-lg"
                     >
                       <option value="">Select Location</option>
-                      {locationOptions.map((location, idx) => (
+                      {dynamicLocations.map((location, idx) => (
                         <option value={location} key={`${location}-${idx}`}>
                           {location}
                         </option>
@@ -319,17 +348,17 @@ const NewProducts = () => {
             {filteredProducts.length > 0 ? (
               currentProducts.map((product) => (
                 <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  title={product.name}
-                  price={product.price}
+                  key={product.ProductId}
+                  id={product.ProductId}
+                  title={product.title}
+                  price={product.Price}
                   rating={product.rating}
-                  image={product.images[0]}
+                  image={product.mainImage}
                   category={product.category}
                   condition={product.condition}
                   location={product.location}
-                  userName={product.seller.name}
-                  userAvatar={product.seller.avatar}
+                  userName={product?.sellerName || ""}
+                  userAvatar={product?.Avatar || ""}
                 />
               ))
             ) : (
