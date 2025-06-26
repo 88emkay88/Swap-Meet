@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductsHeader from "./Products/ProductsHeader";
 import { Clock, FlameIcon, Gavel, Search } from "lucide-react";
-import mockAuctions from "../Data/mockAuctions";
 import AuctionCard from "./Auction/AuctionCard";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -36,11 +35,10 @@ const Auction = () => {
       auction.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       auction.category.toLowerCase().includes(searchQuery.toLowerCase());
     if (filter === "ending-soon") {
-      return (
-        matchesSearch &&
-        auction.timeLeft.includes("h") &&
-        !auction.timeLeft.includes("d")
+      const secondsLeft = Math.floor(
+        (new Date(auction.endTime) - new Date()) / 1000
       );
+      return matchesSearch && secondsLeft > 0 && secondsLeft <= 3600 * 3;
     }
 
     if (filter === "hot") {
@@ -51,7 +49,7 @@ const Auction = () => {
   });
 
   return (
-    <div className=" overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <ProductsHeader />
       <div className="text-center my-8">
         <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -80,7 +78,7 @@ const Auction = () => {
             />
           </form>
 
-          <div className="flex gap-3 flex-wrap justify-center">
+          <div className="flex gap-3 flex-wrap justify-center mr-4">
             <button
               onClick={() => setFilter("all")}
               className={`rounded-full px-6 py-2 ${

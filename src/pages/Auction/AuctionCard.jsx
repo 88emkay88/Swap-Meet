@@ -10,8 +10,19 @@ const AuctionCard = ({ auction }) => {
     .toUpperCase()
     .slice(0, 2);
 
-  const isEndingSoon =
-    auction.timeLeft.includes("h") && !auction.timeLeft.includes("d");
+    const formatTimeLeft = (endTime) => {
+      const secondsLeft = Math.floor((new Date(endTime) - new Date()) / 1000);
+      if (secondsLeft <= 0) return "Ended";
+      const hours = Math.floor(secondsLeft / 3600);
+      const mins = Math.floor((secondsLeft % 3600) / 60);
+      return `${hours}h ${mins}m`;
+    };
+    
+
+  const secondsLeft = Math.floor(
+    (new Date(auction.endTime) - new Date()) / 1000
+  );
+  const isEndingSoon = secondsLeft > 0 && secondsLeft <= 3600 * 3; // 3 hours
 
   return (
     <div className="overflow-hidden hover:shadow-xl transition-all duration-300 rounded-xl group border-0 shadow-md">
@@ -84,7 +95,7 @@ const AuctionCard = ({ auction }) => {
                 isEndingSoon ? "text-orange-600" : ""
               }`}
             >
-              {auction.timeLeft}
+              {formatTimeLeft(auction.end_time)}
             </span>
           </div>
         </div>

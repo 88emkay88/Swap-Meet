@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import bestSellersItems from "../Data/BestSellerItems";
+import React, { useEffect, useState } from "react";
 import ProductsHeader from "./Products/ProductsHeader";
 import Footer from "../components/Footer";
 import {
@@ -29,7 +28,20 @@ const BestSellers = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedType, setSelectedType] = useState("All");
   const [sortBy, setSortBy] = useState("rank");
+  const [bestSellersItems, setBestSellersItems] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost/swapmeet-backend/get-best-sellers.php")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setBestSellersItems(data.bestSellers);
+          console.log("best sellers: ", data.bestSellers);
+        }
+      })
+      .catch((err) => console.error("Failed to load best sellers", err));
+  }, []);
 
   const filteredItems = bestSellersItems.filter((item) => {
     const matchesSearch =

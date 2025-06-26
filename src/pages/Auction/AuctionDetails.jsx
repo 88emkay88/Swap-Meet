@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import mockAuctions from "../../Data/mockAuctions";
 import { ArrowLeft, Clock, DollarSign, Gavel, Heart, SeparatorHorizontal, Share2, Users } from "lucide-react";
 import ProductsHeader from "../Products/ProductsHeader";
 import Footer from "../../components/Footer";
@@ -12,10 +11,30 @@ const AuctionDetails = () => {
   const [bidAmount, setBidAmount] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
 
+  
+
   useEffect(() => {
-    const foundAuction = mockAuctions.find((a) => a.id === id);
-    setAuction(foundAuction || null);
+    const fetchAuction = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost/swapmeet-backend/get-auction-details.php?id=${id}`
+        );
+        const data = await res.json();
+        if (data.success) {
+          setAuction(data.auction);
+        } else {
+          console.error(data.message);
+          setAuction(null);
+        }
+      } catch (err) {
+        console.error("Failed to fetch auction details:", err);
+        setAuction(null);
+      }
+    };
+
+    fetchAuction();
   }, [id]);
+  
 
   if (!auction) {
     return (

@@ -25,6 +25,10 @@ const PostItem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [color, setColor] = useState("");
   const [details, setDetails] = useState([""]);
+  const [isAuction, setIsAuction] = useState(false);
+  const [startingBid, setStartingBid] = useState("");
+  const [endTime, setEndTime] = useState("");
+
   const { user } = useAuth();
 
   const colors = [
@@ -159,8 +163,11 @@ const PostItem = () => {
       details: details.filter((d) => d.trim() !== ""),
       images: imageUrls,
       sellerId: user.sellerProfile.sellerID,
+      isAuction,
+      startingBid,
+      endTime,
     };
-
+    
     setIsLoading(true);
 
     const res = await fetch("http://localhost/swapmeet-backend/post-item.php", {
@@ -376,6 +383,52 @@ const PostItem = () => {
                         </option>
                       ))}
                     </select>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={isAuction}
+                      onChange={(e) => setIsAuction(e.target.checked)}
+                    />
+                    List as an auction
+                  </label>
+                </div>
+
+                {isAuction && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="startingBid"
+                        className="block font-medium"
+                      >
+                        Starting Bid (R)
+                      </label>
+                      <input
+                        type="number"
+                        id="startingBid"
+                        value={startingBid}
+                        onChange={(e) => setStartingBid(e.target.value)}
+                        className="w-full border border-gray-300 rounded-xl px-3 py-2"
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label htmlFor="endTime" className="block font-medium">
+                        Auction End Time
+                      </label>
+                      <input
+                        type="datetime-local"
+                        id="endTime"
+                        value={endTime}
+                        onChange={(e) => setEndTime(e.target.value)}
+                        className="w-full border border-gray-300 rounded-xl px-3 py-2"
+                        required
+                      />
+                    </div>
                   </div>
                 )}
 
