@@ -28,9 +28,20 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = await fetch(
-          "https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/get-all-products.php"
-        );
+        const res = await fetch("/.netlify/functions/products")
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              console.log("Products fetched:", data.products);
+              // Handle/display products here
+            } else {
+              console.error("Failed to fetch products:", data.message || data);
+            }
+          })
+          .catch((err) => {
+            console.error("Fetch error:", err);
+          });
+      
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
