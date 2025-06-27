@@ -6,6 +6,8 @@ import "./App.css";
 function App() {
   const element = useRoutes(routes); // handles nested routes properly
 
+  console.log("API BASE:", process.env.REACT_APP_API_BASE);
+
   return (
     <>
       <ScrollToTop />
