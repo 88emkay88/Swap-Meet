@@ -1,7 +1,7 @@
 // netlify/functions/products.js
 export async function handler(event, context) {
     try {
-        const response = await fetch("https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/get-all-products.php");
+        const response = await fetch("https://swapmeet.atwebpages.com/api/get-all-products.php");
 
         const data = await response.text(); // use .text() in case it's not valid JSON
         return {
@@ -19,4 +19,3 @@ export async function handler(event, context) {
         };
     }
 }
-  
