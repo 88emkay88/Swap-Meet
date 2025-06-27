@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        `${"https://d202e0cc-9257-4a32-8c3b-d99083c7ea0b-00-24ny4n04qaxdg.janeway.replit.dev"}/add-to-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://d202e0cc-9257-4a32-8c3b-d99083c7ea0b-00-24ny4n04qaxdg.janeway.replit.dev"}/remove-from-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/remove-from-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -81,7 +81,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://d202e0cc-9257-4a32-8c3b-d99083c7ea0b-00-24ny4n04qaxdg.janeway.replit.dev"}/clear-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/clear-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

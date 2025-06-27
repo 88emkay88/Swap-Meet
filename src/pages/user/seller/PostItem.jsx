@@ -49,7 +49,7 @@ const PostItem = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          `${"https://d202e0cc-9257-4a32-8c3b-d99083c7ea0b-00-24ny4n04qaxdg.janeway.replit.dev"}/get-categories.php`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/get-categories.php`
         );
         const data = await res.json();
 
@@ -171,7 +171,7 @@ const PostItem = () => {
     setIsLoading(true);
 
     const res = await fetch(
-      `${"https://d202e0cc-9257-4a32-8c3b-d99083c7ea0b-00-24ny4n04qaxdg.janeway.replit.dev"}/post-item.php`,
+      `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/post-item.php`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
