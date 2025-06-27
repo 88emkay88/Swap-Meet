@@ -1,5 +1,3 @@
-const fetch = require("node-fetch"); // Only if you're using CommonJS
-
 exports.handler = async function (event, context) {
     try {
         const response = await fetch("https://swapmeet.atwebpages.com/api/get-all-products.php");
@@ -9,6 +7,7 @@ exports.handler = async function (event, context) {
         }
 
         const data = await response.json();
+
         return {
             statusCode: 200,
             body: JSON.stringify(data),
@@ -20,3 +19,4 @@ exports.handler = async function (event, context) {
         };
     }
 };
+  
