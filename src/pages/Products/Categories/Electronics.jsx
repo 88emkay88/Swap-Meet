@@ -28,12 +28,15 @@ export default function Electronics() {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-all-products.php`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-all-products.php`
         );
 
         const data = await res.json();
 
-        console.log("API BASE:", process.env.REACT_APP_API_BASE);
+        console.log(
+          "API BASE:",
+          "https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"
+        );
 
         if (data.success) {
           setProducts(data.products);

@@ -20,7 +20,9 @@ const Listings = () => {
 
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-seller-products.php?sellerId=${
+            user.sellerProfile.sellerID
+          }`
         );
         const data = await res.json();
 

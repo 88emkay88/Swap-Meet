@@ -13,7 +13,9 @@ export const EscrowProvider = ({ children }) => {
 
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-escrow-transactions.php?userId=${user.UserId}`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-escrow-transactions.php?userId=${
+            user.UserId
+          }`
         );
         const data = await res.json();
 
@@ -31,7 +33,9 @@ export const EscrowProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <EscrowContext.Provider value={{ escrowTransactions, setEscrowTransactions }}>
+    <EscrowContext.Provider
+      value={{ escrowTransactions, setEscrowTransactions }}
+    >
       {children}
     </EscrowContext.Provider>
   );

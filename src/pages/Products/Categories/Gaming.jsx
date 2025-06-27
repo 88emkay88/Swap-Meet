@@ -29,7 +29,7 @@ export default function Gaming() {
     const fetchAllProducts = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-all-products.php`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-all-products.php`
         );
 
         const data = await res.json();

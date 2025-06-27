@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Search,
-  Package,
-  AlertCircle,
-  CheckCircle,
-} from "lucide-react";
+import { Search, Package, AlertCircle, CheckCircle } from "lucide-react";
 import MobileBuyerMenu from "./MobileBuyerMenu";
 import BuyerSideBar from "./BuyerSideBar";
 import Footer from "../../../components/Footer";
@@ -18,8 +13,6 @@ const BuyerOrders = () => {
   const { escrowTransactions } = useEscrow();
   const { user } = useAuth();
 
-
-
   // FETCH BUYER ORDERS
   useEffect(() => {
     if (!user || !user.buyerProfile || !user.buyerProfile.buyerId) return;
@@ -29,7 +22,9 @@ const BuyerOrders = () => {
 
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-buyer-orders.php?buyerId=${user.buyerProfile.buyerId}`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-buyer-orders.php?buyerId=${
+            user.buyerProfile.buyerId
+          }`
         );
 
         const data = await res.json();

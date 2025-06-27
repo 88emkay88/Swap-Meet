@@ -49,7 +49,7 @@ const PostItem = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-categories.php`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-categories.php`
         );
         const data = await res.json();
 
@@ -167,14 +167,17 @@ const PostItem = () => {
       startingBid,
       endTime,
     };
-    
+
     setIsLoading(true);
 
-    const res = await fetch(`${process.env.REACT_APP_API_BASE}/post-item.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(itemData),
-    });
+    const res = await fetch(
+      `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/post-item.php`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(itemData),
+      }
+    );
 
     const data = await res.json();
     setIsLoading(false);

@@ -7,7 +7,6 @@ import Footer from "../../../components/Footer";
 import { useEffect, useState } from "react";
 import MobileBuyerMenu from "./MobileBuyerMenu";
 
-
 const BuyerDashBoard = () => {
   const { user } = useAuth();
   const { favorites } = useFavorites();
@@ -19,9 +18,7 @@ const BuyerDashBoard = () => {
 
       try {
         const res = await fetch(
-          `${
-            process.env.REACT_APP_API_BASE
-          }/get-nearby-products.php?Location=${encodeURIComponent(
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-nearby-products.php?Location=${encodeURIComponent(
             user.Location
           )}`
         );
@@ -34,7 +31,7 @@ const BuyerDashBoard = () => {
       }
     };
 
-    fetchNearby()
+    fetchNearby();
   }, [user]);
 
   return (

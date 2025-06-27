@@ -19,11 +19,13 @@ export const CartProvider = ({ children }) => {
 
   // Save cart to local storage
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems))
-  }, [cartItems])
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = async (product) => {
-    const exists = cartItems.find((item) => item.ProductId === product.ProductId);
+    const exists = cartItems.find(
+      (item) => item.ProductId === product.ProductId
+    );
     if (exists) {
       alert("Item is already in your cart.");
       return;
@@ -34,7 +36,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_API_BASE}/add-to-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -58,14 +60,17 @@ export const CartProvider = ({ children }) => {
     setCartItems(cartItems.filter((item) => item.ProductId !== id));
 
     try {
-      await fetch(`${process.env.REACT_APP_API_BASE}/remove-from-cart.php`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          UserId: user?.UserId,
-          ProductId: id,
-        }),
-      });
+      await fetch(
+        `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/remove-from-cart.php`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            UserId: user?.UserId,
+            ProductId: id,
+          }),
+        }
+      );
     } catch (err) {
       console.error("Fail to remove item from server:", err);
     }
@@ -75,11 +80,14 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
 
     try {
-      await fetch(`${process.env.REACT_APP_API_BASE}/clear-cart.php`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: user?.UserId }),
-      });
+      await fetch(
+        `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/clear-cart.php`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_id: user?.UserId }),
+        }
+      );
     } catch (err) {
       console.error("Failed to clear cart on server:", err);
     }

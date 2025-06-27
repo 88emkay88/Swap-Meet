@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Clock, DollarSign, Gavel, Heart, SeparatorHorizontal, Share2, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  Clock,
+  DollarSign,
+  Gavel,
+  Heart,
+  SeparatorHorizontal,
+  Share2,
+  Users,
+} from "lucide-react";
 import ProductsHeader from "../Products/ProductsHeader";
 import Footer from "../../components/Footer";
-
 
 const AuctionDetails = () => {
   const { id } = useParams();
@@ -11,13 +19,11 @@ const AuctionDetails = () => {
   const [bidAmount, setBidAmount] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
 
-  
-
   useEffect(() => {
     const fetchAuction = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-auction-details.php?id=${id}`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-auction-details.php?id=${id}`
         );
         const data = await res.json();
         if (data.success) {
@@ -34,7 +40,6 @@ const AuctionDetails = () => {
 
     fetchAuction();
   }, [id]);
-  
 
   if (!auction) {
     return (

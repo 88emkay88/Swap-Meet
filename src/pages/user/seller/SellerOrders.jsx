@@ -12,7 +12,6 @@ const SellerOrders = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const { user } = useAuth();
 
-
   // fetch orders
   useEffect(() => {
     if (!user || !user.sellerProfile || !user.sellerProfile.sellerID) return;
@@ -22,7 +21,9 @@ const SellerOrders = () => {
 
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_API_BASE}/get-seller-orders.php?sellerId=${user.sellerProfile.sellerID}`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-seller-orders.php?sellerId=${
+            user.sellerProfile.sellerID
+          }`
         );
 
         const data = await res.json();
@@ -67,7 +68,6 @@ const SellerOrders = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
-
 
   const handleShipOrder = (orderId) => {
     console.log(`Shipping order ${orderId}`);
