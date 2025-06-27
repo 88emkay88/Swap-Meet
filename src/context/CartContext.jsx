@@ -34,7 +34,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        "http://localhost/swapmeet-backend/add-to-cart.php",
+        `${process.env.REACT_APP_API_BASE}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -58,7 +58,7 @@ export const CartProvider = ({ children }) => {
     setCartItems(cartItems.filter((item) => item.ProductId !== id));
 
     try {
-      await fetch("http://localhost/swapmeet-backend/remove-from-cart.php", {
+      await fetch(`${process.env.REACT_APP_API_BASE}/remove-from-cart.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,7 +75,7 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
 
     try {
-      await fetch("http://localhost/swapmeet-backend/clear-cart.php", {
+      await fetch(`${process.env.REACT_APP_API_BASE}/clear-cart.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user?.UserId }),

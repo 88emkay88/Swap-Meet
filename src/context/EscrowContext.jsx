@@ -13,7 +13,7 @@ export const EscrowProvider = ({ children }) => {
 
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-escrow-transactions.php?userId=${user.UserId}`
+          `${process.env.REACT_APP_API_BASE}/get-escrow-transactions.php?userId=${user.UserId}`
         );
         const data = await res.json();
 

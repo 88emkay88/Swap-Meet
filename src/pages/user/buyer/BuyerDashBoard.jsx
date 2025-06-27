@@ -19,7 +19,9 @@ const BuyerDashBoard = () => {
 
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-nearby-products.php?Location=${encodeURIComponent(
+          `${
+            process.env.REACT_APP_API_BASE
+          }/get-nearby-products.php?Location=${encodeURIComponent(
             user.Location
           )}`
         );

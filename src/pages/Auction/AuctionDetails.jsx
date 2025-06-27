@@ -17,7 +17,7 @@ const AuctionDetails = () => {
     const fetchAuction = async () => {
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-auction-details.php?id=${id}`
+          `${process.env.REACT_APP_API_BASE}/get-auction-details.php?id=${id}`
         );
         const data = await res.json();
         if (data.success) {

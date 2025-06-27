@@ -29,7 +29,7 @@ const BuyerOrders = () => {
 
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-buyer-orders.php?buyerId=${user.buyerProfile.buyerId}`
+          `${process.env.REACT_APP_API_BASE}/get-buyer-orders.php?buyerId=${user.buyerProfile.buyerId}`
         );
 
         const data = await res.json();

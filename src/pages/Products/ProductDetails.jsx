@@ -23,7 +23,7 @@ const ProductDetails = () => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          "http://localhost/swapmeet-backend/get-all-products.php"
+          `${process.env.REACT_APP_API_BASE}/get-all-products.php`
         );
         const data = await res.json();
 

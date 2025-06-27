@@ -73,7 +73,7 @@ const SellerDashboard = () => {
     const fetchUserItems = async () => {
       try {
         const res = await fetch(
-          `http://localhost/swapmeet-backend/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
+          `${process.env.REACT_APP_API_BASE}/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
         );
         const data = await res.json();
         if (data.success) {

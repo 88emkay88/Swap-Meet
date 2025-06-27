@@ -62,7 +62,7 @@ const SellerProfile = () => {
 
     try {
       const res = await fetch(
-        "http://localhost/swapmeet-backend/update-profile.php",
+        `${process.env.REACT_APP_API_BASE}/update-profile.php`,
         {
           method: "POST",
           header: { "Content-Type": "application/json" },
