@@ -29,7 +29,7 @@ export default function Sports() {
     const fetchAllProducts = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet.atwebpages.com/api"}/get-all-products.php`
+          `${"https://swapmeet.atwebpages.com"}/get-all-products.php`
         );
 
         const data = await res.json();

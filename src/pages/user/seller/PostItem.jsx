@@ -49,7 +49,7 @@ const PostItem = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet.atwebpages.com/api"}/get-categories.php`
+          `${"https://swapmeet.atwebpages.com"}/get-categories.php`
         );
         const data = await res.json();
 
@@ -171,7 +171,7 @@ const PostItem = () => {
     setIsLoading(true);
 
     const res = await fetch(
-      `${"https://swapmeet.atwebpages.com/api"}/post-item.php`,
+      `${"https://swapmeet.atwebpages.com"}/post-item.php`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
