@@ -1,42 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Users, Package, ShoppingCart } from "lucide-react";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import AdminSidebar from "./AdminSideBar";
 
 const AdminDashboard = () => {
-  const [stats] = useState([
-    { title: "Total Users", value: "12,543", icon: Users },
-    { title: "Total Products", value: "8,721", icon: Package },
-    { title: "Total Orders", value: "3,456", icon: ShoppingCart },
-    { title: "Revenue", value: "R124,580", icon: FaMoneyBillTrendUp },
-  ]);
+  const [stats, setStats] = useState([]);
+  const [recentOrders, setRecentOrders] = useState([]);
 
-  const [recentOrders] = useState([
-    {
-      id: "#001",
-      customer: "John Doe",
-      amount: "R125.00",
-      status: "Completed",
-    },
-    {
-      id: "#002",
-      customer: "Jane Smith",
-      amount: "R89.99",
-      status: "Processing",
-    },
-    {
-      id: "#003",
-      customer: "Bob Johnson",
-      amount: "R156.50",
-      status: "Shipped",
-    },
-    {
-      id: "#004",
-      customer: "Alice Brown",
-      amount: "R234.00",
-      status: "Pending",
-    },
-  ]);
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/admin-dashboard.php"
+        );
+        const data = await res.json();
+        if (data.success) {
+          const d = data.data;
+          setStats([
+            { title: "Total Users", value: d.totalUsers, icon: Users },
+            { title: "Total Products", value: d.totalProducts, icon: Package },
+            { title: "Total Orders", value: d.totalOrders, icon: ShoppingCart },
+            {
+              title: "Revenue",
+              value: d.totalRevenue,
+              icon: FaMoneyBillTrendUp,
+            },
+          ]);
+          setRecentOrders(d.recentOrders);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error("Failed to fetch admin stats", err);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
 
   return (
     <div>

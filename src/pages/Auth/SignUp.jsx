@@ -23,11 +23,15 @@ const SignUp = () => {
       login(data.user); // store in context
       if (data.user.role === "seller") {
         navigate("/seller-dashboard");
-      } else {
+      } else if (data.user.role === "buyer") {
         navigate("/buyer-dashboard");
+      } else if (data.user.role === "admin") {
+        login(data.user);
+        navigate("/admin")
       }
     } else {
       alert(data.message);
+      navigate("/")
     }
   };
 
