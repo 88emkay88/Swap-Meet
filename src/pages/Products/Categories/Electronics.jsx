@@ -33,6 +33,8 @@ export default function Electronics() {
 
         const data = await res.json();
 
+        console.log("API BASE:", process.env.REACT_APP_API_BASE);
+
         if (data.success) {
           setProducts(data.products);
         } else {
