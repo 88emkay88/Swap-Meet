@@ -58,6 +58,15 @@ export default function ProductPage() {
     fetchAllProducts();
   }, []);
 
+  useEffect(() => {
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched products:", data);
+      })
+      .catch((err) => console.error("Fetch error:", err));
+  }, []);
+
   const dynamicLocations = [
     ...new Set(products.map((p) => p.location).filter(Boolean)),
   ];
