@@ -3,9 +3,7 @@ import ProductsHeader from "../ProductsHeader";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import Footer from "../../../components/Footer";
 import ProductCard from "../ProductCard";
-import locationOptions from "../../../Data/locations";
 import colorOption from "../../../Data/colors";
-import products from "../../../Data/products";
 import Sidebar from "../Sidebar";
 import { SlidersHorizontal, X } from "lucide-react";
 import { Range } from "react-range";
@@ -22,13 +20,40 @@ export default function HomeAppliances() {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
   const productsPerPage = 9;
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost/swapmeet-backend/get-all-products.php"
+        );
+
+        const data = await res.json();
+
+        if (data.success) {
+          setProducts(data.products);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error("Error fetching products ", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   //— Filter only category === "HomeAppliances"
   const HomeAppliances = products.filter(
     (p) => p.category === "Home Appliances"
   );
+
+  const dynamicLocations = [
+    ...new Set(HomeAppliances.map((p) => p.location).filter(Boolean)),
+  ];
 
   const checkbox = [
     "Refrigerators",
@@ -118,7 +143,7 @@ export default function HomeAppliances() {
         <Sidebar
           checkbox={checkbox}
           colorOption={colorOption}
-          locationOptions={locationOptions}
+          dynamicLocations={dynamicLocations}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
           selectedColors={selectedColors}
@@ -265,7 +290,7 @@ export default function HomeAppliances() {
                       className="w-full p-2 border border-gray-300 rounded-lg"
                     >
                       <option value="">Select Location</option>
-                      {locationOptions.map((location, idx) => (
+                      {dynamicLocations.map((location, idx) => (
                         <option value={location} key={`${location}-${idx}`}>
                           {location}
                         </option>
@@ -321,19 +346,19 @@ export default function HomeAppliances() {
           {/* Products Grid */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.length ? (
-              currentProducts.map((p) => (
+              currentProducts.map((product) => (
                 <ProductCard
-                  key={p.id}
-                  id={p.id}
-                  title={p.name}
-                  image={p.images?.[0] || p.image}
-                  price={p.price}
-                  rating={p.rating}
-                  condition={p.condition}
-                  location={p.location}
-                  category={p.category}
-                  userName={p.seller.name}
-                  userAvatar={p.seller.avatar}
+                  key={product.ProductId}
+                  id={product.ProductId}
+                  title={product.title}
+                  price={product.Price}
+                  rating={product.rating}
+                  image={product.mainImage}
+                  category={product.category}
+                  condition={product.condition}
+                  location={product.location}
+                  userName={product?.sellerName || ""}
+                  userAvatar={product?.Avatar || ""}
                 />
               ))
             ) : (
