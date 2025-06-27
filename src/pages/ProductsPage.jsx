@@ -30,41 +30,21 @@ export default function ProductPage() {
       try {
         const res = await fetch(
           "https://swapmeet.atwebpages.com/api/get-all-products.php"
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.success) {
-              console.log("Products fetched:", data.products);
-              // Handle/display products here
-            } else {
-              console.error("Failed to fetch products:", data.message || data);
-            }
-          })
-          .catch((err) => {
-            console.error("Fetch error:", err);
-          });
+        );
 
         const data = await res.json();
+
         if (data.success) {
           setProducts(data.products);
         } else {
           console.error(data.message);
         }
       } catch (err) {
-        console.error("Error fetching products", err);
+        console.error("Error fetching products ", err);
       }
     };
 
     fetchAllProducts();
-  }, []);
-
-  useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched products:", data);
-      })
-      .catch((err) => console.error("Fetch error:", err));
   }, []);
 
   const dynamicLocations = [
