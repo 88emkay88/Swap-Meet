@@ -2,10 +2,15 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import PaperBags from "../assets/images/paper-bags.jpg";
+import ShoppingCart from "../assets/images/shopping-cart-bluebg.jpg";
+import OnlineChart from "../assets/images/online-shopping-chart.jpg";
+
+
 const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
   const heroContent = [
     {
-      img: "/src/assets/images/paper-bags.jpg",
+      img: PaperBags,
       alt: "image 1",
       heading: (
         <>
@@ -18,8 +23,8 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       button: "Explore",
     },
     {
-      img: "/src/assets/images/shopping-cart-bluebg.jpg",
-      alt: "image 1",
+      img: ShoppingCart,
+      alt: "image 2",
       heading: (
         <>
           Welcome to Swap<span className="text-red-800">Meet</span>
@@ -31,8 +36,8 @@ const CarouselHero = ({ autoSlide = true, autoSlideInterval = 10000 }) => {
       button: "Explore",
     },
     {
-      img: "/src/assets/images/online-shopping-chart.jpg",
-      alt: "image 1",
+      img: OnlineChart,
+      alt: "image 3",
       heading: (
         <>
           Welcome to Swap<span className="text-green-800">Meet</span>

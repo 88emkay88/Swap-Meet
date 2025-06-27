@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import auctionImg from "../assets/images/Auction.jpg";
+
 const AuctionCard = () => {
   return (
     <div className="m-10 pb-5 bg-sky-300 rounded-2xl md:flex justify-center items-center shadow-xl md:h-140">
       <img
         className="md:w-1/2 md:h-140 md:rounded-l-2xl md:translate-y-2.5 translate-y-0 rounded-t-2xl md:rounded-tr-none"
-        src="/src/assets/images/Auction.jpg"
+        src={auctionImg}
         alt="Auction elements"
       />
 
