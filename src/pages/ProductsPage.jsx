@@ -28,7 +28,9 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = await fetch("/.netlify/functions/products")
+        const res = await fetch(
+          "https://swapmeet.atwebpages.com/api/get-all-products.php"
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
@@ -41,7 +43,7 @@ export default function ProductPage() {
           .catch((err) => {
             console.error("Fetch error:", err);
           });
-      
+
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
