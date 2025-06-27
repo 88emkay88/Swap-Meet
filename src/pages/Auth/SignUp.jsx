@@ -12,7 +12,7 @@ const SignUp = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const res = await fetch("https://swapmeet.atwebpages.com/api/get-all-products.phps", {
+    const res = await fetch("https://swapmeet.atwebpages.com/api/login.php", {
       method: "POST",
       body: formData,
     });
@@ -27,11 +27,11 @@ const SignUp = () => {
         navigate("/buyer-dashboard");
       } else if (data.user.role === "admin") {
         login(data.user);
-        navigate("/admin")
+        navigate("/admin");
       }
     } else {
       alert(data.message);
-      navigate("/")
+      navigate("/");
     }
   };
 
