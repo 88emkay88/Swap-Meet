@@ -1,30 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Import images
+import Earbuds from "../assets/images/ear-buds.png";
+import Accessories from "../assets/images/accessories.png";
+import Blender from "../assets/images/blender.png";
+import Console from "../assets/images/console.png";
+import Basketball from "../assets/images/basketball.png";
+
 const PopularCategories = () => {
   const categories = [
     {
-      img: "/src/assets/images/ear-buds.png",
+      img: Earbuds,
       heading: "Electronics",
       link: "/electornics",
     },
     {
-      img: "/src/assets/images/accessories.png",
+      img: Accessories,
       heading: "Accessories",
       link: "/accessories",
     },
     {
-      img: "/src/assets/images/blender.png",
+      img: Blender,
       heading: "Home Appliances",
       link: "/home-appliances",
     },
     {
-      img: "/src/assets/images/console.png",
+      img: Console,
       heading: "Gaming",
       link: "/gaming",
     },
     {
-      img: "/src/assets/images/basketball.png",
+      img: Basketball,
       heading: "Sports",
       link: "/sports",
     },
