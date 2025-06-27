@@ -28,14 +28,14 @@ export default function Electronics() {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/get-all-products.php`
+          `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-all-products.php`
         );
 
         const data = await res.json();
 
         console.log(
           "API BASE:",
-          "https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"
+          "https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"
         );
 
         if (data.success) {

@@ -33,7 +33,7 @@ const BestSellers = () => {
 
   useEffect(() => {
     fetch(
-      `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend/"}/get-best-sellers.php`
+      `${"https://swapmeet-backend.infinityfreeapp.com/swapmeet-backend"}/get-best-sellers.php`
     )
       .then((res) => res.json())
       .then((data) => {
