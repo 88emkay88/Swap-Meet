@@ -272,7 +272,7 @@ const SellerProfile = () => {
                           </label>
                           <input
                             id={field.key}
-                            value={profileData[field.key]}
+                            value={profileData[field.key] || ""}
                             onChange={(e) =>
                               setProfileData({
                                 ...profileData,
