@@ -57,17 +57,17 @@ const SellerProfile = () => {
   const handleSave = async () => {
     const updatedData = {
       UserId: user.UserId,
-      FirstName: profileData.firstName,
-      LastName: profileData.lastName,
-      StoreName: profileData.businessName,
-      Email: profileData.email,
-      PhoneNumber: profileData.phone,
-      Location: profileData.address,
-      Bio: profileData.bio,
-      Website: profileData.website,
-      Avatar: profileData.avatar,
+      FirstName: profileData.firstName || user.FirstName,
+      LastName: profileData.lastName || user.LastName,
+      StoreName: profileData.businessName || user.storeName,
+      Email: profileData.email || user.Email,
+      PhoneNumber: profileData.phone || user.PhoneNumber,
+      Location: profileData.address || user.Location,
+      Bio: profileData.bio || user.Bio,
+      Website: profileData.website || user.Website,
+      Avatar: profileData.avatar || user.Avatar,
     };
-
+    
     try {
       const res = await fetch(
         `https://swapmeet.atwebpages.com/api/update-profile.php`,
