@@ -65,6 +65,7 @@ const SellerProfile = () => {
       Location: profileData.address,
       Bio: profileData.bio,
       Website: profileData.website,
+      Avatar: profileData.avatar,
     };
 
     try {
@@ -191,9 +192,9 @@ const SellerProfile = () => {
                     </p>
 
                     <div className="flex items-center gap-4 mb-4">
-                      {user?.Avatar ? (
+                      {profileData.avatar || user?.Avatar ? (
                         <img
-                          src={user.Avatar}
+                          src={profileData.avatar || user.Avatar}
                           alt={`${user.FirstName}-${user.LastName}`}
                           className="h-20 w-20 rounded-full"
                         />
