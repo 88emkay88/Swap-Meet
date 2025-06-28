@@ -145,7 +145,7 @@ const Header = () => {
                 <Link to={`/${user.role}-dashboard`}>
                   {user.avatar ? (
                     <img
-                      src={user.avatar}
+                      src={user.Avatar}
                       alt={user.UserName}
                       className="h-10 w-10 rounded-full border"
                     />
