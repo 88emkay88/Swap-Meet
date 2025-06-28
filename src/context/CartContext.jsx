@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        `${"https://swapmeet.atwebpages.com/api"}/add-to-cart.php`,
+        `${"http://swapmeet.atwebpages.com/api"}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://swapmeet.atwebpages.com/api"}/remove-from-cart.php`,
+        `${"http://swapmeet.atwebpages.com/api"}/remove-from-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
 
     try {
-      await fetch(`${"https://swapmeet.atwebpages.com/api"}/clear-cart.php`, {
+      await fetch(`${"http://swapmeet.atwebpages.com/api"}/clear-cart.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user?.UserId }),

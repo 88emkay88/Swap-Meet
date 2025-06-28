@@ -13,7 +13,7 @@ export const EscrowProvider = ({ children }) => {
 
       try {
         const res = await fetch(
-          `${"https://swapmeet.atwebpages.com/api"}/get-escrow-transactions.php?userId=${
+          `${"http://swapmeet.atwebpages.com/api"}/get-escrow-transactions.php?userId=${
             user.UserId
           }`
         );
