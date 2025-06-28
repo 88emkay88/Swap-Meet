@@ -143,7 +143,7 @@ const Header = () => {
                   </>
                 )}
                 <Link to={`/${user.role}-dashboard`}>
-                  {user.avatar ? (
+                  {user.Avatar ? (
                     <img
                       src={user.Avatar}
                       alt={user.UserName}
