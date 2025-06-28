@@ -108,9 +108,9 @@ const ProductsHeader = () => {
               </>
             )}
             <Link to={`/${user.role}-dashboard`}>
-              {user.avatar ? (
+              {user.Avatar ? (
                 <img
-                  src={user.avatar}
+                  src={user.Avatar}
                   alt={user.UserName}
                   className="h-10 w-10 rounded-full border"
                 />

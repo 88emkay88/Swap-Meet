@@ -67,7 +67,7 @@ const SellerProfile = () => {
       Website: profileData.website || user.Website,
       Avatar: profileData.avatar || user.Avatar,
     };
-    
+
     try {
       const res = await fetch(
         `https://swapmeet.atwebpages.com/api/update-profile.php`,

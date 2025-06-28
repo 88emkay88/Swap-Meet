@@ -21,7 +21,7 @@ const SellerDashboard = () => {
 
     const steps = [];
 
-    if (!user.avatar) steps.push("Add profile picture");
+    if (!user.Avatar) steps.push("Add profile picture");
     if (!user.Email) steps.push("Verify email address");
     if (!user.PhoneNumber) steps.push("Add phone number");
     if (!user.Address) steps.push("Add Address");
@@ -73,9 +73,7 @@ const SellerDashboard = () => {
     const fetchUserItems = async () => {
       try {
         const res = await fetch(
-          `https://swapmeet.atwebpages.com/api/get-seller-products.php?sellerId=${
-            user.sellerProfile.sellerID
-          }`
+          `https://swapmeet.atwebpages.com/api/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
         );
         const data = await res.json();
         if (data.success) {
