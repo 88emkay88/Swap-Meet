@@ -28,9 +28,33 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("favorites");
   };
 
+  const refreshUser = async () => {
+    try {
+      const stored = localStorage.getItem("swapmeet-user");
+      if (!stored) return;
+
+      const parsed = JSON.parse(stored);
+
+      const res = await fetch(
+        `https://your-backend.com/api/get-user.php?userId=${parsed.UserId}`
+      );
+      const data = await res.json();
+
+      if (data.success) {
+        setUser(data.user);
+        localStorage.setItem("swapmeet-user", JSON.stringify(data.user));
+      }
+    } catch (err) {
+      console.error("Failed to refresh user:", err);
+    }
+  };
+  
+
   // context value
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, isLoading, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

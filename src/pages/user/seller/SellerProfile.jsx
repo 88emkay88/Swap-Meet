@@ -22,6 +22,7 @@ import MobileSellerMenu from "./MobileSellerMenu";
 const SellerProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useAuth();
+  const { refreshUser } = useAuth();
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -81,6 +82,7 @@ const SellerProfile = () => {
 
       const data = await res.json();
       if (data.success) {
+        await refreshUser();
         alert("Profile updated!");
         setIsEditing(false);
       } else {
@@ -118,7 +120,6 @@ const SellerProfile = () => {
       avatar: imageUrl, // attach the URL
     }));
   };
-  
 
   const handleCancel = () => {
     setIsEditing(false);
