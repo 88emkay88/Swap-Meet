@@ -171,7 +171,7 @@ const PostItem = () => {
     setIsLoading(true);
 
     const res = await fetch(
-      `${"https://swapmeet.atwebpages.com/api"}/post-item.php`,
+      `https://swapmeet.atwebpages.com/api/post-item.php`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
