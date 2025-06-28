@@ -42,10 +42,10 @@ const SellerProfile = () => {
         lastName: user.LastName || "",
         email: user.Email || "",
         phone: user.PhoneNumber || "",
-        businessName: user.storeName || "",
-        address: user.Location || "",
-        bio: user.Bio || "",
-        website: user.Website || "",
+        businessName: user?.sellerProfile.storeName || "",
+        address: user.Address || "",
+        bio: user.sellerProfile.Bio || "",
+        website: user.sellerProfile.website || "",
       });
     }
   }, [user]);
@@ -62,7 +62,7 @@ const SellerProfile = () => {
       StoreName: profileData.businessName || user.storeName,
       Email: profileData.email || user.Email,
       PhoneNumber: profileData.phone || user.PhoneNumber,
-      Location: profileData.address || user.Location,
+      Location: profileData.address || user.Address,
       Bio: profileData.bio || user.Bio,
       Website: profileData.website || user.Website,
       Avatar: profileData.avatar || user.Avatar,

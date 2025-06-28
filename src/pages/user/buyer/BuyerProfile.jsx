@@ -384,7 +384,7 @@ const BuyerProfile = () => {
                         <strong>Phone:</strong> {user.PhoneNumber}
                       </li>
                       <li>
-                        <strong>Location:</strong> {user.Location || "unknown"}
+                        <strong>Location:</strong> {user.Address || "unknown"}
                       </li>
                       <li>
                         <strong>Instagram:</strong>{" "}
