@@ -34,7 +34,7 @@ const NewProducts = () => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `${"swapmeet-backend.byethost12.com"}/get-all-products.php`
+          `${"https://swapmeet-backend.byethost12.com/api"}/get-all-products.php`
         );
 
         const data = await res.json();

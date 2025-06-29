@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       const parsed = JSON.parse(stored);
 
       const res = await fetch(
-        `swapmeet-backend.byethost12.com/get-user.php?userId=${parsed.UserId}`
+        `https://swapmeet-backend.byethost12.com/api/get-user.php?userId=${parsed.UserId}`
       );
       const data = await res.json();
 

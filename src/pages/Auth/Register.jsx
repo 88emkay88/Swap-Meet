@@ -22,10 +22,13 @@ const Register = () => {
     formData.append("role", role);
 
     try {
-      const res = await fetch("swapmeet-backend.byethost12.com/register.php", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://swapmeet-backend.byethost12.com/api/register.php",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await res.json();
 

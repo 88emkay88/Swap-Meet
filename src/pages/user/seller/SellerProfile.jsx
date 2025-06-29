@@ -70,7 +70,7 @@ const SellerProfile = () => {
 
     try {
       const res = await fetch(
-        `swapmeet-backend.byethost12.com/update-profile.php`,
+        `https://swapmeet-backend.byethost12.com/api/update-profile.php`,
         {
           method: "POST",
           header: { "Content-Type": "application/json" },

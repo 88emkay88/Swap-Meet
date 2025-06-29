@@ -21,7 +21,7 @@ const SellerOrders = () => {
 
       try {
         const res = await fetch(
-          `${"swapmeet-backend.byethost12.com"}/get-seller-orders.php?sellerId=${
+          `${"https://swapmeet-backend.byethost12.com/api"}/get-seller-orders.php?sellerId=${
             user.sellerProfile.sellerID
           }`
         );

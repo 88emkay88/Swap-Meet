@@ -49,7 +49,7 @@ const PostItem = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          `${"swapmeet-backend.byethost12.com"}/get-categories.php`
+          `${"https://swapmeet-backend.byethost12.com/api"}/get-categories.php`
         );
         const data = await res.json();
 
@@ -170,11 +170,14 @@ const PostItem = () => {
 
     setIsLoading(true);
 
-    const res = await fetch(`swapmeet-backend.byethost12.com/post-item.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(itemData),
-    });
+    const res = await fetch(
+      `https://swapmeet-backend.byethost12.com/api/post-item.php`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(itemData),
+      }
+    );
 
     const data = await res.json();
     setIsLoading(false);
