@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        `${"http://swapmeet.atwebpages.com/api"}/add-to-cart.php`,
+        `${"swapmeet-backend.byethost12.com"}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -60,17 +60,14 @@ export const CartProvider = ({ children }) => {
     setCartItems(cartItems.filter((item) => item.ProductId !== id));
 
     try {
-      await fetch(
-        `${"http://swapmeet.atwebpages.com/api"}/remove-from-cart.php`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            UserId: user?.UserId,
-            ProductId: id,
-          }),
-        }
-      );
+      await fetch(`${"swapmeet-backend.byethost12.com"}/remove-from-cart.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          UserId: user?.UserId,
+          ProductId: id,
+        }),
+      });
     } catch (err) {
       console.error("Fail to remove item from server:", err);
     }
@@ -80,7 +77,7 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
 
     try {
-      await fetch(`${"http://swapmeet.atwebpages.com/api"}/clear-cart.php`, {
+      await fetch(`${"swapmeet-backend.byethost12.com"}/clear-cart.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user?.UserId }),

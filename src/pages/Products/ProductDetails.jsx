@@ -23,7 +23,7 @@ const ProductDetails = () => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          "http://swapmeet.atwebpages.com/api/get-all-products.php"
+          "swapmeet-backend.byethost12.com/get-all-products.php"
         );
         const data = await res.json();
 

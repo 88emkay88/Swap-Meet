@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       const parsed = JSON.parse(stored);
 
       const res = await fetch(
-        `http://swapmeet.atwebpages.com/api/get-user.php?userId=${parsed.UserId}`
+        `swapmeet-backend.byethost12.com/get-user.php?userId=${parsed.UserId}`
       );
       const data = await res.json();
 
@@ -48,7 +48,6 @@ export const AuthProvider = ({ children }) => {
       console.error("Failed to refresh user:", err);
     }
   };
-  
 
   // context value
   return (
