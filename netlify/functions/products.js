@@ -1,15 +1,21 @@
 export async function handler(event, context) {
     try {
-        const response = await fetch("https://swapmeet-backend.byethost12.com/api/api/get-all-products.php");
-        const data = await response.json();
+        const res = await fetch("https://swapmeet-backend.byethost12.com/api/get-all-products.php");
+        const data = await res.text(); // or .json() if you're sure it's JSON
+
         return {
             statusCode: 200,
-            body: JSON.stringify(data),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+            },
+            body: data,
         };
-    } catch (error) {
+    } catch (err) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: "Failed to fetch data", details: error.message }),
+            body: JSON.stringify({ error: "Failed to fetch data." }),
         };
     }
 }
+  
