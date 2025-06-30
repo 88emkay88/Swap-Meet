@@ -28,10 +28,9 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = await fetch("/.netlify/functions/get-products")
-          .then((res) => res.json())
-          .then((data) => console.log(data))
-          .catch((err) => console.error("Error:", err));
+        const res = await fetch(
+          "http://swapmeet.host.adellya.my.id/api/get-all-products.php"
+        );
 
         const data = await res.json();
 

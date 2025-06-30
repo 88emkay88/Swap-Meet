@@ -1,6 +1,6 @@
 export async function handler(event, context) {
     try {
-        const res = await fetch("https://swapmeet-backend.byethost12.com/api/get-all-products.php");
+        const res = await fetch("http://swapmeet.host.adellya.my.id/api/get-all-products.php");
         const data = await res.text(); // or .json() if you're sure it's JSON
 
         return {

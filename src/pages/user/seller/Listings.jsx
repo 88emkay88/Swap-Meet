@@ -20,7 +20,7 @@ const Listings = () => {
 
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.byethost12.com/api"}/get-seller-products.php?sellerId=${
+          `${"https://swapmeet.host.adellya.my.id/api"}/get-seller-products.php?sellerId=${
             user.sellerProfile.sellerID
           }`
         );

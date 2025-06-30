@@ -14,7 +14,7 @@ const Auction = () => {
     const fetchAuctions = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.byethost12.com/api"}/get-auctions.php`
+          `${"https://swapmeet.host.adellya.my.id/api"}/get-auctions.php`
         );
         const data = await res.json();
         if (data.success) {
