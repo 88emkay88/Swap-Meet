@@ -29,7 +29,7 @@ export default function ProductPage() {
     const fetchAllProducts = async () => {
       try {
         const res = await fetch(
-          "http://swapmeet.host.adellya.my.id/api/get-all-products.php"
+          "https://swapmeet.host.adellya.my.id/api/get-all-products.php"
         );
 
         const data = await res.json();
