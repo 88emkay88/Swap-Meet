@@ -23,7 +23,7 @@ const Register = () => {
 
     try {
       const res = await fetch(
-        "https://swapmeet-backend.infinityfreeapp.com/api/register.php",
+        "https://swapmeet.atwebpages.com/api/register.php",
         {
           method: "POST",
           body: formData,
