@@ -12,10 +12,13 @@ const SignUp = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const res = await fetch("https://swapmeet.atwebpages.com/api/login.php", {
-      method: "POST",
-      body: formData,
-    });
+    const res = await fetch(
+      "https://swapmeet-backend.iceiy.com/api/login.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     const data = await res.json();
 

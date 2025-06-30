@@ -18,7 +18,7 @@ const BuyerDashBoard = () => {
 
       try {
         const res = await fetch(
-          `${"https://swapmeet.atwebpages.com/api"}/get-nearby-products.php?Location=${encodeURIComponent(
+          `${"https://swapmeet-backend.iceiy.com/api"}/get-nearby-products.php?Location=${encodeURIComponent(
             user.Address
           )}`
         );
