@@ -32,7 +32,9 @@ const BestSellers = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    fetch(`${"https://swapmeet.host.adellya.my.id/api"}/get-best-sellers.php`)
+    fetch(
+      `${"https://swapmeet-backend.infinityfreeapp.com/api"}/get-best-sellers.php`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

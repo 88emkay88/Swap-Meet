@@ -13,7 +13,7 @@ const SignUp = () => {
     const formData = new FormData(e.target);
 
     const res = await fetch(
-      "https://swapmeet.host.adellya.my.id/api/login.php",
+      "https://swapmeet-backend.infinityfreeapp.com/api/login.php",
       {
         method: "POST",
         body: formData,

@@ -22,7 +22,7 @@ const BuyerOrders = () => {
 
       try {
         const res = await fetch(
-          `${"https://swapmeet.host.adellya.my.id/api"}/get-buyer-orders.php?buyerId=${
+          `${"https://swapmeet-backend.infinityfreeapp.com/api"}/get-buyer-orders.php?buyerId=${
             user.buyerProfile.buyerId
           }`
         );

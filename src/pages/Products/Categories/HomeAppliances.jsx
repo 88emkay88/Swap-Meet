@@ -28,7 +28,7 @@ export default function HomeAppliances() {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet.host.adellya.my.id/api"}/get-all-products.php`
+          `${"https://swapmeet-backend.infinityfreeapp.com/api"}/get-all-products.php`
         );
 
         const data = await res.json();

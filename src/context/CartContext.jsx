@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        `${"https://swapmeet.host.adellya.my.id/api"}/add-to-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/api"}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://swapmeet.host.adellya.my.id/api"}/remove-from-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/api"}/remove-from-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -81,7 +81,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://swapmeet.host.adellya.my.id/api"}/clear-cart.php`,
+        `${"https://swapmeet-backend.infinityfreeapp.com/api"}/clear-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

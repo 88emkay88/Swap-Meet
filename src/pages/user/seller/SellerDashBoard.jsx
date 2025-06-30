@@ -36,7 +36,7 @@ const SellerDashboard = () => {
   useEffect(() => {
     const fetchListings = async () => {
       const res = await fetch(
-        `https://swapmeet.host.adellya.my.id/api/seller-dashboard.php?sellerId=${user.sellerProfile.sellerID}`
+        `https://swapmeet-backend.infinityfreeapp.com/api/seller-dashboard.php?sellerId=${user.sellerProfile.sellerID}`
       );
 
       const data = await res.json();
@@ -53,7 +53,7 @@ const SellerDashboard = () => {
       if (!user) return;
 
       const res = await fetch(
-        `https://swapmeet.host.adellya.my.id/api/seller-dashboard.php?sellerId=${user.sellerProfile.sellerID}`
+        `https://swapmeet-backend.infinityfreeapp.com/api/seller-dashboard.php?sellerId=${user.sellerProfile.sellerID}`
       );
 
       const data = await res.json();
@@ -73,7 +73,7 @@ const SellerDashboard = () => {
     const fetchUserItems = async () => {
       try {
         const res = await fetch(
-          `https://swapmeet.host.adellya.my.id/api/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
+          `https://swapmeet-backend.infinityfreeapp.com/api/get-seller-products.php?sellerId=${user.sellerProfile.sellerID}`
         );
         const data = await res.json();
         if (data.success) {
