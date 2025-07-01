@@ -1,6 +1,6 @@
 export async function handler(event, context) {
     try {
-        const res = await fetch("http://swapmeet.liveblog365.com/api/get-all-products.php");
+        const res = await fetch("http://swapmeet-backend.webze.eu.org/api/get-all-products.php");
         const data = await res.text(); // or .json() if you're sure it's JSON
 
         return {

@@ -28,7 +28,7 @@ const Trending = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(
-        `${"https://swapmeet.liveblog365.com/api"}/get-all-products.php`
+        `${"https://swapmeet-backend.webze.eu.org/api"}/get-all-products.php`
       );
 
       const data = await res.json();

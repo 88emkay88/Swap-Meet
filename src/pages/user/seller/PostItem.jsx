@@ -49,7 +49,7 @@ const PostItem = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet.liveblog365.com/api"}/get-categories.php`
+          `${"https://swapmeet-backend.webze.eu.org/api"}/get-categories.php`
         );
         const data = await res.json();
 
@@ -171,7 +171,7 @@ const PostItem = () => {
     setIsLoading(true);
 
     const res = await fetch(
-      `https://swapmeet.liveblog365.com/api/post-item.php`,
+      `https://swapmeet-backend.webze.eu.org/api/post-item.php`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
