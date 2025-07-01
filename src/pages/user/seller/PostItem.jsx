@@ -49,7 +49,7 @@ const PostItem = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.webze.eu.org/api"}/get-categories.php`
+          `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/get-categories.php`
         );
         const data = await res.json();
 
@@ -171,7 +171,7 @@ const PostItem = () => {
     setIsLoading(true);
 
     const res = await fetch(
-      `https://swapmeet-backend.webze.eu.org/api/post-item.php`,
+      `https://swapmeet-backend-706493566423.us-central1.run.app/post-item.php`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

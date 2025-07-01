@@ -23,7 +23,7 @@ const Register = () => {
 
     try {
       const res = await fetch(
-        "https://swapmeet-backend.webze.eu.org/api/register.php",
+        "https://swapmeet-backend-706493566423.us-central1.run.app/register.php",
         {
           method: "POST",
           body: formData,

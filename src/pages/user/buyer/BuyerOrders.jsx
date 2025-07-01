@@ -22,7 +22,7 @@ const BuyerOrders = () => {
 
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.webze.eu.org/api"}/get-buyer-orders.php?buyerId=${
+          `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/get-buyer-orders.php?buyerId=${
             user.buyerProfile.buyerId
           }`
         );

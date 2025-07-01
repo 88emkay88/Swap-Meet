@@ -13,7 +13,7 @@ const SignUp = () => {
     const formData = new FormData(e.target);
 
     const res = await fetch(
-      "https://swapmeet-backend.webze.eu.org/api/login.php",
+      "https://swapmeet-backend-706493566423.us-central1.run.app/login.php",
       {
         method: "POST",
         body: formData,

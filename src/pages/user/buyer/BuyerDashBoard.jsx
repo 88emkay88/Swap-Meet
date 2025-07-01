@@ -18,7 +18,7 @@ const BuyerDashBoard = () => {
 
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.webze.eu.org/api"}/get-nearby-products.php?Location=${encodeURIComponent(
+          `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/get-nearby-products.php?Location=${encodeURIComponent(
             user.Address
           )}`
         );

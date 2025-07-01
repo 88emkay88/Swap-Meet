@@ -70,7 +70,7 @@ const SellerProfile = () => {
 
     try {
       const res = await fetch(
-        `https://swapmeet-backend.webze.eu.org/api/update-profile.php`,
+        `https://swapmeet-backend-706493566423.us-central1.run.app/update-profile.php`,
         {
           method: "POST",
           header: { "Content-Type": "application/json" },

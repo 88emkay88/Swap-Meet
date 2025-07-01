@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
     // Send to Backend
     try {
       const res = await fetch(
-        `${"https://swapmeet-backend.webze.eu.org/api"}/add-to-cart.php`,
+        `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/add-to-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://swapmeet-backend.webze.eu.org/api"}/remove-from-cart.php`,
+        `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/remove-from-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -81,7 +81,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       await fetch(
-        `${"https://swapmeet-backend.webze.eu.org/api"}/clear-cart.php`,
+        `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/clear-cart.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

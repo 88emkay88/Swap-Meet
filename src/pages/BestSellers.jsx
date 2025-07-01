@@ -32,7 +32,9 @@ const BestSellers = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    fetch(`${"https://swapmeet-backend.webze.eu.org/api"}/get-best-sellers.php`)
+    fetch(
+      `${"https://swapmeet-backend-706493566423.us-central1.run.app"}/get-best-sellers.php`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
