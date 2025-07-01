@@ -23,7 +23,7 @@ const Register = () => {
 
     try {
       const res = await fetch(
-        "https://http://swapmeet.liveblog365.com/api/register.php",
+        "https://swapmeet.liveblog365.com/api/register.php",
         {
           method: "POST",
           body: formData,

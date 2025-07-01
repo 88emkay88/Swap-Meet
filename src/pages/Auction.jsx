@@ -14,7 +14,7 @@ const Auction = () => {
     const fetchAuctions = async () => {
       try {
         const res = await fetch(
-          `${"https://http://swapmeet.liveblog365.com/api"}/get-auctions.php`
+          `${"https://swapmeet.liveblog365.com/api"}/get-auctions.php`
         );
         const data = await res.json();
         if (data.success) {

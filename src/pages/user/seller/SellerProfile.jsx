@@ -70,7 +70,7 @@ const SellerProfile = () => {
 
     try {
       const res = await fetch(
-        `https://http://swapmeet.liveblog365.com/api/update-profile.php`,
+        `https://swapmeet.liveblog365.com/api/update-profile.php`,
         {
           method: "POST",
           header: { "Content-Type": "application/json" },

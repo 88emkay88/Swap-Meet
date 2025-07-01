@@ -12,13 +12,10 @@ const SignUp = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const res = await fetch(
-      "https://http://swapmeet.liveblog365.com/api/login.php",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const res = await fetch("https://swapmeet.liveblog365.com/api/login.php", {
+      method: "POST",
+      body: formData,
+    });
 
     const data = await res.json();
 
