@@ -23,7 +23,7 @@ const AuctionDetails = () => {
     const fetchAuction = async () => {
       try {
         const res = await fetch(
-          `${"https://swapmeet-backend.iceiy.com/api"}/get-auction-details.php?id=${id}`
+          `${"https://http://swapmeet.liveblog365.com/api"}/get-auction-details.php?id=${id}`
         );
         const data = await res.json();
         if (data.success) {

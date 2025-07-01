@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       const parsed = JSON.parse(stored);
 
       const res = await fetch(
-        `https://swapmeet-backend.iceiy.com/api/get-user.php?userId=${parsed.UserId}`
+        `https://http://swapmeet.liveblog365.com/api/get-user.php?userId=${parsed.UserId}`
       );
       const data = await res.json();
 
